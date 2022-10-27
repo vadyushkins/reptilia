@@ -13,7 +13,7 @@ public class ParseOptions {
     private ParseOptions(Builder builder) {
         this.ignoreLayout = builder.ignoreLayout;
         this.map = builder.map;
-        this.global= builder.global;
+        this.global = builder.global;
     }
 
     public boolean ignoreLayout() {

@@ -19,12 +19,10 @@ import java.util.List;
 import static java.util.Collections.emptyList;
 
 /**
- *
  * Unambiguous Nonterminal nodes have only one child.
  * Unambiguous Intermediate nodes two children:
- *  - The left child is an intermediate node and the right child a nonterminal or terminal node
- *  - Both left and right children are nonterminal or terminal nodes
- *
+ * - The left child is an intermediate node and the right child a nonterminal or terminal node
+ * - Both left and right children are nonterminal or terminal nodes
  */
 public class DefaultSPPFToParseTreeVisitor<T> implements SPPFVisitor<T> {
 
@@ -38,6 +36,16 @@ public class DefaultSPPFToParseTreeVisitor<T> implements SPPFVisitor<T> {
         this.input = input;
         this.ignoreLayout = ignoreLayout;
         this.resultOps = resultOps;
+    }
+
+    private static <T> void addChildren(T result, List<T> children) {
+        if (result instanceof List<?>) {
+            children.addAll((List<T>) result);
+        } else {
+            if (result != null) {
+                children.add(result);
+            }
+        }
     }
 
     @Override
@@ -128,16 +136,6 @@ public class DefaultSPPFToParseTreeVisitor<T> implements SPPFVisitor<T> {
         return parseTreeBuilder.nonterminalNode(slot.getRule(), children, leftExtent, rightExtent);
     }
 
-    private static <T> void addChildren(T result, List<T> children) {
-        if (result instanceof List<?>) {
-            children.addAll((List<T>) result);
-        } else {
-            if (result != null) {
-                children.add(result);
-            }
-        }
-    }
-
     private T convertStar(NonPackedNode node, Star symbol, int leftExtent, int rightExtent) {
         if (node.isAmbiguous()) {
             handleAmbiguousNode(node);
@@ -225,8 +223,7 @@ public class DefaultSPPFToParseTreeVisitor<T> implements SPPFVisitor<T> {
 
         if (leftChild instanceof IntermediateNode) {
             return convertUnderPlus(plus, (IntermediateNode) leftChild, children);
-        }
-        else {
+        } else {
             if (leftChild instanceof NonterminalNode) {
                 RuntimeRule rule = ((NonterminalNode) leftChild).getRule();
                 if (rule.getDefinition() != null && plus.getName().equals(rule.getDefinition().getName())) {

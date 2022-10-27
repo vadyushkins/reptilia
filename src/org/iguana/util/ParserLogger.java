@@ -15,11 +15,7 @@ import java.util.Arrays;
 public class ParserLogger {
 
     private static ParserLogger instance = new ParserLogger();
-
-    public static ParserLogger getInstance() {
-        return instance;
-    }
-
+    private final IguanaLogger logger;
     private int descriptorsCount;
 
     private int countNonterminalNodes;
@@ -35,9 +31,6 @@ public class ParserLogger {
     private int countGSSNodes;
 
     private int countGSSEdges;
-
-    private final IguanaLogger logger;
-
     private boolean logEnabled = false;
 
     public ParserLogger() {
@@ -46,6 +39,10 @@ public class ParserLogger {
             logger = IguanaLogger.DEFAULT;
         else
             logger = new JavaUtilIguanaLogger("IguanaParser Logger", config.getLogLevel());
+    }
+
+    public static ParserLogger getInstance() {
+        return instance;
     }
 
     public void reset() {

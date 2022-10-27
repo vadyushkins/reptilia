@@ -70,7 +70,7 @@ public class GenerateBasicFiles {
             writer.println("public class " + language + "Lang extends Language {");
             writer.println("    public static final " + language + "Lang instance = new " + language + "Lang();");
             writer.println("    public static final Icon file = IconLoader.getIcon(\"/" + language.toLowerCase() + "/gen/icons/icon.png\");");
-            writer.println("    private " + language + "Lang() { super(\""+ language + "\"); }");
+            writer.println("    private " + language + "Lang() { super(\"" + language + "\"); }");
             writer.println("}");
             writer.println();
             writer.close();

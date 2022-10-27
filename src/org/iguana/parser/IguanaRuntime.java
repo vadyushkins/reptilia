@@ -25,30 +25,21 @@ import java.util.function.Function;
 
 public class IguanaRuntime<T extends Result> {
 
+    private final Deque<Descriptor<T>> descriptorPool;
+    private final Deque<Descriptor<T>> descriptorsStack;
+    private final IEvaluatorContext ctx;
+    private final Configuration config;
+    private final ParserLogger logger = ParserLogger.getInstance();
+    private final ResultOps<T> resultOps;
     /**
      * The grammar slot at which a getParserTree error is occurred.
      */
     private GrammarSlot errorSlot;
-
     /**
      * The last input index at which an error is occurred.
      */
     private int errorIndex;
-
     private String errorDescription;
-
-    private final Deque<Descriptor<T>> descriptorPool;
-
-    private final Deque<Descriptor<T>> descriptorsStack;
-
-    private final IEvaluatorContext ctx;
-
-    private final Configuration config;
-
-    private final ParserLogger logger = ParserLogger.getInstance();
-
-    private final ResultOps<T> resultOps;
-
     private boolean hasParseError;
 
     private Input input;
@@ -59,6 +50,63 @@ public class IguanaRuntime<T extends Result> {
         this.descriptorsStack = new ArrayDeque<>(512);
         this.descriptorPool = new ArrayDeque<>(512);
         this.ctx = GLLEvaluator.getEvaluatorContext(config);
+    }
+
+    private static void printStats(GrammarGraph grammarGraph) {
+        for (TerminalGrammarSlot slot : grammarGraph.getTerminalGrammarSlots()) {
+            System.out.println(slot.getTerminal().getName() + " : " + slot.countTerminalNodes());
+        }
+
+        for (NonterminalGrammarSlot slot : grammarGraph.getNonterminalGrammarSlots()) {
+            System.out.print(slot.getNonterminal().getName());
+            System.out.println(" GSS nodes: " + slot.countGSSNodes());
+            double[] poppedElementStats = stats(slot.getGSSNodes(), GSSNode::countPoppedElements);
+            double[] gssEdgesStats = stats(slot.getGSSNodes(), GSSNode::countGSSEdges);
+            if (poppedElementStats == null)
+                System.out.println("Popped Elements: empty");
+            else
+                System.out.printf("Popped Elements (min: %d, max: %d, mean: %.2f)%n", (int) poppedElementStats[0], (int) poppedElementStats[1], poppedElementStats[2]);
+
+            if (gssEdgesStats == null)
+                System.out.println("GSS Edges: empty");
+            else
+                System.out.printf("GSS Edges (min: %d, max: %d, mean: %.2f)%n", (int) gssEdgesStats[0], (int) gssEdgesStats[1], gssEdgesStats[2]);
+            System.out.println("---------------");
+        }
+    }
+
+    private static void printGSSInfo(GrammarGraph grammarGraph) {
+        Comparator<GSSNode<?>> edgeComparator = (node1, node2) -> node2.countGSSEdges() - node1.countGSSEdges();
+        List<GSSNode<?>> gssNodes = new ArrayList<>();
+        for (NonterminalGrammarSlot slot : grammarGraph.getNonterminalGrammarSlots()) {
+            for (GSSNode<?> gssNode : slot.getGSSNodes()) {
+                gssNodes.add(gssNode);
+            }
+        }
+
+        gssNodes.sort(edgeComparator);
+
+        for (GSSNode<?> gssNode : gssNodes) {
+            System.out.println(gssNode + ", edges: " + gssNode.countGSSEdges() + ", poppedElements: " + gssNode.countPoppedElements());
+        }
+    }
+
+    private static double[] stats(Iterable<GSSNode> gssNodes, Function<GSSNode, Integer> f) {
+        if (!gssNodes.iterator().hasNext()) return null;
+
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        int count = 0;
+
+        for (GSSNode gssNode : gssNodes) {
+            min = Integer.min(min, f.apply(gssNode));
+            max = Integer.max(max, f.apply(gssNode));
+            sum += f.apply(gssNode);
+            count++;
+        }
+
+        return new double[]{min, max, (double) sum / count};
     }
 
     public Result run(Input input, Nonterminal start, GrammarGraph grammarGraph, Map<String, Object> map, boolean global) {
@@ -135,7 +183,6 @@ public class IguanaRuntime<T extends Result> {
      * inputIndex of the new getParserTree error is greater than the previous one. In
      * other words, we throw away an error if we find an error which happens at
      * the next position of input.
-     *
      */
     public void recordParseError(int i, GrammarSlot slot, GSSNode<T> u, String description) {
         if (i >= this.errorIndex) {
@@ -187,9 +234,9 @@ public class IguanaRuntime<T extends Result> {
     public GSSEdge<T> createGSSEdge(BodyGrammarSlot returnSlot, T result, GSSNode<T> gssNode, Environment env) {
         if (result.isDummy()) {
             if (env.isEmpty()) {
-                return gssNode != null? new DummyGSSEdge<>(returnSlot, gssNode) : new CyclicDummyGSSEdges<>();
+                return gssNode != null ? new DummyGSSEdge<>(returnSlot, gssNode) : new CyclicDummyGSSEdges<>();
             } else {
-                return gssNode != null? new DummyGSSEdgeWithEnv<>(returnSlot, gssNode, env) : new CyclicDummyGSSEdgesWithEnv<>(env);
+                return gssNode != null ? new DummyGSSEdgeWithEnv<>(returnSlot, gssNode, env) : new CyclicDummyGSSEdgesWithEnv<>(env);
             }
         }
 
@@ -270,62 +317,5 @@ public class IguanaRuntime<T extends Result> {
 
     public ResultOps<T> getResultOps() {
         return resultOps;
-    }
-
-    private static void printStats(GrammarGraph grammarGraph) {
-        for (TerminalGrammarSlot slot : grammarGraph.getTerminalGrammarSlots()) {
-            System.out.println(slot.getTerminal().getName() + " : " + slot.countTerminalNodes());
-        }
-
-        for (NonterminalGrammarSlot slot : grammarGraph.getNonterminalGrammarSlots()) {
-            System.out.print(slot.getNonterminal().getName());
-            System.out.println(" GSS nodes: " + slot.countGSSNodes());
-            double[] poppedElementStats = stats(slot.getGSSNodes(), GSSNode::countPoppedElements);
-            double[] gssEdgesStats = stats(slot.getGSSNodes(), GSSNode::countGSSEdges);
-            if (poppedElementStats == null)
-                System.out.println("Popped Elements: empty");
-            else
-                System.out.printf("Popped Elements (min: %d, max: %d, mean: %.2f)%n", (int) poppedElementStats[0], (int) poppedElementStats[1], poppedElementStats[2]);
-
-            if (gssEdgesStats == null)
-                System.out.println("GSS Edges: empty");
-            else
-                System.out.printf("GSS Edges (min: %d, max: %d, mean: %.2f)%n", (int) gssEdgesStats[0], (int) gssEdgesStats[1], gssEdgesStats[2]);
-            System.out.println("---------------");
-        }
-    }
-
-    private static void printGSSInfo(GrammarGraph grammarGraph) {
-        Comparator<GSSNode<?>> edgeComparator = (node1, node2) -> node2.countGSSEdges() - node1.countGSSEdges();
-        List<GSSNode<?>> gssNodes = new ArrayList<>();
-        for (NonterminalGrammarSlot slot : grammarGraph.getNonterminalGrammarSlots()) {
-            for (GSSNode<?> gssNode : slot.getGSSNodes()) {
-                gssNodes.add(gssNode);
-            }
-        }
-
-        gssNodes.sort(edgeComparator);
-
-        for (GSSNode<?> gssNode : gssNodes) {
-            System.out.println(gssNode + ", edges: " + gssNode.countGSSEdges() + ", poppedElements: " + gssNode.countPoppedElements());
-        }
-    }
-
-    private static double[] stats(Iterable<GSSNode> gssNodes, Function<GSSNode, Integer> f) {
-        if (!gssNodes.iterator().hasNext()) return null;
-
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
-        int sum = 0;
-        int count = 0;
-
-        for (GSSNode gssNode : gssNodes) {
-            min = Integer.min(min, f.apply(gssNode));
-            max = Integer.max(max, f.apply(gssNode));
-            sum += f.apply(gssNode);
-            count++;
-        }
-
-        return new double[]{min, max, (double) sum / count};
     }
 }

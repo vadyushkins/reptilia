@@ -91,7 +91,8 @@ public class CodeHolder implements org.iguana.grammar.symbol.Symbol {
 
         public Statement statement;
 
-        public Builder() {}
+        public Builder() {
+        }
 
         public Builder(CodeHolder codeHolder) {
             this.statement = codeHolder.statement;

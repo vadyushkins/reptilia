@@ -48,10 +48,10 @@ public class Token {
         if (!(o instanceof Token)) return false;
         Token token = (Token) o;
         return start == token.start &&
-            end == token.end &&
-            Objects.equals(regularExpression, token.regularExpression) &&
-            Objects.equals(category, token.category) &&
-            Objects.equals(input, token.input);
+                end == token.end &&
+                Objects.equals(regularExpression, token.regularExpression) &&
+                Objects.equals(category, token.category) &&
+                Objects.equals(input, token.input);
     }
 
     @Override

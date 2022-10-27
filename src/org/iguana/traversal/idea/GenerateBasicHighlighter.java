@@ -72,7 +72,7 @@ public class GenerateBasicHighlighter {
                         color = "HighlighterColors.TEXT";
                     else
                         color = "DefaultLanguageHighlighterColors." + color;
-                    writer.println((i == 0? "        if " : "        else if ") + "(tokenType.equals(" + language + "TokenTypes." + tokenType + "))");
+                    writer.println((i == 0 ? "        if " : "        else if ") + "(tokenType.equals(" + language + "TokenTypes." + tokenType + "))");
                     writer.println("            return new TextAttributesKey[] {TextAttributesKey.createTextAttributesKey(\"" + tokenType + "\", " + color + ")};");
                     i++;
                 }
@@ -114,14 +114,22 @@ public class GenerateBasicHighlighter {
 
     private static String getColor(String tokenType) {
         switch (tokenType) {
-            case "OPERATOR": return "OPERATION_SIGN";
-            case "OPEN_BRACE": return "BRACES";
-            case "CLOSE_BRACE": return "BRACES";
-            case "OPEN_PARENTHESIS": return "PARENTHESES";
-            case "CLOSE_PARENTHESIS": return "PARENTHESES";
-            case "OPEN_BRACKET": return "BRACKETS";
-            case "CLOSE_BRACKET": return "BRACKETS";
-            case "BAD_CHARACTER": return "BAD_CHARACTER";
+            case "OPERATOR":
+                return "OPERATION_SIGN";
+            case "OPEN_BRACE":
+                return "BRACES";
+            case "CLOSE_BRACE":
+                return "BRACES";
+            case "OPEN_PARENTHESIS":
+                return "PARENTHESES";
+            case "CLOSE_PARENTHESIS":
+                return "PARENTHESES";
+            case "OPEN_BRACKET":
+                return "BRACKETS";
+            case "CLOSE_BRACKET":
+                return "BRACKETS";
+            case "BAD_CHARACTER":
+                return "BAD_CHARACTER";
             default:
                 if (tokenType.toUpperCase().contains("COMMENT"))
                     return "LINE_COMMENT";

@@ -88,12 +88,12 @@ public class NonterminalGrammarSlot implements GrammarSlot {
         this.lookAheadTest = lookAheadTest;
     }
 
-    public void setFollowTest(FollowTest followTest) {
-        this.followTest = followTest;
-    }
-
     public FollowTest getFollowTest() {
         return followTest;
+    }
+
+    public void setFollowTest(FollowTest followTest) {
+        this.followTest = followTest;
     }
 
     public Nonterminal getNonterminal() {
@@ -183,7 +183,7 @@ public class NonterminalGrammarSlot implements GrammarSlot {
                 if (runtime.getConfiguration().getEnvImpl() == EnvironmentImpl.ARRAY || runtime.getConfiguration().getEnvImpl() == EnvironmentImpl.INT_ARRAY)
                     newEnv = runtime.getEmptyEnvironment().declare(data);
                 else
-                    newEnv = runtime.getEmptyEnvironment().declare(nonterminal.getParameters().toArray(new String[] {}), data);
+                    newEnv = runtime.getEmptyEnvironment().declare(nonterminal.getParameters().toArray(new String[]{}), data);
             }
 
             for (int j = 0; j < firstSlots.size(); j++) {

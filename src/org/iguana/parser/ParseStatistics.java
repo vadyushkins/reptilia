@@ -45,6 +45,10 @@ public class ParseStatistics extends RecognizerStatistics {
         this.ambiguousNodesCount = builder.ambiguousNodesCount;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public int getNonterminalNodesCount() {
         return nonterminalNodesCount;
     }
@@ -63,10 +67,6 @@ public class ParseStatistics extends RecognizerStatistics {
 
     public int getAmbiguousNodesCount() {
         return ambiguousNodesCount;
-    }
-
-    public static Builder builder() {
-        return new Builder();
     }
 
     @Override
@@ -97,11 +97,11 @@ public class ParseStatistics extends RecognizerStatistics {
     @Override
     public String toString() {
         return super.toString() +
-               "Nonterminal nodes: " + nonterminalNodesCount + "\n" +
-               "Terminal nodes: " + terminalNodesCount + "\n" +
-               "Intermediate nodes: " + intermediateNodesCount + "\n" +
-               "Packed nodes: " + packedNodesCount + "\n" +
-               "Ambiguities: " + ambiguousNodesCount + "\n";
+                "Nonterminal nodes: " + nonterminalNodesCount + "\n" +
+                "Terminal nodes: " + terminalNodesCount + "\n" +
+                "Intermediate nodes: " + intermediateNodesCount + "\n" +
+                "Packed nodes: " + packedNodesCount + "\n" +
+                "Ambiguities: " + ambiguousNodesCount + "\n";
     }
 
     public static class Builder extends RecognizerStatistics.Builder<Builder> {

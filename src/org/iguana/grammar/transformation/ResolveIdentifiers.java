@@ -26,20 +26,20 @@ public class ResolveIdentifiers implements SymbolToSymbolVisitor {
     public Symbol visit(Identifier id) {
         if (nonterminals.contains(id.getName())) {
             return new Nonterminal.Builder(id.getName())
-                .addPreConditions(visitPreConditions(id))
-                .addPostConditions(visitPostConditions(id))
-                .addExcepts(id.getExcepts())
-                .setLabel(id.getLabel())
-                .build();
+                    .addPreConditions(visitPreConditions(id))
+                    .addPostConditions(visitPostConditions(id))
+                    .addExcepts(id.getExcepts())
+                    .setLabel(id.getLabel())
+                    .build();
         } else if (regularExpressions.containsKey(id.getName())) {
             RegularExpression regularExpression = regularExpressions.get(id.getName());
             return new Terminal.Builder(regularExpression)
-                .setNodeType(TerminalNodeType.Regex)
-                .setPreConditions(visitPreConditions(id))
-                .setPostConditions(visitPostConditions(id))
-                .setLabel(id.getLabel())
-                .setName(id.getName())
-                .build();
+                    .setNodeType(TerminalNodeType.Regex)
+                    .setPreConditions(visitPreConditions(id))
+                    .setPostConditions(visitPostConditions(id))
+                    .setLabel(id.getLabel())
+                    .setName(id.getName())
+                    .build();
         } else {
             throw new RuntimeException("Identifier '" + id + "' is not defined.");
         }

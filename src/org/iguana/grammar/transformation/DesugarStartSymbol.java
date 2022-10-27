@@ -27,14 +27,14 @@ public class DesugarStartSymbol implements GrammarTransformation {
             Nonterminal startNonterminal = new Nonterminal.Builder(start.getName()).setNodeType(NonterminalNodeType.Start).build();
 
             RuntimeRule startRule = RuntimeRule.withHead(startNonterminal)
-                // TODO: For now we use the label top, but would be good to allow configuring it.
-                .addSymbol(new Nonterminal.Builder(start.getStartSymbol()).setLabel("top").build())
-                .setRecursion(Recursion.NON_REC)
-                .setAssociativity(Associativity.UNDEFINED)
-                .setPrecedence(-1)
-                .setPrecedenceLevel(PrecedenceLevel.getFirstAndDone())
-                .setDefinition(start)
-                .build();
+                    // TODO: For now we use the label top, but would be good to allow configuring it.
+                    .addSymbol(new Nonterminal.Builder(start.getStartSymbol()).setLabel("top").build())
+                    .setRecursion(Recursion.NON_REC)
+                    .setAssociativity(Associativity.UNDEFINED)
+                    .setPrecedence(-1)
+                    .setPrecedenceLevel(PrecedenceLevel.getFirstAndDone())
+                    .setDefinition(start)
+                    .build();
 
             builder.addRule(startRule);
             builder.addStartSymbol(start);

@@ -14,6 +14,10 @@ public class RecognizerStatistics {
         this.gssEdgesCount = builder.gssEdgesCount;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public int getDescriptorsCount() {
         return descriptorsCount;
     }
@@ -49,12 +53,8 @@ public class RecognizerStatistics {
     @Override
     public String toString() {
         return "Descriptors: " + descriptorsCount + "\n" +
-               "GSS Nodes: " + gssNodesCount + "\n" +
-               "GSS Edges: " + gssEdgesCount + "\n";
-    }
-
-    public static Builder builder() {
-        return new Builder();
+                "GSS Nodes: " + gssNodesCount + "\n" +
+                "GSS Edges: " + gssEdgesCount + "\n";
     }
 
     public static class Builder<T extends Builder<T>> {

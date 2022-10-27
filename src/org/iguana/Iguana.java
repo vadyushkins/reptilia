@@ -19,30 +19,19 @@ import java.nio.file.Path;
 import java.util.concurrent.Callable;
 
 @Command(name = "iguana", mixinStandardHelpOptions = true, version = "0.1-SNAPSHOT",
-    description = "Iguana: General Data-dependent Parser", sortOptions = false)
+        description = "Iguana: General Data-dependent Parser", sortOptions = false)
 public class Iguana implements Callable<Integer> {
 
     @ArgGroup(exclusive = true, multiplicity = "1")
     Command command;
-
-    static class Command {
-        @Option(names = "--generate-grammar") boolean generateGrammar;
-        @Option(names = "--generate-types") boolean generateTypes;
-        @Option(names = "--generate-ide") boolean generateIDE;
-    }
-
     @Option(names = {"--name", "-n"}, description = "The grammar name", defaultValue = "grammar")
     private String grammarName;
-
     @Option(names = {"--grammar", "-g"}, description = "The grammar file", required = true)
     private File grammarFile;
-
     @Option(names = {"--output", "-o"}, description = "The output project for generated files", required = true)
     private Path outputDirectory;
-
     @Option(names = "--package", description = "package name for the generated code")
     private String packageName;
-
     @Option(names = {"--grammar-output"}, description = "The location where the grammar.json file will be generated.", required = true)
     private Path grammarOutputDirectory;
 
@@ -85,5 +74,14 @@ public class Iguana implements Callable<Integer> {
         }
 
         return 0;
+    }
+
+    static class Command {
+        @Option(names = "--generate-grammar")
+        boolean generateGrammar;
+        @Option(names = "--generate-types")
+        boolean generateTypes;
+        @Option(names = "--generate-ide")
+        boolean generateIDE;
     }
 }

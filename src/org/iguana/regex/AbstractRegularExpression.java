@@ -13,7 +13,7 @@ public abstract class AbstractRegularExpression implements RegularExpression {
 
     private Automaton automaton;
 
-    public AbstractRegularExpression(RegexBuilder<? extends  RegularExpression> builder ) {
+    public AbstractRegularExpression(RegexBuilder<? extends RegularExpression> builder) {
         this.lookaheads = builder.lookaheads;
         this.lookbehinds = builder.lookbehinds;
     }

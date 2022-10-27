@@ -16,11 +16,11 @@ public class IggyParseTree {
         }
 
         public OptionNode name() {
-           return (OptionNode) childAt(1);
+            return (OptionNode) childAt(1);
         }
 
         public PlusNode defs() {
-           return (PlusNode) childAt(2);
+            return (PlusNode) childAt(2);
         }
 
         @Override
@@ -39,11 +39,11 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(2);
+            return (Identifier) childAt(2);
         }
 
         public Expression exp() {
-           return (Expression) childAt(4);
+            return (Expression) childAt(4);
         }
 
         @Override
@@ -69,19 +69,19 @@ public class IggyParseTree {
         }
 
         public OptionNode modifier() {
-           return (OptionNode) childAt(0);
+            return (OptionNode) childAt(0);
         }
 
         public Name name() {
-           return (Name) childAt(1);
+            return (Name) childAt(1);
         }
 
         public OptionNode params() {
-           return (OptionNode) childAt(2);
+            return (OptionNode) childAt(2);
         }
 
         public Body body() {
-           return (Body) childAt(4);
+            return (Body) childAt(4);
         }
 
         @Override
@@ -100,15 +100,15 @@ public class IggyParseTree {
         }
 
         public OptionNode modifier() {
-           return (OptionNode) childAt(0);
+            return (OptionNode) childAt(0);
         }
 
         public Name name() {
-           return (Name) childAt(2);
+            return (Name) childAt(2);
         }
 
         public RegexBody body() {
-           return (RegexBody) childAt(4);
+            return (RegexBody) childAt(4);
         }
 
         @Override
@@ -194,7 +194,7 @@ public class IggyParseTree {
         }
 
         public Sequence seq() {
-           return (Sequence) childAt(0);
+            return (Sequence) childAt(0);
         }
 
         @Override
@@ -213,11 +213,11 @@ public class IggyParseTree {
         }
 
         public TerminalNode assoc() {
-           return (TerminalNode) childAt(0);
+            return (TerminalNode) childAt(0);
         }
 
         public PlusNode seqs() {
-           return (PlusNode) childAt(2);
+            return (PlusNode) childAt(2);
         }
 
         @Override
@@ -243,27 +243,27 @@ public class IggyParseTree {
         }
 
         public OptionNode assoc() {
-           return (OptionNode) childAt(0);
+            return (OptionNode) childAt(0);
         }
 
         public OptionNode cond() {
-           return (OptionNode) childAt(1);
+            return (OptionNode) childAt(1);
         }
 
         public Symbol first() {
-           return (Symbol) childAt(2);
+            return (Symbol) childAt(2);
         }
 
         public PlusNode rest() {
-           return (PlusNode) childAt(3);
+            return (PlusNode) childAt(3);
         }
 
         public OptionNode ret() {
-           return (OptionNode) childAt(4);
+            return (OptionNode) childAt(4);
         }
 
         public OptionNode label() {
-           return (OptionNode) childAt(5);
+            return (OptionNode) childAt(5);
         }
 
         @Override
@@ -282,19 +282,19 @@ public class IggyParseTree {
         }
 
         public OptionNode cond() {
-           return (OptionNode) childAt(0);
+            return (OptionNode) childAt(0);
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(1);
+            return (Symbol) childAt(1);
         }
 
         public OptionNode ret() {
-           return (OptionNode) childAt(2);
+            return (OptionNode) childAt(2);
         }
 
         public OptionNode label() {
-           return (OptionNode) childAt(3);
+            return (OptionNode) childAt(3);
         }
 
         @Override
@@ -313,7 +313,7 @@ public class IggyParseTree {
         }
 
         public OptionNode label() {
-           return (OptionNode) childAt(0);
+            return (OptionNode) childAt(0);
         }
 
         @Override
@@ -354,11 +354,11 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(0);
+            return (Identifier) childAt(0);
         }
 
         public Arguments args() {
-           return (Arguments) childAt(1);
+            return (Arguments) childAt(1);
         }
 
         @Override
@@ -377,7 +377,7 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(1);
+            return (Symbol) childAt(1);
         }
 
         @Override
@@ -396,7 +396,7 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         @Override
@@ -415,7 +415,7 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         @Override
@@ -434,7 +434,7 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         @Override
@@ -453,7 +453,7 @@ public class IggyParseTree {
         }
 
         public PlusNode syms() {
-           return (PlusNode) childAt(1);
+            return (PlusNode) childAt(1);
         }
 
         @Override
@@ -472,11 +472,11 @@ public class IggyParseTree {
         }
 
         public PlusNode first() {
-           return (PlusNode) childAt(1);
+            return (PlusNode) childAt(1);
         }
 
         public PlusNode rest() {
-           return (PlusNode) childAt(2);
+            return (PlusNode) childAt(2);
         }
 
         @Override
@@ -495,7 +495,7 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(1);
+            return (Symbol) childAt(1);
         }
 
         @Override
@@ -514,7 +514,7 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(1);
+            return (Symbol) childAt(1);
         }
 
         @Override
@@ -533,11 +533,11 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(0);
+            return (Identifier) childAt(0);
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(2);
+            return (Symbol) childAt(2);
         }
 
         @Override
@@ -556,11 +556,11 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         public PlusNode stmts() {
-           return (PlusNode) childAt(1);
+            return (PlusNode) childAt(1);
         }
 
         @Override
@@ -579,11 +579,11 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         public Condition cond() {
-           return (Condition) childAt(1);
+            return (Condition) childAt(1);
         }
 
         @Override
@@ -602,11 +602,11 @@ public class IggyParseTree {
         }
 
         public Regex reg() {
-           return (Regex) childAt(0);
+            return (Regex) childAt(0);
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(2);
+            return (Symbol) childAt(2);
         }
 
         @Override
@@ -625,11 +625,11 @@ public class IggyParseTree {
         }
 
         public Regex reg() {
-           return (Regex) childAt(0);
+            return (Regex) childAt(0);
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(2);
+            return (Symbol) childAt(2);
         }
 
         @Override
@@ -648,7 +648,7 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(1);
+            return (Symbol) childAt(1);
         }
 
         @Override
@@ -667,11 +667,11 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         public Regex reg() {
-           return (Regex) childAt(2);
+            return (Regex) childAt(2);
         }
 
         @Override
@@ -690,11 +690,11 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         public Regex reg() {
-           return (Regex) childAt(2);
+            return (Regex) childAt(2);
         }
 
         @Override
@@ -713,11 +713,11 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         public Regex reg() {
-           return (Regex) childAt(2);
+            return (Regex) childAt(2);
         }
 
         @Override
@@ -736,11 +736,11 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         public Identifier id() {
-           return (Identifier) childAt(2);
+            return (Identifier) childAt(2);
         }
 
         @Override
@@ -759,7 +759,7 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         @Override
@@ -778,7 +778,7 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         @Override
@@ -797,15 +797,15 @@ public class IggyParseTree {
         }
 
         public Expression exp() {
-           return (Expression) childAt(1);
+            return (Expression) childAt(1);
         }
 
         public Symbol thenPart() {
-           return (Symbol) childAt(2);
+            return (Symbol) childAt(2);
         }
 
         public Symbol elsePart() {
-           return (Symbol) childAt(4);
+            return (Symbol) childAt(4);
         }
 
         @Override
@@ -824,7 +824,7 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(0);
+            return (Identifier) childAt(0);
         }
 
         @Override
@@ -843,7 +843,7 @@ public class IggyParseTree {
         }
 
         public TerminalNode string() {
-           return (TerminalNode) childAt(0);
+            return (TerminalNode) childAt(0);
         }
 
         @Override
@@ -862,7 +862,7 @@ public class IggyParseTree {
         }
 
         public CharClass charClass() {
-           return (CharClass) childAt(0);
+            return (CharClass) childAt(0);
         }
 
         @Override
@@ -881,11 +881,11 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(1);
+            return (Symbol) childAt(1);
         }
 
         public PlusNode sep() {
-           return (PlusNode) childAt(2);
+            return (PlusNode) childAt(2);
         }
 
         @Override
@@ -904,11 +904,11 @@ public class IggyParseTree {
         }
 
         public Symbol sym() {
-           return (Symbol) childAt(1);
+            return (Symbol) childAt(1);
         }
 
         public PlusNode sep() {
-           return (PlusNode) childAt(2);
+            return (PlusNode) childAt(2);
         }
 
         @Override
@@ -949,11 +949,11 @@ public class IggyParseTree {
         }
 
         public FunName fun() {
-           return (FunName) childAt(0);
+            return (FunName) childAt(0);
         }
 
         public Arguments args() {
-           return (Arguments) childAt(1);
+            return (Arguments) childAt(1);
         }
 
         @Override
@@ -972,7 +972,7 @@ public class IggyParseTree {
         }
 
         public Binding bindings() {
-           return (Binding) childAt(0);
+            return (Binding) childAt(0);
         }
 
         @Override
@@ -998,11 +998,11 @@ public class IggyParseTree {
         }
 
         public VarName varName() {
-           return (VarName) childAt(0);
+            return (VarName) childAt(0);
         }
 
         public Expression exp() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1021,7 +1021,7 @@ public class IggyParseTree {
         }
 
         public PlusNode decls() {
-           return (PlusNode) childAt(1);
+            return (PlusNode) childAt(1);
         }
 
         @Override
@@ -1047,7 +1047,7 @@ public class IggyParseTree {
         }
 
         public Regex reg() {
-           return (Regex) childAt(0);
+            return (Regex) childAt(0);
         }
 
         @Override
@@ -1066,7 +1066,7 @@ public class IggyParseTree {
         }
 
         public Regex reg() {
-           return (Regex) childAt(0);
+            return (Regex) childAt(0);
         }
 
         @Override
@@ -1085,7 +1085,7 @@ public class IggyParseTree {
         }
 
         public Regex reg() {
-           return (Regex) childAt(0);
+            return (Regex) childAt(0);
         }
 
         @Override
@@ -1104,7 +1104,7 @@ public class IggyParseTree {
         }
 
         public Regex reg() {
-           return (Regex) childAt(1);
+            return (Regex) childAt(1);
         }
 
         @Override
@@ -1123,11 +1123,11 @@ public class IggyParseTree {
         }
 
         public Regex first() {
-           return (Regex) childAt(1);
+            return (Regex) childAt(1);
         }
 
         public PlusNode rest() {
-           return (PlusNode) childAt(2);
+            return (PlusNode) childAt(2);
         }
 
         @Override
@@ -1146,11 +1146,11 @@ public class IggyParseTree {
         }
 
         public PlusNode first() {
-           return (PlusNode) childAt(1);
+            return (PlusNode) childAt(1);
         }
 
         public PlusNode rest() {
-           return (PlusNode) childAt(3);
+            return (PlusNode) childAt(3);
         }
 
         @Override
@@ -1169,7 +1169,7 @@ public class IggyParseTree {
         }
 
         public Name name() {
-           return (Name) childAt(0);
+            return (Name) childAt(0);
         }
 
         @Override
@@ -1188,7 +1188,7 @@ public class IggyParseTree {
         }
 
         public CharClass charClass() {
-           return (CharClass) childAt(0);
+            return (CharClass) childAt(0);
         }
 
         @Override
@@ -1207,7 +1207,7 @@ public class IggyParseTree {
         }
 
         public TerminalNode string() {
-           return (TerminalNode) childAt(0);
+            return (TerminalNode) childAt(0);
         }
 
         @Override
@@ -1233,7 +1233,7 @@ public class IggyParseTree {
         }
 
         public StarNode ranges() {
-           return (StarNode) childAt(1);
+            return (StarNode) childAt(1);
         }
 
         @Override
@@ -1252,7 +1252,7 @@ public class IggyParseTree {
         }
 
         public StarNode ranges() {
-           return (StarNode) childAt(2);
+            return (StarNode) childAt(2);
         }
 
         @Override
@@ -1278,11 +1278,11 @@ public class IggyParseTree {
         }
 
         public TerminalNode first() {
-           return (TerminalNode) childAt(0);
+            return (TerminalNode) childAt(0);
         }
 
         public TerminalNode second() {
-           return (TerminalNode) childAt(2);
+            return (TerminalNode) childAt(2);
         }
 
         @Override
@@ -1301,7 +1301,7 @@ public class IggyParseTree {
         }
 
         public TerminalNode range() {
-           return (TerminalNode) childAt(0);
+            return (TerminalNode) childAt(0);
         }
 
         @Override
@@ -1327,11 +1327,11 @@ public class IggyParseTree {
         }
 
         public FunName fun() {
-           return (FunName) childAt(0);
+            return (FunName) childAt(0);
         }
 
         public Arguments args() {
-           return (Arguments) childAt(1);
+            return (Arguments) childAt(1);
         }
 
         @Override
@@ -1350,7 +1350,7 @@ public class IggyParseTree {
         }
 
         public Expression exp() {
-           return (Expression) childAt(1);
+            return (Expression) childAt(1);
         }
 
         @Override
@@ -1369,11 +1369,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1392,11 +1392,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1415,11 +1415,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1438,11 +1438,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1461,11 +1461,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1484,11 +1484,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1507,11 +1507,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1530,11 +1530,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1553,11 +1553,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1576,11 +1576,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1599,11 +1599,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1622,11 +1622,11 @@ public class IggyParseTree {
         }
 
         public Expression lhs() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         public Expression rhs() {
-           return (Expression) childAt(2);
+            return (Expression) childAt(2);
         }
 
         @Override
@@ -1645,7 +1645,7 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(0);
+            return (Identifier) childAt(0);
         }
 
         @Override
@@ -1664,7 +1664,7 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(0);
+            return (Identifier) childAt(0);
         }
 
         @Override
@@ -1683,7 +1683,7 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(0);
+            return (Identifier) childAt(0);
         }
 
         @Override
@@ -1702,7 +1702,7 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(0);
+            return (Identifier) childAt(0);
         }
 
         @Override
@@ -1721,7 +1721,7 @@ public class IggyParseTree {
         }
 
         public VarName varName() {
-           return (VarName) childAt(0);
+            return (VarName) childAt(0);
         }
 
         @Override
@@ -1740,7 +1740,7 @@ public class IggyParseTree {
         }
 
         public TerminalNode number() {
-           return (TerminalNode) childAt(0);
+            return (TerminalNode) childAt(0);
         }
 
         @Override
@@ -1759,7 +1759,7 @@ public class IggyParseTree {
         }
 
         public Expression exp() {
-           return (Expression) childAt(1);
+            return (Expression) childAt(1);
         }
 
         @Override
@@ -1778,7 +1778,7 @@ public class IggyParseTree {
         }
 
         public Expression exp() {
-           return (Expression) childAt(1);
+            return (Expression) childAt(1);
         }
 
         @Override
@@ -1797,7 +1797,7 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(0);
+            return (Identifier) childAt(0);
         }
 
         @Override
@@ -1816,7 +1816,7 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(0);
+            return (Identifier) childAt(0);
         }
 
         @Override
@@ -1947,7 +1947,7 @@ public class IggyParseTree {
         }
 
         public Identifier id() {
-           return (Identifier) childAt(1);
+            return (Identifier) childAt(1);
         }
 
         @Override
@@ -1981,7 +1981,7 @@ public class IggyParseTree {
         }
 
         public Symbol child() {
-           return (Symbol) childAt(0);
+            return (Symbol) childAt(0);
         }
 
         @Override
@@ -2000,7 +2000,7 @@ public class IggyParseTree {
         }
 
         public Expression child() {
-           return (Expression) childAt(0);
+            return (Expression) childAt(0);
         }
 
         @Override

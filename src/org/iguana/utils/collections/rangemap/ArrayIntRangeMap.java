@@ -5,9 +5,9 @@ import java.util.List;
 
 public class ArrayIntRangeMap<T> implements IntRangeMap {
 
+    private final int[] values;
     private int start;
     private int end;
-    private final int[] values;
 
     ArrayIntRangeMap(int start, int end, List<Range> ranges, List<T> rangeValues) {
         this.start = start;

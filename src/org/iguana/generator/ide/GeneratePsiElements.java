@@ -50,7 +50,7 @@ public class GeneratePsiElements extends Generator {
         sb.append("\n");
 
         metaSymbolNodes.forEach(node ->
-            sb.append(generateSymbolClass(node, null, false, Collections.emptyList())));
+                sb.append(generateSymbolClass(node, null, false, Collections.emptyList())));
         sb.append("\n");
 
         for (Map.Entry<Nonterminal, List<RuntimeRule>> entry : grammar.getDefinitions().entrySet()) {
@@ -115,12 +115,12 @@ public class GeneratePsiElements extends Generator {
 
     private String generateSymbolClass(String symbolClass, String superType, boolean isAbstract, List<Symbol> symbols) {
         return
-            "    public static " + (isAbstract ? "abstract " : "") + "class " + symbolClass + " extends ASTWrapperPsiElement {\n" +
-                "        public " + symbolClass + "(@NotNull ASTNode node) {\n" +
-                "            super(node);\n" +
-                "        }\n\n" +
-                generateSymbols(symbols) +
-                "    }\n\n";
+                "    public static " + (isAbstract ? "abstract " : "") + "class " + symbolClass + " extends ASTWrapperPsiElement {\n" +
+                        "        public " + symbolClass + "(@NotNull ASTNode node) {\n" +
+                        "            super(node);\n" +
+                        "        }\n\n" +
+                        generateSymbols(symbols) +
+                        "    }\n\n";
     }
 
     private String generateSymbols(List<Symbol> symbols) {
@@ -148,25 +148,6 @@ public class GeneratePsiElements extends Generator {
         return sb.toString();
     }
 
-    private static class Type {
-        private final String name;
-        private final String parameter;
-
-        public Type(String name) {
-            this(name, null);
-        }
-        public Type(String name, String parameter) {
-            this.name = name;
-            this.parameter = parameter;
-        }
-
-        @Override
-        public String toString() {
-            if (parameter == null) return name;
-            else return String.format("%s<%s>", name, parameter);
-        }
-    }
-
     private Type getSymbolType(Symbol symbol) {
         if (symbol instanceof Nonterminal) {
             return new Type(toFirstUpperCase(grammarName) + "PsiElement." + symbol.getName());
@@ -189,6 +170,26 @@ public class GeneratePsiElements extends Generator {
         } else {
             // Data dependent symbols do not have a type
             return null;
+        }
+    }
+
+    private static class Type {
+        private final String name;
+        private final String parameter;
+
+        public Type(String name) {
+            this(name, null);
+        }
+
+        public Type(String name, String parameter) {
+            this.name = name;
+            this.parameter = parameter;
+        }
+
+        @Override
+        public String toString() {
+            if (parameter == null) return name;
+            else return String.format("%s<%s>", name, parameter);
         }
     }
 }

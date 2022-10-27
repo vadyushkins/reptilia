@@ -11,15 +11,25 @@ public class Keys {
         return from(a, b);
     }
 
-    public static org.iguana.utils.collections.key.Key from(int a) { return new org.iguana.utils.collections.key.IntKey1(a); }
+    public static org.iguana.utils.collections.key.Key from(int a) {
+        return new org.iguana.utils.collections.key.IntKey1(a);
+    }
 
-    public static org.iguana.utils.collections.key.Key from(int a, Object o) { return new org.iguana.utils.collections.key.IntObjectKey(a, o); }
+    public static org.iguana.utils.collections.key.Key from(int a, Object o) {
+        return new org.iguana.utils.collections.key.IntObjectKey(a, o);
+    }
 
-    public static org.iguana.utils.collections.key.Key from(int a, Object[] objects) { return new org.iguana.utils.collections.key.IntArrayKey(a, objects); }
+    public static org.iguana.utils.collections.key.Key from(int a, Object[] objects) {
+        return new org.iguana.utils.collections.key.IntArrayKey(a, objects);
+    }
 
-    public static org.iguana.utils.collections.key.Key from(int a, int b, Object object) { return new org.iguana.utils.collections.key.IntIntObjectKey(a, b, object); }
+    public static org.iguana.utils.collections.key.Key from(int a, int b, Object object) {
+        return new org.iguana.utils.collections.key.IntIntObjectKey(a, b, object);
+    }
 
-    public static org.iguana.utils.collections.key.Key from(int a, int b, int c, Object object) { return new org.iguana.utils.collections.key.IntIntIntObjectKey(a, b, c, object); }
+    public static org.iguana.utils.collections.key.Key from(int a, int b, int c, Object object) {
+        return new org.iguana.utils.collections.key.IntIntIntObjectKey(a, b, c, object);
+    }
 
     public static org.iguana.utils.collections.key.Key from(Object a, Object b) {
         return new org.iguana.utils.collections.key.ObjectKey2(a, b, org.iguana.utils.collections.hash.MurmurHash3.f2().apply(a, b));
@@ -53,7 +63,7 @@ public class Keys {
         return new org.iguana.utils.collections.key.ObjectKey4(a, b, c, d, f.apply(a, b, c, d));
     }
 
-    public static org.iguana.utils.collections.key.Key from(Object...elements) {
+    public static org.iguana.utils.collections.key.Key from(Object... elements) {
         return new ObjectKeyN(MurmurHash3.fn(), elements);
     }
 
