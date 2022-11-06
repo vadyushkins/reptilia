@@ -10,6 +10,16 @@ import java.util.Optional;
 
 public interface ParseTreeVisitor<T> {
 
+    static Symbol getSymbol(Symbol symbol) {
+        if (symbol instanceof Star) {
+            return ((Star) symbol).getSymbol();
+        } else if (symbol instanceof Plus) {
+            return ((Plus) symbol).getSymbol();
+        } else if (symbol instanceof Opt) {
+            return ((Opt) symbol).getSymbol();
+        } else throw new RuntimeException("Unsupported symbol " + symbol);
+    }
+
     T visitNonterminalNode(NonterminalNode node);
 
     default List<T> visitAmbiguityNode(AmbiguityNode node) {
@@ -115,15 +125,5 @@ public interface ParseTreeVisitor<T> {
         }
 
         return result;
-    }
-
-    static Symbol getSymbol(Symbol symbol) {
-        if (symbol instanceof Star) {
-            return ((Star) symbol).getSymbol();
-        } else if (symbol instanceof Plus) {
-            return ((Plus) symbol).getSymbol();
-        } else if (symbol instanceof Opt) {
-            return ((Opt) symbol).getSymbol();
-        } else throw new RuntimeException("Unsupported symbol " + symbol);
     }
 }

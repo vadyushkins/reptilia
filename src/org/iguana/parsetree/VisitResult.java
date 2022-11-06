@@ -9,11 +9,6 @@ import java.util.*;
 
 public abstract class VisitResult {
 
-    public abstract MergeResultVisitor visitor();
-    public abstract VisitResult merge(VisitResult other);
-    public abstract <T> T accept(CreateNodeVisitor<T> visitor, PackedNode packedNode);
-    public abstract java.util.List<Object> getValues();
-
     public static Empty empty() {
         return new VisitResult.Empty();
     }
@@ -28,6 +23,38 @@ public abstract class VisitResult {
 
     public static EBNF ebnf(java.util.List<Object> values, Symbol symbol) {
         return new EBNF(values, symbol);
+    }
+
+    public abstract MergeResultVisitor visitor();
+
+    public abstract VisitResult merge(VisitResult other);
+
+    public abstract <T> T accept(CreateNodeVisitor<T> visitor, PackedNode packedNode);
+
+    public abstract java.util.List<Object> getValues();
+
+    interface MergeResultVisitor {
+        Object visit(Empty other);
+
+        Object visit(Single other);
+
+        Object visit(List other);
+
+        Object visit(EBNF other);
+
+        Object visit(ListOfResult other);
+    }
+
+    public interface CreateNodeVisitor<T> {
+        T visit(Empty result, PackedNode packedNode);
+
+        T visit(Single result, PackedNode packedNode);
+
+        T visit(List result, PackedNode packedNode);
+
+        T visit(EBNF result, PackedNode packedNode);
+
+        T visit(ListOfResult result, PackedNode packedNode);
     }
 
     public static class Empty extends VisitResult {
@@ -237,12 +264,54 @@ public abstract class VisitResult {
         }
     }
 
-    interface MergeResultVisitor {
-        Object visit(Empty other);
-        Object visit(Single other);
-        Object visit(List other);
-        Object visit(EBNF other);
-        Object visit(ListOfResult other);
+    public static class CreateParseTreeVisitor<T> implements CreateNodeVisitor<java.util.List<T>> {
+
+        private ParseTreeBuilder<T> parseTreeBuilder;
+
+        public CreateParseTreeVisitor(ParseTreeBuilder<T> parseTreeBuilder) {
+            this.parseTreeBuilder = parseTreeBuilder;
+        }
+
+        @Override
+        public java.util.List<T> visit(Empty result, PackedNode packedNode) {
+            RuntimeRule rule = packedNode.getGrammarSlot().getRule();
+            return CollectionsUtil.list(parseTreeBuilder.nonterminalNode(rule, (java.util.List<T>) result.getValues(), packedNode.getLeftExtent(), packedNode.getRightExtent()));
+        }
+
+        @Override
+        public java.util.List<T> visit(Single result, PackedNode packedNode) {
+            RuntimeRule rule = packedNode.getGrammarSlot().getRule();
+            return CollectionsUtil.list((parseTreeBuilder.nonterminalNode(rule, (java.util.List<T>) result.getValues(), packedNode.getLeftExtent(), packedNode.getRightExtent())));
+        }
+
+        @Override
+        public java.util.List<T> visit(List result, PackedNode packedNode) {
+            java.util.List<T> values = new ArrayList<>();
+            for (Object o : result.getValues()) {
+                if (o instanceof VisitResult) {
+                    values.addAll(((VisitResult) o).accept(this, packedNode));
+                } else {
+                    values.add((T) o);
+                }
+            }
+            RuntimeRule rule = packedNode.getGrammarSlot().getRule();
+            return CollectionsUtil.list(parseTreeBuilder.nonterminalNode(rule, values, packedNode.getLeftExtent(), packedNode.getRightExtent()));
+        }
+
+        @Override
+        public java.util.List<T> visit(EBNF result, PackedNode packedNode) {
+            T ebnfNode = parseTreeBuilder.metaSymbolNode(result.getSymbol(), (java.util.List<T>) result.getValues(), packedNode.getLeftExtent(), packedNode.getRightExtent());
+            return CollectionsUtil.list(ebnfNode);
+        }
+
+        @Override
+        public java.util.List<T> visit(ListOfResult result, PackedNode packedNode) {
+            Set<T> set = new LinkedHashSet<>();
+            for (VisitResult vResult : result.getVisitResults()) {
+                set.add(parseTreeBuilder.nonterminalNode(packedNode.getGrammarSlot().getRule(), (java.util.List<T>) vResult.getValues(), packedNode.getLeftExtent(), packedNode.getRightExtent()));
+            }
+            return CollectionsUtil.list(parseTreeBuilder.ambiguityNode(set));
+        }
     }
 
     class SingleVisitor implements MergeResultVisitor {
@@ -455,65 +524,6 @@ public abstract class VisitResult {
         @Override
         public VisitResult visit(ListOfResult other) {
             return other;
-        }
-    }
-
-    public interface CreateNodeVisitor<T> {
-        T visit(Empty result, PackedNode packedNode);
-        T visit(Single result, PackedNode packedNode);
-        T visit(List result, PackedNode packedNode);
-        T visit(EBNF result, PackedNode packedNode);
-        T visit(ListOfResult result, PackedNode packedNode);
-    }
-
-
-    public static class CreateParseTreeVisitor<T> implements CreateNodeVisitor<java.util.List<T>> {
-
-        private ParseTreeBuilder<T> parseTreeBuilder;
-
-        public CreateParseTreeVisitor(ParseTreeBuilder<T> parseTreeBuilder) {
-            this.parseTreeBuilder = parseTreeBuilder;
-        }
-
-        @Override
-        public java.util.List<T> visit(Empty result, PackedNode packedNode) {
-            RuntimeRule rule = packedNode.getGrammarSlot().getRule();
-            return CollectionsUtil.list(parseTreeBuilder.nonterminalNode(rule, (java.util.List<T>) result.getValues(), packedNode.getLeftExtent(), packedNode.getRightExtent()));
-        }
-
-        @Override
-        public java.util.List<T> visit(Single result, PackedNode packedNode) {
-            RuntimeRule rule = packedNode.getGrammarSlot().getRule();
-            return CollectionsUtil.list((parseTreeBuilder.nonterminalNode(rule, (java.util.List<T>) result.getValues(), packedNode.getLeftExtent(), packedNode.getRightExtent())));
-        }
-
-        @Override
-        public java.util.List<T> visit(List result, PackedNode packedNode) {
-            java.util.List<T> values = new ArrayList<>();
-            for (Object o : result.getValues()) {
-                if (o instanceof VisitResult) {
-                    values.addAll(((VisitResult) o).accept(this, packedNode));
-                } else {
-                    values.add((T) o);
-                }
-            }
-            RuntimeRule rule = packedNode.getGrammarSlot().getRule();
-            return CollectionsUtil.list(parseTreeBuilder.nonterminalNode(rule, values, packedNode.getLeftExtent(), packedNode.getRightExtent()));
-        }
-
-        @Override
-        public java.util.List<T> visit(EBNF result, PackedNode packedNode) {
-            T ebnfNode = parseTreeBuilder.metaSymbolNode(result.getSymbol(), (java.util.List<T>) result.getValues(), packedNode.getLeftExtent(), packedNode.getRightExtent());
-            return CollectionsUtil.list(ebnfNode);
-        }
-
-        @Override
-        public java.util.List<T> visit(ListOfResult result, PackedNode packedNode) {
-            Set<T> set = new LinkedHashSet<>();
-            for (VisitResult vResult :result.getVisitResults()) {
-                set.add(parseTreeBuilder.nonterminalNode(packedNode.getGrammarSlot().getRule(), (java.util.List<T>) vResult.getValues(), packedNode.getLeftExtent(), packedNode.getRightExtent()));
-            }
-            return CollectionsUtil.list(parseTreeBuilder.ambiguityNode(set));
         }
     }
 

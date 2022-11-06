@@ -34,27 +34,27 @@ import org.iguana.traversal.SPPFVisitor;
 
 public class NonterminalNode extends NonPackedNode {
 
-	private final EndGrammarSlot slot;
+    private final EndGrammarSlot slot;
 
-	private final NonPackedNode child;
+    private final NonPackedNode child;
 
-	private final int leftExtent;
+    private final int leftExtent;
 
-	private final int rightExtent;
+    private final int rightExtent;
 
     private boolean ambiguous;
 
-	public NonterminalNode(EndGrammarSlot slot, NonPackedNode child, int leftExtent, int rightExtent) {
-		this.slot = slot;
-		this.child = child;
-		this.leftExtent = leftExtent;
-		this.rightExtent = rightExtent;
-	}
+    public NonterminalNode(EndGrammarSlot slot, NonPackedNode child, int leftExtent, int rightExtent) {
+        this.slot = slot;
+        this.child = child;
+        this.leftExtent = leftExtent;
+        this.rightExtent = rightExtent;
+    }
 
     @Override
     public SPPFNode getChildAt(int index) {
-	    if (index == 0) {
-	        return child;
+        if (index == 0) {
+            return child;
         }
         throw new IndexOutOfBoundsException();
     }
@@ -65,11 +65,11 @@ public class NonterminalNode extends NonPackedNode {
     }
 
     @Override
-	public NonterminalGrammarSlot getGrammarSlot() {
-		return slot.getNonterminal();
-	}
+    public NonterminalGrammarSlot getGrammarSlot() {
+        return slot.getNonterminal();
+    }
 
-	public EndGrammarSlot getEndGrammarSlot() {
+    public EndGrammarSlot getEndGrammarSlot() {
         return slot;
     }
 
@@ -77,19 +77,14 @@ public class NonterminalNode extends NonPackedNode {
         return slot.getRule();
     }
 
-	@Override
-	public <R> R accept(SPPFVisitor<R> visitor) {
-		return visitor.visit(this);
-	}
+    @Override
+    public <R> R accept(SPPFVisitor<R> visitor) {
+        return visitor.visit(this);
+    }
 
     @Override
     public int getLeftExtent() {
         return leftExtent;
-    }
-
-    @Override
-    public void setAmbiguous(boolean ambiguous) {
-        this.ambiguous = ambiguous;
     }
 
     @Override
@@ -98,9 +93,14 @@ public class NonterminalNode extends NonPackedNode {
     }
 
     @Override
-	public String toString() {
-		return String.format("(%s, %d, %d)", slot, getLeftExtent(), getRightExtent());
-	}
+    public void setAmbiguous(boolean ambiguous) {
+        this.ambiguous = ambiguous;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("(%s, %d, %d)", slot, getLeftExtent(), getRightExtent());
+    }
 
     @Override
     public int getRightExtent() {

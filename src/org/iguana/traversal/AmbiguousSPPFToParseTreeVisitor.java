@@ -23,9 +23,8 @@ public class AmbiguousSPPFToParseTreeVisitor<T> implements SPPFVisitor<VisitResu
     private final Set<NonterminalNode> visitedNodes;
     private final Map<NonPackedNode, VisitResult> convertedNodes;
     private final boolean ignoreLayout;
-    private ParserResultOps resultOps;
-
     private final VisitResult.CreateParseTreeVisitor<T> createNodeVisitor;
+    private ParserResultOps resultOps;
 
     public AmbiguousSPPFToParseTreeVisitor(ParseTreeBuilder<T> parseTreeBuilder, boolean ignoreLayout, ParserResultOps resultOps) {
         this.parseTreeBuilder = parseTreeBuilder;
@@ -166,7 +165,7 @@ public class AmbiguousSPPFToParseTreeVisitor<T> implements SPPFVisitor<VisitResu
         // It seems that we can simplify the SPPF to ParseTree creation by checking the packed node's node type
         // and may be able to get rid of VisitResult hierarchy
         if (node.getGrammarSlot().getRule().getHead().getNodeType() != NonterminalNodeType.Plus &&
-            node.getGrammarSlot().getRule().getHead().getNodeType() != NonterminalNodeType.Star) {
+                node.getGrammarSlot().getRule().getHead().getNodeType() != NonterminalNodeType.Star) {
             if (left instanceof EBNF) {
                 List<Object> values = new ArrayList<>();
                 values.add(left);

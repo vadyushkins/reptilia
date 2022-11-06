@@ -22,11 +22,9 @@ public class IguanaRecognizer {
 
     protected final GrammarGraph grammarGraph;
     protected final Configuration config;
-
+    protected final RuntimeGrammar finalGrammar;
     protected ParseError parseError;
     protected RecognizerStatistics statistics;
-
-    protected final RuntimeGrammar finalGrammar;
 
     public IguanaRecognizer(Grammar grammar) {
         this(grammar, Configuration.load());
@@ -44,6 +42,13 @@ public class IguanaRecognizer {
         this.grammarGraph = GrammarGraphBuilder.from(grammar, config);
         this.config = config;
         this.finalGrammar = grammar;
+    }
+
+    protected static Start assertStartSymbolNotNull(Start start) {
+        if (start == null) {
+            throw new RuntimeException("Start symbol is not set");
+        }
+        return start;
     }
 
     public boolean recognize(Input input, Symbol symbol) {
@@ -86,12 +91,5 @@ public class IguanaRecognizer {
         grammarGraph.clear();
         parseError = null;
         statistics = null;
-    }
-
-    protected static Start assertStartSymbolNotNull(Start start) {
-        if (start == null) {
-            throw new RuntimeException("Start symbol is not set");
-        }
-        return start;
     }
 }

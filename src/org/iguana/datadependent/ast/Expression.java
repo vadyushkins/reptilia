@@ -51,11 +51,15 @@ public abstract class Expression extends AbstractAST {
         return false;
     }
 
-    public static abstract class Boolean extends Expression {
+    public boolean isInteger() {
+        return false;
+    }
 
-        public boolean isBoolean() {
-            return true;
-        }
+    public boolean isString() {
+        return false;
+    }
+
+    public static abstract class Boolean extends Expression {
 
         static final Boolean TRUE = new Boolean() {
 
@@ -74,7 +78,6 @@ public abstract class Expression extends AbstractAST {
                 return visitor.visit(this);
             }
         };
-
         static final Boolean FALSE = new Boolean() {
 
             @Override
@@ -94,10 +97,10 @@ public abstract class Expression extends AbstractAST {
 
         };
 
-    }
+        public boolean isBoolean() {
+            return true;
+        }
 
-    public boolean isInteger() {
-        return false;
     }
 
     public static class Integer extends Expression {
@@ -182,10 +185,6 @@ public abstract class Expression extends AbstractAST {
             return visitor.visit(this);
         }
 
-    }
-
-    public boolean isString() {
-        return false;
     }
 
     public static class String extends Expression {
@@ -669,9 +668,9 @@ public abstract class Expression extends AbstractAST {
             if (!(obj instanceof OrIndent)) return false;
             OrIndent other = (OrIndent) obj;
             return this.index.equals(other.index) &&
-                this.ind.equals(other.ind) &&
-                this.first.equals(other.first) &&
-                this.lExt.equals(other.lExt);
+                    this.ind.equals(other.ind) &&
+                    this.first.equals(other.first) &&
+                    this.lExt.equals(other.lExt);
         }
 
         @Override
@@ -741,7 +740,7 @@ public abstract class Expression extends AbstractAST {
 //			return returnIndex? "(" +first + " && " + lExt + " - " + index + " == 0)?" + index
 //					          : first + " && " + lExt + " - " + index + " == 0";
             return returnIndex ? java.lang.String.format("g(%s,%s,%s,%s)", index, first, lExt, 1)
-                : java.lang.String.format("g(%s,%s,%s,%s)", index, first, lExt, 0);
+                    : java.lang.String.format("g(%s,%s,%s,%s)", index, first, lExt, 0);
         }
 
         @Override
@@ -750,8 +749,8 @@ public abstract class Expression extends AbstractAST {
             if (!(obj instanceof AndIndent)) return false;
             AndIndent other = (AndIndent) obj;
             return this.index.equals(other.index) &&
-                this.first.equals(other.first) &&
-                this.lExt.equals(other.lExt);
+                    this.first.equals(other.first) &&
+                    this.lExt.equals(other.lExt);
         }
 
         @Override
@@ -1450,8 +1449,8 @@ public abstract class Expression extends AbstractAST {
             if (!(obj instanceof IfThenElse)) return false;
             IfThenElse other = (IfThenElse) obj;
             return this.condition.equals(other.condition) &&
-                this.thenPart.equals(other.thenPart) &&
-                this.elsePart.equals(other.elsePart);
+                    this.thenPart.equals(other.thenPart) &&
+                    this.elsePart.equals(other.elsePart);
         }
 
         @Override

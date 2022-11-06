@@ -36,6 +36,115 @@ public class IggyParseTreeToGrammarVisitor implements IggyParseTreeVisitor<Objec
     private final List<String> startSymbols = new ArrayList<>();
     private Identifier layout;
 
+    private static RegularExpression getRegex(List<List<RegularExpression>> listOfList) {
+        if (listOfList.size() == 1) {
+            return getRegexOfList(listOfList.get(0));
+        }
+        org.iguana.regex.Alt.Builder<RegularExpression> builder = new org.iguana.regex.Alt.Builder<>();
+        for (List<RegularExpression> list : listOfList) {
+            builder.add(getRegexOfList(list));
+        }
+        return builder.build();
+    }
+
+    private static RegularExpression getRegexOfList(List<RegularExpression> list) {
+        if (list.size() == 1) {
+            return list.get(0);
+        }
+        return org.iguana.regex.Seq.from(list);
+    }
+
+    private static Associativity getAssociativity(ParseTreeNode node) {
+        switch (node.getText()) {
+            case "left":
+                return Associativity.LEFT;
+            case "right":
+                return Associativity.RIGHT;
+            case "non-assoc":
+                return Associativity.NON_ASSOC;
+            default:
+                return Associativity.UNDEFINED;
+        }
+    }
+
+    private static String stripQuotes(ParseTreeNode node) {
+        return node.getText().substring(1, node.getText().length() - 1);
+    }
+
+    private static int[] getChars(String s) {
+        int i = 0;
+        int j = 0;
+        int[] chars = new int[s.length()];
+        while (i < s.length()) {
+            if (s.charAt(i) == '\\') {
+                switch (s.charAt(i + 1)) {
+                    case 'n':
+                        chars[j++] = '\n';
+                        break;
+                    case 'r':
+                        chars[j++] = '\r';
+                        break;
+                    case 't':
+                        chars[j++] = '\t';
+                        break;
+                    case 'f':
+                        chars[j++] = '\f';
+                        break;
+                    case ' ':
+                        chars[j++] = ' ';
+                        break;
+                    case '\\':
+                        chars[j++] = '\\';
+                        break;
+                    case '\'':
+                        chars[j++] = '\'';
+                        break;
+                    case '"':
+                        chars[j++] = '"';
+                        break;
+                }
+                i += 2;
+            } else {
+                chars[j++] = s.charAt(i++);
+            }
+        }
+        return Arrays.copyOf(chars, j);
+    }
+
+    private static RegularExpression getCharsRegex(String s) {
+        int[] chars = getChars(s);
+        if (chars.length == 1) {
+            return Char.from(chars[0]);
+        }
+        return Seq.from(chars);
+    }
+
+    private static int getRangeChar(String s) {
+        switch (s) {
+            case "\\n":
+                return '\n';
+            case "\\r":
+                return '\r';
+            case "\\t":
+                return '\t';
+            case "\\f":
+                return '\f';
+            case "\\'":
+                return '\'';
+            case "\\\"":
+                return '\"';
+            case "\\ ":
+                return ' ';
+            case "\\[":
+                return '[';
+            case "\\]":
+                return ']';
+            case "\\-":
+                return '-';
+        }
+        return s.charAt(0);
+    }
+
     @Override
     public Grammar visitGrammar(IggyParseTree.Grammar node) {
         Optional<Identifier> name = visit(node.name());
@@ -106,14 +215,14 @@ public class IggyParseTreeToGrammarVisitor implements IggyParseTreeVisitor<Objec
             }
         }
         Nonterminal nonterminal = new Nonterminal.Builder(nonterminalName.getName())
-            .addParameters(parameters.map(identifiers -> identifiers.stream().map(AbstractSymbol::toString).collect(Collectors.toList())).orElse(Collections.emptyList()))
-            .setNodeType(nonterminalNodeType)
-            .build();
+                .addParameters(parameters.map(identifiers -> identifiers.stream().map(AbstractSymbol::toString).collect(Collectors.toList())).orElse(Collections.emptyList()))
+                .setNodeType(nonterminalNodeType)
+                .build();
 
         return new Rule.Builder(nonterminal)
-            .addPriorityLevels(priorityLevels)
-            .setLayoutStrategy(layoutStrategy)
-            .build();
+                .addPriorityLevels(priorityLevels)
+                .setLayoutStrategy(layoutStrategy)
+                .build();
     }
 
     @Override
@@ -386,9 +495,9 @@ public class IggyParseTreeToGrammarVisitor implements IggyParseTreeVisitor<Objec
     @Override
     public Symbol visitIfThenElseSymbol(IggyParseTree.IfThenElseSymbol node) {
         return IfThenElse.ifThenElse(
-            (Expression) node.exp().accept(this),
-            (Symbol) node.thenPart().accept(this),
-            (Symbol) node.elsePart().accept(this)
+                (Expression) node.exp().accept(this),
+                (Symbol) node.thenPart().accept(this),
+                (Symbol) node.elsePart().accept(this)
         );
     }
 
@@ -403,16 +512,16 @@ public class IggyParseTreeToGrammarVisitor implements IggyParseTreeVisitor<Objec
         RegularExpression regex = getCharsRegex(text);
         literals.put(text, regex);
         return new Terminal.Builder(regex)
-            .setNodeType(TerminalNodeType.Literal)
-            .build();
+                .setNodeType(TerminalNodeType.Literal)
+                .build();
     }
 
     @Override
     public Terminal visitCharClassSymbol(IggyParseTree.CharClassSymbol node) {
         RegularExpression regex = (RegularExpression) node.charClass().accept(this);
         return new Terminal.Builder(regex)
-            .setNodeType(TerminalNodeType.Regex)
-            .build();
+                .setNodeType(TerminalNodeType.Regex)
+                .build();
     }
 
     @Override
@@ -744,114 +853,5 @@ public class IggyParseTreeToGrammarVisitor implements IggyParseTreeVisitor<Objec
 
     private <T> T visit(ParseTreeNode node) {
         return (T) node.accept(this);
-    }
-
-    private static RegularExpression getRegex(List<List<RegularExpression>> listOfList) {
-        if (listOfList.size() == 1) {
-            return getRegexOfList(listOfList.get(0));
-        }
-        org.iguana.regex.Alt.Builder<RegularExpression> builder = new org.iguana.regex.Alt.Builder<>();
-        for (List<RegularExpression> list : listOfList) {
-            builder.add(getRegexOfList(list));
-        }
-        return builder.build();
-    }
-
-    private static RegularExpression getRegexOfList(List<RegularExpression> list) {
-        if (list.size() == 1) {
-            return list.get(0);
-        }
-        return org.iguana.regex.Seq.from(list);
-    }
-
-    private static Associativity getAssociativity(ParseTreeNode node) {
-        switch (node.getText()) {
-            case "left":
-                return Associativity.LEFT;
-            case "right":
-                return Associativity.RIGHT;
-            case "non-assoc":
-                return Associativity.NON_ASSOC;
-            default:
-                return Associativity.UNDEFINED;
-        }
-    }
-
-    private static String stripQuotes(ParseTreeNode node) {
-        return node.getText().substring(1, node.getText().length() - 1);
-    }
-
-    private static int[] getChars(String s) {
-        int i = 0;
-        int j = 0;
-        int[] chars = new int[s.length()];
-        while (i < s.length()) {
-            if (s.charAt(i) == '\\') {
-                switch (s.charAt(i + 1)) {
-                    case 'n':
-                        chars[j++] = '\n';
-                        break;
-                    case 'r':
-                        chars[j++] = '\r';
-                        break;
-                    case 't':
-                        chars[j++] = '\t';
-                        break;
-                    case 'f':
-                        chars[j++] = '\f';
-                        break;
-                    case ' ':
-                        chars[j++] = ' ';
-                        break;
-                    case '\\':
-                        chars[j++] = '\\';
-                        break;
-                    case '\'':
-                        chars[j++] = '\'';
-                        break;
-                    case '"':
-                        chars[j++] = '"';
-                        break;
-                }
-                i += 2;
-            } else {
-                chars[j++] = s.charAt(i++);
-            }
-        }
-        return Arrays.copyOf(chars, j);
-    }
-
-    private static RegularExpression getCharsRegex(String s) {
-        int[] chars = getChars(s);
-        if (chars.length == 1) {
-            return Char.from(chars[0]);
-        }
-        return Seq.from(chars);
-    }
-
-    private static int getRangeChar(String s) {
-        switch (s) {
-            case "\\n":
-                return '\n';
-            case "\\r":
-                return '\r';
-            case "\\t":
-                return '\t';
-            case "\\f":
-                return '\f';
-            case "\\'":
-                return '\'';
-            case "\\\"":
-                return '\"';
-            case "\\ ":
-                return ' ';
-            case "\\[":
-                return '[';
-            case "\\]":
-                return ']';
-            case "\\-":
-                return '-';
-        }
-        return s.charAt(0);
     }
 }

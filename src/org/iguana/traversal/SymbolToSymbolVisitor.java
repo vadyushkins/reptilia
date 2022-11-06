@@ -192,10 +192,10 @@ public interface SymbolToSymbolVisitor extends ISymbolVisitor<Symbol>, IConditio
     default Symbol visitSymbol(Symbol symbol) {
         List<Symbol> newChildren = symbol.getChildren().stream().map(s -> s.accept(this)).collect(Collectors.toList());
         Symbol newSymbol = symbol.copy()
-            .setChildren(newChildren)
-            .setPreConditions(visitPreConditions(symbol))
-            .setPostConditions(visitPostConditions(symbol))
-            .build();
+                .setChildren(newChildren)
+                .setPreConditions(visitPreConditions(symbol))
+                .setPostConditions(visitPostConditions(symbol))
+                .build();
 
         if (newSymbol.equals(symbol)) {
             return symbol;

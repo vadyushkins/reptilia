@@ -38,7 +38,6 @@ public abstract class Generator {
     }
 
     /**
-     *
      * @param f a function from the nonterminal name to the generated string
      */
     protected void generateTypes(StringBuilder sb, Function<String, String> f) {

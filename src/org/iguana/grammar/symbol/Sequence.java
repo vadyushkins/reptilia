@@ -7,23 +7,20 @@ import static org.iguana.utils.collections.CollectionsUtil.buildMap;
 
 public class Sequence {
 
-    private final List<Symbol> symbols;
-
     public final Associativity associativity;
-
     public final String label;
-
+    private final List<Symbol> symbols;
     private final Map<String, Object> attributes;
-
-    public static Sequence from(Symbol ...symbols) {
-        return new Builder().addSymbols(List.of(symbols)).build();
-    }
 
     public Sequence(Builder builder) {
         this.symbols = builder.symbols;
         this.associativity = builder.associativity;
         this.label = builder.label;
         this.attributes = builder.attributes;
+    }
+
+    public static Sequence from(Symbol... symbols) {
+        return new Builder().addSymbols(List.of(symbols)).build();
     }
 
     public boolean isEmpty() {
@@ -66,8 +63,8 @@ public class Sequence {
         if (!(obj instanceof Sequence)) return false;
         Sequence other = (Sequence) obj;
         return Objects.equals(this.symbols, other.symbols) &&
-               Objects.equals(this.associativity, other.associativity) &&
-               Objects.equals(this.label, other.label);
+                Objects.equals(this.associativity, other.associativity) &&
+                Objects.equals(this.label, other.label);
     }
 
     @Override
@@ -107,7 +104,8 @@ public class Sequence {
         private Associativity associativity = Associativity.UNDEFINED;
         private String label;
 
-        public Builder() { }
+        public Builder() {
+        }
 
         public Builder(Sequence seq) {
             this.attributes = new HashMap<>(seq.getAttributes());

@@ -29,9 +29,9 @@ package org.iguana.sppf;
 
 public abstract class NonPackedNode implements SPPFNode {
 
-    public abstract void setAmbiguous(boolean ambiguous);
-
     public abstract boolean isAmbiguous();
+
+    public abstract void setAmbiguous(boolean ambiguous);
 
     public abstract PackedNode getFirstPackedNode();
 

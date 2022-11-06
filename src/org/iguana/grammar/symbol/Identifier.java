@@ -9,13 +9,13 @@ public class Identifier extends AbstractSymbol {
 
     private final Set<String> excepts;
 
-    public static Identifier fromName(String name) {
-        return new Builder(name).build();
-    }
-
     public Identifier(Builder builder) {
         super(builder);
         this.excepts = builder.excepts;
+    }
+
+    public static Identifier fromName(String name) {
+        return new Builder(name).build();
     }
 
     public Set<String> getExcepts() {
@@ -49,7 +49,8 @@ public class Identifier extends AbstractSymbol {
 
         private Set<String> excepts = new HashSet<>();
 
-        private Builder() { }
+        private Builder() {
+        }
 
         public Builder(String name) {
             this.name = name;

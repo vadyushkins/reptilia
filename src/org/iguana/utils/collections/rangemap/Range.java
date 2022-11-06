@@ -2,10 +2,6 @@ package org.iguana.utils.collections.rangemap;
 
 public interface Range extends Comparable<Range> {
 
-    int getStart();
-
-    int getEnd();
-
     static Range in(int start, int end) {
         return new Range() {
 
@@ -25,6 +21,10 @@ public interface Range extends Comparable<Range> {
             }
         };
     }
+
+    int getStart();
+
+    int getEnd();
 
     @Override
     default int compareTo(Range o) {

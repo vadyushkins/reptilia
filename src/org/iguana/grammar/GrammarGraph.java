@@ -29,7 +29,7 @@ public class GrammarGraph {
     }
 
     public List<NonterminalGrammarSlot> getNonterminalGrammarSlots() {
-       return slots.stream().filter(slot -> slot instanceof NonterminalGrammarSlot).map(slot -> (NonterminalGrammarSlot) slot).collect(toList());
+        return slots.stream().filter(slot -> slot instanceof NonterminalGrammarSlot).map(slot -> (NonterminalGrammarSlot) slot).collect(toList());
     }
 
     public List<TerminalGrammarSlot> getTerminalGrammarSlots() {

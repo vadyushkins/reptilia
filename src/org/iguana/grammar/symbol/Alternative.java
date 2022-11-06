@@ -8,17 +8,16 @@ import static org.iguana.utils.collections.CollectionsUtil.buildList;
 
 public class Alternative {
 
-    private final List<Sequence> seqs;
-
     public final Associativity associativity;
-
-    public static Alternative from(Sequence... seqs) {
-        return new Builder().addSequences(List.of(seqs)).build();
-    }
+    private final List<Sequence> seqs;
 
     public Alternative(Builder builder) {
         this.seqs = builder.seqs;
         this.associativity = builder.associativity;
+    }
+
+    public static Alternative from(Sequence... seqs) {
+        return new Builder().addSequences(List.of(seqs)).build();
     }
 
     public Sequence first() {

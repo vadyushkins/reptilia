@@ -166,35 +166,35 @@ public class ParseTreeVisitorGenerator extends Generator {
     private String generateVisitorMethod(String name) {
         String className = toFirstUpperCase(grammarName) + "ParseTree";
         if (name.startsWith("$_")) {
-            return "    default T visit" + toFirstUpperCase(name) + "(" + className + "." +  toFirstUpperCase(name) + " node) {\n" +
-                   "        return node.child().accept(this);\n" +
-                   "    }\n\n";
+            return "    default T visit" + toFirstUpperCase(name) + "(" + className + "." + toFirstUpperCase(name) + " node) {\n" +
+                    "        return node.child().accept(this);\n" +
+                    "    }\n\n";
         } else {
-            return "    T visit" + toFirstUpperCase(name) + "(" + className + "." +  toFirstUpperCase(name) + " node);\n\n";
+            return "    T visit" + toFirstUpperCase(name) + "(" + className + "." + toFirstUpperCase(name) + " node);\n\n";
         }
     }
 
     private String generateSymbolClass(String symbolClass, String superType, boolean isAbstract, List<Symbol> symbols) {
         return
-            "    public static " + (isAbstract ? "abstract " : "") + "class " + toFirstUpperCase(symbolClass) + " extends " + toFirstUpperCase(superType) + " {\n" +
-            "        public " + toFirstUpperCase(symbolClass) + "(RuntimeRule rule, List<ParseTreeNode> children, int start, int end) {\n" +
-            "            super(rule, children, start, end);\n" +
-            "        }\n\n" +
-            generateSymbols(symbols) +
-            (isAbstract ? "" : generateAcceptMethod(symbolClass)) +
-            "    }\n\n";
+                "    public static " + (isAbstract ? "abstract " : "") + "class " + toFirstUpperCase(symbolClass) + " extends " + toFirstUpperCase(superType) + " {\n" +
+                        "        public " + toFirstUpperCase(symbolClass) + "(RuntimeRule rule, List<ParseTreeNode> children, int start, int end) {\n" +
+                        "            super(rule, children, start, end);\n" +
+                        "        }\n\n" +
+                        generateSymbols(symbols) +
+                        (isAbstract ? "" : generateAcceptMethod(symbolClass)) +
+                        "    }\n\n";
     }
 
     private String generateAcceptMethod(String symbolClass) {
         String visitorName = toFirstUpperCase(grammarName) + "ParseTreeVisitor";
         return
-            "        @Override\n" +
-            "        public <T> T accept(ParseTreeVisitor<T> visitor) {\n" +
-            "            if (visitor instanceof " + visitorName + ") {\n" +
-            "                return ((" + visitorName + "<T>) visitor).visit" + toFirstUpperCase(symbolClass) + "(this);\n" +
-            "            }\n" +
-            "            return visitor.visitNonterminalNode(this);\n" +
-            "        }\n";
+                "        @Override\n" +
+                        "        public <T> T accept(ParseTreeVisitor<T> visitor) {\n" +
+                        "            if (visitor instanceof " + visitorName + ") {\n" +
+                        "                return ((" + visitorName + "<T>) visitor).visit" + toFirstUpperCase(symbolClass) + "(this);\n" +
+                        "            }\n" +
+                        "            return visitor.visitNonterminalNode(this);\n" +
+                        "        }\n";
     }
 
     private String generateSymbols(List<Symbol> symbols) {
