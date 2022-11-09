@@ -1,0 +1,125 @@
+{
+  "rules": [
+    {
+      "head": {
+        "kind": "Nonterminal",
+        "name": "S",
+        "preConditions": [],
+        "postConditions": []
+      },
+      "priorityLevels": [
+        {
+          "alternatives": [
+            {
+              "seqs": [
+                {
+                  "symbols": [
+                    {
+                      "kind": "Identifier",
+                      "name": "S",
+                      "preConditions": [],
+                      "postConditions": [],
+                      "excepts": []
+                    },
+                    {
+                      "kind": "Identifier",
+                      "name": "S",
+                      "preConditions": [],
+                      "postConditions": [],
+                      "excepts": []
+                    },
+                    {
+                      "kind": "Identifier",
+                      "name": "S",
+                      "preConditions": [],
+                      "postConditions": [],
+                      "excepts": []
+                    }
+                  ],
+                  "associativity": "UNDEFINED"
+                }
+              ],
+              "associativity": "UNDEFINED"
+            },
+            {
+              "seqs": [
+                {
+                  "symbols": [
+                    {
+                      "kind": "Identifier",
+                      "name": "S",
+                      "preConditions": [],
+                      "postConditions": [],
+                      "excepts": []
+                    },
+                    {
+                      "kind": "Identifier",
+                      "name": "S",
+                      "preConditions": [],
+                      "postConditions": [],
+                      "excepts": []
+                    }
+                  ],
+                  "associativity": "UNDEFINED"
+                }
+              ],
+              "associativity": "UNDEFINED"
+            },
+            {
+              "seqs": [
+                {
+                  "symbols": [
+                    {
+                      "kind": "Terminal",
+                      "name": "'b'",
+                      "preConditions": [],
+                      "postConditions": [],
+                      "nodeType": "Literal",
+                      "regex": {
+                        "kind": "Char",
+                        "lookaheads": [],
+                        "lookbehinds": [],
+                        "val": 98
+                      }
+                    }
+                  ],
+                  "associativity": "UNDEFINED"
+                }
+              ],
+              "associativity": "UNDEFINED"
+            },
+            {
+              "seqs": [
+                {
+                  "symbols": [],
+                  "associativity": "UNDEFINED"
+                }
+              ],
+              "associativity": "UNDEFINED"
+            }
+          ]
+        }
+      ],
+      "layoutStrategy": "INHERITED"
+    }
+  ],
+  "regularExpressionDefinitions": {},
+  "literals": {
+    "b": {
+      "kind": "Char",
+      "lookaheads": [],
+      "lookbehinds": [],
+      "val": 98
+    }
+  },
+  "startSymbols": [
+    {
+      "kind": "Start",
+      "name": "Start(S)",
+      "preConditions": [],
+      "postConditions": [],
+      "startSymbol": "S"
+    }
+  ],
+  "globals": {}
+}
