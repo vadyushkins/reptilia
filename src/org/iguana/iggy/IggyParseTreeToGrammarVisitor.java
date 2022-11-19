@@ -9,6 +9,7 @@ import org.iguana.grammar.condition.PositionalCondition;
 import org.iguana.grammar.condition.RegularExpressionCondition;
 import org.iguana.grammar.slot.NonterminalNodeType;
 import org.iguana.grammar.slot.TerminalNodeType;
+import org.iguana.grammar.symbol.Error;
 import org.iguana.grammar.symbol.*;
 import org.iguana.iggy.gen.IggyParseTree;
 import org.iguana.iggy.gen.IggyParseTree.RegexRule;
@@ -106,7 +107,8 @@ public class IggyParseTreeToGrammarVisitor implements IggyParseTreeVisitor<Objec
             }
         }
         Nonterminal nonterminal = new Nonterminal.Builder(nonterminalName.getName())
-            .addParameters(parameters.map(identifiers -> identifiers.stream().map(AbstractSymbol::toString).collect(Collectors.toList())).orElse(Collections.emptyList()))
+            .addParameters(parameters.map(identifiers -> identifiers.stream().map(AbstractSymbol::toString)
+                .collect(Collectors.toList())).orElse(Collections.emptyList()))
             .setNodeType(nonterminalNodeType)
             .build();
 
@@ -427,6 +429,11 @@ public class IggyParseTreeToGrammarVisitor implements IggyParseTreeVisitor<Objec
         Symbol symbol = (Symbol) node.sym().accept(this);
         List<Symbol> seps = visit(node.sep());
         return new Plus.Builder(symbol).addSeparators(seps).build();
+    }
+
+    @Override
+    public Object visitErrorSymbol(IggyParseTree.ErrorSymbol node) {
+        return Error.getInstance();
     }
 
     @Override

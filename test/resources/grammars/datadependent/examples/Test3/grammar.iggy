@@ -1,0 +1,22 @@
+// OCaml sample
+
+start expr
+  =        expr '.' field
+  > left   expr expr
+  >        '-' expr
+  > left   expr '*' expr
+  > left   (expr '+' expr | expr '-' expr)
+  >        'if' expr 'then' expr 'else' expr
+  > right  expr ';' expr
+  |        '(' expr ')'
+  |        num
+
+regex field
+  = [a-zA-Z][a-zA-Z0-9]*
+
+regex num
+  = [0] | [1-9][0-9]*
+
+layout regex whitespaces
+  = [\n\r\t\f\ ]*
+

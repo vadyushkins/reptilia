@@ -44,12 +44,27 @@ public class RecognizerResultOps implements ResultOps<RecognizerResult> {
     }
 
     @Override
-    public RecognizerResult merge(RecognizerResult current, RecognizerResult result1, RecognizerResult result2, BodyGrammarSlot slot) {
+    public RecognizerResult error(BodyGrammarSlot slot, int start, int end) {
+        return RecognizerResult.of(start, end);
+    }
+
+    @Override
+    public RecognizerResult merge(
+        RecognizerResult current,
+        RecognizerResult result1,
+        RecognizerResult result2,
+        BodyGrammarSlot slot
+    ) {
         return result2;
     }
 
     @Override
-    public RecognizerResult convert(RecognizerResult current, RecognizerResult result, EndGrammarSlot slot, Object value) {
+    public RecognizerResult convert(
+        RecognizerResult current,
+        RecognizerResult result,
+        EndGrammarSlot slot,
+        Object value
+    ) {
         if (current == null) {
             if (value == null) {
                 return result;

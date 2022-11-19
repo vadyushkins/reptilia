@@ -28,7 +28,12 @@ public class DefaultParseTreeBuilder implements ParseTreeBuilder<ParseTreeNode> 
     }
 
     @Override
-    public NonterminalNode nonterminalNode(RuntimeRule rule, List<ParseTreeNode> children, int leftExtent, int rightExtent) {
+    public NonterminalNode nonterminalNode(
+        RuntimeRule rule,
+        List<ParseTreeNode> children,
+        int leftExtent,
+        int rightExtent
+    ) {
         return new NonterminalNode(rule, children, leftExtent, rightExtent);
     }
 
@@ -49,7 +54,7 @@ public class DefaultParseTreeBuilder implements ParseTreeBuilder<ParseTreeNode> 
 
     @Override
     public ParseTreeNode optNode(Opt symbol, ParseTreeNode child, int leftExtent, int rightExtent) {
-        return new OptionNode(symbol,child, leftExtent, rightExtent);
+        return new OptionNode(symbol, child, leftExtent, rightExtent);
     }
 
     @Override
@@ -65,5 +70,10 @@ public class DefaultParseTreeBuilder implements ParseTreeBuilder<ParseTreeNode> 
     @Override
     public ParseTreeNode startNode(Start symbol, List<ParseTreeNode> children, int leftExtent, int rightExtent) {
         return new StartNode(symbol, children, leftExtent, rightExtent);
+    }
+
+    @Override
+    public ParseTreeNode errorNode(int leftExtent, int rightExtent) {
+        return new ErrorNode(leftExtent, rightExtent, input);
     }
 }

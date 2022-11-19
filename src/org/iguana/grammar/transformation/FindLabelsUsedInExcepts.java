@@ -3,6 +3,7 @@ package org.iguana.grammar.transformation;
 import org.iguana.grammar.runtime.RuntimeGrammar;
 import org.iguana.grammar.runtime.RuntimeRule;
 import org.iguana.grammar.symbol.*;
+import org.iguana.grammar.symbol.Error;
 import org.iguana.traversal.ISymbolVisitor;
 
 import java.util.HashMap;
@@ -39,7 +40,8 @@ public class FindLabelsUsedInExcepts implements ISymbolVisitor<Void> {
 	}
 
 	@Override
-	public Void visit(Block symbol) { // Currently, also expected to be desugared as part of data-dependent EBNF constructs
+	// Currently, also expected to be desugared as part of data-dependent EBNF constructs
+	public Void visit(Block symbol) {
 		throw new RuntimeException("Unexpected symbol: " + symbol);
 	}
 
@@ -50,18 +52,25 @@ public class FindLabelsUsedInExcepts implements ISymbolVisitor<Void> {
 	}
 
 	@Override
+	public Void visit(Error error) {
+		return null;
+	}
+
+	@Override
 	public Void visit(Conditional symbol) {
 		symbol.getSymbol().accept(this);
 		return null;
 	}
 
 	@Override
-	public Void visit(IfThen symbol) { // Currently, also expected to be desugared as part of data-dependent EBNF constructs
+	// Currently, also expected to be desugared as part of data-dependent EBNF constructs
+	public Void visit(IfThen symbol) {
 		throw new RuntimeException("Unexpected symbol: " + symbol);
 	}
 
 	@Override
-	public Void visit(IfThenElse symbol) { // Currently, also expected to be desugared as part of data-dependent EBNF constructs
+	// Currently, also expected to be desugared as part of data-dependent EBNF constructs
+	public Void visit(IfThenElse symbol) {
 		throw new RuntimeException("Unexpected symbol: " + symbol);
 	}
 
@@ -97,7 +106,8 @@ public class FindLabelsUsedInExcepts implements ISymbolVisitor<Void> {
 	}
 
 	@Override
-	public Void visit(While symbol) { // Currently, also expected to be desugared as part of data-dependent EBNF constructs
+	// Currently, also expected to be desugared as part of data-dependent EBNF constructs
+	public Void visit(While symbol) {
 		throw new RuntimeException("Unexpected symbol: " + symbol);
 	}
 

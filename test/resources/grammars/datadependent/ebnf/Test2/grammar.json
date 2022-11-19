@@ -1,0 +1,347 @@
+{
+  "rules" : [
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "S",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "priorityLevels" : [
+        {
+          "alternatives" : [
+            {
+              "seqs" : [
+                {
+                  "symbols" : [
+                    {
+                      "kind" : "Identifier",
+                      "name" : "X",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [ ]
+                    }
+                  ],
+                  "associativity" : "UNDEFINED"
+                }
+              ],
+              "associativity" : "UNDEFINED"
+            }
+          ]
+        }
+      ],
+      "layoutStrategy" : "INHERITED"
+    },
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "X",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "priorityLevels" : [
+        {
+          "alternatives" : [
+            {
+              "seqs" : [
+                {
+                  "symbols" : [
+                    {
+                      "kind" : "Identifier",
+                      "name" : "A",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [ ]
+                    },
+                    {
+                      "kind" : "Star",
+                      "name" : "(B | (c:C {assert(c.lExt == 1 || c.lExt == 3)} D))*",
+                      "label" : "s",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "s" : {
+                        "kind" : "Alt",
+                        "name" : "(B | (c:C {assert(c.lExt == 1 || c.lExt == 3)} D))",
+                        "preConditions" : [ ],
+                        "postConditions" : [ ],
+                        "symbols" : [
+                          {
+                            "kind" : "Identifier",
+                            "name" : "B",
+                            "label" : "b",
+                            "preConditions" : [ ],
+                            "postConditions" : [ ],
+                            "excepts" : [ ]
+                          },
+                          {
+                            "kind" : "Sequence",
+                            "name" : "(c:C {assert(c.lExt == 1 || c.lExt == 3)} D)",
+                            "preConditions" : [ ],
+                            "postConditions" : [ ],
+                            "symbols" : [
+                              {
+                                "kind" : "Code",
+                                "name" : "c:C {assert(c.lExt == 1 || c.lExt == 3)}",
+                                "preConditions" : [ ],
+                                "postConditions" : [ ],
+                                "symbol" : {
+                                  "kind" : "Identifier",
+                                  "name" : "C",
+                                  "label" : "c",
+                                  "preConditions" : [ ],
+                                  "postConditions" : [ ],
+                                  "excepts" : [ ]
+                                },
+                                "statements" : [
+                                  {
+                                    "kind" : "ExpressionStatement",
+                                    "exp" : {
+                                      "kind" : "Assert",
+                                      "arguments" : [
+                                        {
+                                          "kind" : "Or",
+                                          "lhs" : {
+                                            "kind" : "Equal",
+                                            "lhs" : {
+                                              "kind" : "LeftExtent",
+                                              "label" : "c"
+                                            },
+                                            "rhs" : {
+                                              "kind" : "Integer",
+                                              "value" : 1
+                                            }
+                                          },
+                                          "rhs" : {
+                                            "kind" : "Equal",
+                                            "lhs" : {
+                                              "kind" : "LeftExtent",
+                                              "label" : "c"
+                                            },
+                                            "rhs" : {
+                                              "kind" : "Integer",
+                                              "value" : 3
+                                            }
+                                          }
+                                        }
+                                      ],
+                                      "fun" : "assert"
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "kind" : "Identifier",
+                                "name" : "D",
+                                "label" : "d",
+                                "preConditions" : [ ],
+                                "postConditions" : [ ],
+                                "excepts" : [ ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "separators" : [ ]
+                    }
+                  ],
+                  "associativity" : "UNDEFINED"
+                }
+              ],
+              "associativity" : "UNDEFINED"
+            }
+          ]
+        }
+      ],
+      "layoutStrategy" : "INHERITED"
+    },
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "A",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "priorityLevels" : [
+        {
+          "alternatives" : [
+            {
+              "seqs" : [
+                {
+                  "symbols" : [
+                    {
+                      "kind" : "Terminal",
+                      "name" : "'a'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 97
+                      }
+                    }
+                  ],
+                  "associativity" : "UNDEFINED"
+                }
+              ],
+              "associativity" : "UNDEFINED"
+            }
+          ]
+        }
+      ],
+      "layoutStrategy" : "INHERITED"
+    },
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "B",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "priorityLevels" : [
+        {
+          "alternatives" : [
+            {
+              "seqs" : [
+                {
+                  "symbols" : [
+                    {
+                      "kind" : "Terminal",
+                      "name" : "'b'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 98
+                      }
+                    }
+                  ],
+                  "associativity" : "UNDEFINED"
+                }
+              ],
+              "associativity" : "UNDEFINED"
+            }
+          ]
+        }
+      ],
+      "layoutStrategy" : "INHERITED"
+    },
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "C",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "priorityLevels" : [
+        {
+          "alternatives" : [
+            {
+              "seqs" : [
+                {
+                  "symbols" : [
+                    {
+                      "kind" : "Terminal",
+                      "name" : "'c'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 99
+                      }
+                    }
+                  ],
+                  "associativity" : "UNDEFINED"
+                }
+              ],
+              "associativity" : "UNDEFINED"
+            }
+          ]
+        }
+      ],
+      "layoutStrategy" : "INHERITED"
+    },
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "D",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "priorityLevels" : [
+        {
+          "alternatives" : [
+            {
+              "seqs" : [
+                {
+                  "symbols" : [
+                    {
+                      "kind" : "Terminal",
+                      "name" : "'d'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 100
+                      }
+                    }
+                  ],
+                  "associativity" : "UNDEFINED"
+                }
+              ],
+              "associativity" : "UNDEFINED"
+            }
+          ]
+        }
+      ],
+      "layoutStrategy" : "INHERITED"
+    }
+  ],
+  "regularExpressionDefinitions" : { },
+  "literals" : {
+    "a" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 97
+    },
+    "b" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 98
+    },
+    "c" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 99
+    },
+    "d" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 100
+    }
+  },
+  "startSymbols" : [
+    {
+      "kind" : "Start",
+      "name" : "Start(S)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "S"
+    }
+  ],
+  "globals" : { }
+}

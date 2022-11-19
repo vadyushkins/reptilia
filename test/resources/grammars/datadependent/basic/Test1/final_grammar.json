@@ -1,0 +1,326 @@
+{
+  "rules" : [
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "X",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "body" : [
+        {
+          "kind" : "Nonterminal",
+          "name" : "S",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "arguments" : [
+            {
+              "kind" : "Integer",
+              "value" : 1
+            },
+            {
+              "kind" : "Integer",
+              "value" : 2
+            }
+          ]
+        }
+      ],
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
+      }
+    },
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "S",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "parameters" : [
+          "a",
+          "b"
+        ]
+      },
+      "body" : [
+        {
+          "kind" : "Code",
+          "name" : "l:A {assert(a == 1,b == 2,l.lExt == 0,l.rExt == 1)}",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "symbol" : {
+            "kind" : "Nonterminal",
+            "name" : "A",
+            "label" : "l",
+            "preConditions" : [ ],
+            "postConditions" : [ ]
+          },
+          "statements" : [
+            {
+              "kind" : "ExpressionStatement",
+              "exp" : {
+                "kind" : "Assert",
+                "arguments" : [
+                  {
+                    "kind" : "Equal",
+                    "lhs" : {
+                      "kind" : "Name",
+                      "name" : "a",
+                      "i" : -1
+                    },
+                    "rhs" : {
+                      "kind" : "Integer",
+                      "value" : 1
+                    }
+                  },
+                  {
+                    "kind" : "Equal",
+                    "lhs" : {
+                      "kind" : "Name",
+                      "name" : "b",
+                      "i" : -1
+                    },
+                    "rhs" : {
+                      "kind" : "Integer",
+                      "value" : 2
+                    }
+                  },
+                  {
+                    "kind" : "Equal",
+                    "lhs" : {
+                      "kind" : "LeftExtent",
+                      "label" : "l"
+                    },
+                    "rhs" : {
+                      "kind" : "Integer",
+                      "value" : 0
+                    }
+                  },
+                  {
+                    "kind" : "Equal",
+                    "lhs" : {
+                      "kind" : "RightExtent",
+                      "label" : "l"
+                    },
+                    "rhs" : {
+                      "kind" : "Integer",
+                      "value" : 1
+                    }
+                  }
+                ],
+                "fun" : "assert"
+              }
+            }
+          ]
+        },
+        {
+          "kind" : "Nonterminal",
+          "name" : "B",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
+        }
+      ],
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
+      }
+    },
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "A",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "body" : [
+        {
+          "kind" : "Terminal",
+          "name" : "'a'",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "nodeType" : "Literal",
+          "regex" : {
+            "kind" : "Char",
+            "lookaheads" : [ ],
+            "lookbehinds" : [ ],
+            "val" : 97
+          }
+        }
+      ],
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
+      }
+    },
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "B",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "body" : [
+        {
+          "kind" : "Terminal",
+          "name" : "'b'",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "nodeType" : "Literal",
+          "regex" : {
+            "kind" : "Char",
+            "lookaheads" : [ ],
+            "lookbehinds" : [ ],
+            "val" : 98
+          }
+        }
+      ],
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
+      }
+    },
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "Start(X)",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "nodeType" : "Start"
+      },
+      "body" : [
+        {
+          "kind" : "Nonterminal",
+          "name" : "X",
+          "label" : "top",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
+        }
+      ],
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
+      },
+      "definition" : {
+        "kind" : "Start",
+        "name" : "Start(X)",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "startSymbol" : "X"
+      }
+    }
+  ],
+  "regularExpressionDefinitions" : { },
+  "ebnfLefts" : { },
+  "ebnfRights" : { },
+  "startSymbols" : [
+    {
+      "kind" : "Start",
+      "name" : "Start(X)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "X"
+    },
+    {
+      "kind" : "Start",
+      "name" : "Start(X)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "X"
+    }
+  ],
+  "globals" : { }
+}

@@ -146,11 +146,15 @@ public class RuntimeRule {
 	}
 	
 	public boolean isLeftOrRightRecursive() {
-		return recursion == Recursion.LEFT_RIGHT_REC || recursion == Recursion.LEFT_REC || recursion == Recursion.RIGHT_REC;
+        return recursion == Recursion.LEFT_RIGHT_REC ||
+               recursion == Recursion.LEFT_REC ||
+               recursion == Recursion.RIGHT_REC;
 	}
 	
 	public boolean isILeftOrRightRecursive() {
-		return irecursion == Recursion.iLEFT_RIGHT_REC || irecursion == Recursion.iLEFT_REC || irecursion == Recursion.iRIGHT_REC;
+        return irecursion == Recursion.iLEFT_RIGHT_REC ||
+               irecursion == Recursion.iLEFT_REC ||
+               irecursion == Recursion.iRIGHT_REC;
 	}
 	
 	public Recursion getRecursion() {
@@ -213,7 +217,7 @@ public class RuntimeRule {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(head).append(" = ");
-		for(Symbol s : body) {
+		for (Symbol s : body) {
 			sb.append(s).append(" ");
 		}
 
@@ -460,6 +464,8 @@ public class RuntimeRule {
 
         public RuntimeRule build() {
             if (body == null) body = Collections.emptyList();
+            if (body.stream().anyMatch(Objects::isNull))
+                throw new IllegalArgumentException("symbols cannot be null: " + body);
             return new RuntimeRule(this);
         }
     }

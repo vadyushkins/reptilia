@@ -35,6 +35,7 @@ import org.iguana.grammar.exception.UnexpectedSymbolException;
 import org.iguana.grammar.operations.ReachabilityGraph;
 import org.iguana.grammar.runtime.RuntimeRule;
 import org.iguana.grammar.symbol.*;
+import org.iguana.grammar.symbol.Error;
 import org.iguana.grammar.symbol.Nonterminal.Builder;
 import org.iguana.traversal.ISymbolVisitor;
 
@@ -53,8 +54,8 @@ import static org.iguana.utils.string.StringUtil.listToString;
  */
 public class DesugarState implements GrammarTransformation {
 	
-	private final Map<Nonterminal,Set<String>> uses = new HashMap<>();
-	private final Map<Nonterminal,Set<String>> updates = new HashMap<>();
+	private final Map<Nonterminal, Set<String>> uses = new HashMap<>();
+	private final Map<Nonterminal, Set<String>> updates = new HashMap<>();
 	
 	private final Map<Nonterminal, Set<String>> returns = new HashMap<>();
 	private final Map<Nonterminal, List<Map<Nonterminal, Set<String>>>> bindings = new HashMap<>();
@@ -146,7 +147,8 @@ public class DesugarState implements GrammarTransformation {
 			int i = 0;
 			List<Map<Nonterminal, Set<String>>> nonterminal_bindings = bindings.get(nonterminal);
 			for (RuntimeRule rule : grammar.getAlternatives(nonterminal)) {
-				newRules.add(transform(rule, uses, nonterminal_bindings == null? new HashMap<>() : nonterminal_bindings.get(i++), returns));
+				newRules.add(transform(rule, uses,
+					nonterminal_bindings == null ? new HashMap<>() : nonterminal_bindings.get(i++), returns));
 			}
 		}
 		return RuntimeGrammar.builder().addRules(newRules).setLayout(grammar.getLayout())
@@ -157,8 +159,13 @@ public class DesugarState implements GrammarTransformation {
 			.setRegularExpressionDefinitions(grammar.getRegularExpressionDefinitions())
 			.build();
 	}
-	
-	private RuntimeRule transform(RuntimeRule rule, Map<Nonterminal, Set<String>> uses, Map<Nonterminal, Set<String>> bindings, Map<Nonterminal, Set<String>> returns) {
+
+	private RuntimeRule transform(
+		RuntimeRule rule,
+		Map<Nonterminal, Set<String>> uses,
+		Map<Nonterminal, Set<String>> bindings,
+		Map<Nonterminal, Set<String>> returns
+	) {
 		if (rule.getBody() == null)
 			return rule;
 		
@@ -223,7 +230,12 @@ public class DesugarState implements GrammarTransformation {
 		private final Map<Nonterminal, Set<String>> bindings;
 		private final RuntimeGrammar grammar;
 
-		DesugarStateVisitor(Map<Nonterminal, Set<String>> uses, Map<Nonterminal, Set<String>> returns, Map<Nonterminal, Set<String>> bindings, RuntimeGrammar grammar) {
+		DesugarStateVisitor(
+			Map<Nonterminal, Set<String>> uses,
+			Map<Nonterminal, Set<String>> returns,
+			Map<Nonterminal, Set<String>> bindings,
+			RuntimeGrammar grammar
+		) {
 			this.uses = uses;
 			this.returns = returns;
 			this.bindings = bindings;
@@ -248,8 +260,14 @@ public class DesugarState implements GrammarTransformation {
 			Symbol sym = symbol.getSymbol().accept(this);
 			if (sym == symbol.getSymbol())
 				return symbol;
-			
-			return new Code.Builder(sym, symbol.getStatements()).setLabel(symbol.getLabel()).addConditions(symbol).build();
+
+			return new Code.Builder(sym, symbol.getStatements()).setLabel(symbol.getLabel()).addConditions(symbol)
+				.build();
+		}
+
+		@Override
+		public Symbol visit(Error error) {
+			return error;
 		}
 
 		@Override
@@ -257,7 +275,8 @@ public class DesugarState implements GrammarTransformation {
 			Symbol sym = symbol.getSymbol().accept(this);
 			if (sym == symbol.getSymbol())
 				return symbol;
-			return new Conditional.Builder(sym, symbol.getExpression()).setLabel(symbol.getLabel()).addConditions(symbol).build();
+			return new Conditional.Builder(sym, symbol.getExpression()).setLabel(symbol.getLabel()).addConditions(
+				symbol).build();
 		}
 
 		@Override

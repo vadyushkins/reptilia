@@ -29,6 +29,7 @@ package org.iguana.grammar.operations;
 
 import org.iguana.grammar.runtime.RuntimeGrammar;
 import org.iguana.grammar.runtime.RuntimeRule;
+import org.iguana.grammar.symbol.Error;
 import org.iguana.grammar.symbol.*;
 import org.iguana.traversal.ISymbolVisitor;
 
@@ -150,6 +151,11 @@ public class ReachabilityGraph {
 		}
 
 		@Override
+		public Boolean visit(Error error) {
+			return false;
+		}
+
+		@Override
 		public Boolean visit(Conditional symbol) {
 			return symbol.getSymbol().accept(this);
 		}
@@ -241,8 +247,12 @@ public class ReachabilityGraph {
         }
 
     }
-	
-	private static boolean add(Nonterminal a, Nonterminal nonterminal, Map<Nonterminal, Set<Nonterminal>> reachabilityGraph) {
+
+	private static boolean add(
+		Nonterminal a,
+		Nonterminal nonterminal,
+		Map<Nonterminal, Set<Nonterminal>> reachabilityGraph
+	) {
 		boolean changed = false;
 		changed |= reachabilityGraph.get(a).add(nonterminal);
 		changed |= reachabilityGraph.get(a).addAll(reachabilityGraph.get(nonterminal));

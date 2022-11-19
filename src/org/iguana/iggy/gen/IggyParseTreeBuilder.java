@@ -16,7 +16,12 @@ public class IggyParseTreeBuilder extends DefaultParseTreeBuilder {
     }
 
     @Override
-    public NonterminalNode nonterminalNode(RuntimeRule rule, List<ParseTreeNode> children, int leftExtent, int rightExtent) {
+    public NonterminalNode nonterminalNode(
+        RuntimeRule rule,
+        List<ParseTreeNode> children,
+        int leftExtent,
+        int rightExtent
+    ) {
         java.lang.String name = rule.getHead().getName();
         java.lang.String label = rule.getLabel();
 
@@ -120,6 +125,8 @@ public class IggyParseTreeBuilder extends DefaultParseTreeBuilder {
                         return new IggyParseTree.StarSepSymbol(rule, children, leftExtent, rightExtent);
                     case "PlusSep":
                         return new IggyParseTree.PlusSepSymbol(rule, children, leftExtent, rightExtent);
+                    case "Error":
+                        return new IggyParseTree.ErrorSymbol(rule, children, leftExtent, rightExtent);
                     default:
                         throw new RuntimeException("Unexpected label:" + label);
                 }

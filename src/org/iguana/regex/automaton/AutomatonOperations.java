@@ -295,15 +295,15 @@ public class AutomatonOperations {
 		
 		for (int i = 0; i < table.length; i++) {
 			for (int j = 0; j < i; j++) {
-				if(states[i].isFinalState() && !states[j].isFinalState()) {
+				if (states[i].isFinalState() && !states[j].isFinalState()) {
 					table[i][j] = EPSILON;
 				}
-				if(states[j].isFinalState() && !states[i].isFinalState()) {
+				if (states[j].isFinalState() && !states[i].isFinalState()) {
 					table[i][j] = EPSILON;
 				}
 				
 				// Differentiate between final states
-				if(states[i].isFinalState() && 
+				if (states[i].isFinalState() &&
 				   states[j].isFinalState()) {
 					table[i][j] = EPSILON;
 				}
@@ -324,21 +324,21 @@ public class AutomatonOperations {
 								State q1 = states[i].getState(alphabet[t]);
 								State q2 = states[j].getState(alphabet[t]);
 
-								// If both states i and j have no outgoing transitions on the interval t, continue with the
-								// next transition.
-								if(q1 == null && q2 == null) {
+								// If both states i and j have no outgoing transitions on the interval t, continue with
+								// the next transition.
+								if (q1 == null && q2 == null) {
 									continue;
 								}
 
 								// If the transition t can be applied on state i but not on state j, two states are
 								// disjoint. Continue with the next pair of states.
-								if((q1 == null && q2 != null) || (q2 == null && q1 != null)) {
+								if ((q1 == null && q2 != null) || (q2 == null && q1 != null)) {
 									table[i][j] = t;
 									changed = true;
 									break;
 								}
 								
-								if(q1.getId() == q2.getId()) {
+								if (q1.getId() == q2.getId()) {
 									continue;
 								}
 								
@@ -374,18 +374,18 @@ public class AutomatonOperations {
 					Set<State> partitionI = partitionsMap.get(stateI);
 					Set<State> partitionJ = partitionsMap.get(stateJ);
 					
-					if(partitionI == null && partitionJ == null) {
+					if (partitionI == null && partitionJ == null) {
 						Set<State> set = new HashSet<>();
 						set.add(stateI);
 						set.add(stateJ);
 						partitionsMap.put(stateI, set);
 						partitionsMap.put(stateJ, set);
 					}
-					else if(partitionI == null && partitionJ != null) {
+					else if (partitionI == null && partitionJ != null) {
 						partitionJ.add(stateI);
 						partitionsMap.put(stateI, partitionJ);
 					} 
-					else if(partitionJ == null && partitionI != null) {
+					else if (partitionJ == null && partitionI != null) {
 						partitionI.add(stateJ);
 						partitionsMap.put(stateJ, partitionI);
 					}
@@ -429,7 +429,8 @@ public class AutomatonOperations {
 		
 		for (State state : states) {
 			for (Transition t : state.getTransitions()) {
-				newStates.get(state).addTransition(new Transition(t.getStart(), t.getEnd(), newStates.get(t.getDestination())));
+				newStates.get(state).addTransition(new Transition(t.getStart(), t.getEnd(),
+					newStates.get(t.getDestination())));
 			}
 		}
 		
@@ -440,9 +441,9 @@ public class AutomatonOperations {
 	private static Set<State> epsilonClosure(Set<State> states) {
 		Set<State> newStates = new HashSet<>(states);
 		
-		for(State state : states) {
+		for (State state : states) {
 			Set<State> s = state.getEpsilonSates();
-			if(!s.isEmpty()) {
+			if (!s.isEmpty()) {
 				newStates.addAll(s);
 				newStates.addAll(epsilonClosure(s));
 			}

@@ -32,6 +32,7 @@ import org.iguana.grammar.runtime.Recursion;
 import org.iguana.grammar.runtime.RuntimeGrammar;
 import org.iguana.grammar.runtime.RuntimeRule;
 import org.iguana.grammar.symbol.*;
+import org.iguana.grammar.symbol.Error;
 import org.iguana.grammar.transformation.GrammarTransformation;
 import org.iguana.traversal.ISymbolVisitor;
 
@@ -106,6 +107,11 @@ public class Names implements GrammarTransformation {
         }
 
         @Override
+        public Symbol visit(Error error) {
+            return error;
+        }
+
+        @Override
         public Symbol visit(Conditional symbol) {
             return Conditional.when(visitSymbol(symbol.getSymbol()), symbol.getExpression());
         }
@@ -117,7 +123,8 @@ public class Names implements GrammarTransformation {
 
         @Override
         public Symbol visit(IfThenElse symbol) {
-            return IfThenElse.ifThenElse(symbol.getExpression(), visitSymbol(symbol.getThenPart()), visitSymbol(symbol.getElsePart()));
+            return IfThenElse.ifThenElse(symbol.getExpression(), visitSymbol(symbol.getThenPart()),
+                visitSymbol(symbol.getElsePart()));
         }
 
         @Override

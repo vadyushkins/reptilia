@@ -1,0 +1,68 @@
+{
+  "rules" : [
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "A",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "priorityLevels" : [
+        {
+          "alternatives" : [
+            {
+              "seqs" : [
+                {
+                  "symbols" : [
+                    {
+                      "kind" : "Star",
+                      "name" : "'a'*",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "s" : {
+                        "kind" : "Terminal",
+                        "name" : "'a'",
+                        "preConditions" : [ ],
+                        "postConditions" : [ ],
+                        "nodeType" : "Literal",
+                        "regex" : {
+                          "kind" : "Char",
+                          "lookaheads" : [ ],
+                          "lookbehinds" : [ ],
+                          "val" : 97
+                        }
+                      },
+                      "separators" : [ ]
+                    }
+                  ],
+                  "associativity" : "UNDEFINED"
+                }
+              ],
+              "associativity" : "UNDEFINED"
+            }
+          ]
+        }
+      ],
+      "layoutStrategy" : "INHERITED"
+    }
+  ],
+  "regularExpressionDefinitions" : { },
+  "literals" : {
+    "a" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 97
+    }
+  },
+  "startSymbols" : [
+    {
+      "kind" : "Start",
+      "name" : "Start(A)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "A"
+    }
+  ],
+  "globals" : { }
+}

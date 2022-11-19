@@ -1,0 +1,9 @@
+
+start S
+  = Id
+
+Id
+  = Chars \ ('if' | 'while' | 'do')
+
+regex Chars
+  = [a-z]+

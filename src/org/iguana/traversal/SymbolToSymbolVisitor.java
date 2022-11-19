@@ -5,6 +5,7 @@ import org.iguana.grammar.condition.DataDependentCondition;
 import org.iguana.grammar.condition.PositionalCondition;
 import org.iguana.grammar.condition.RegularExpressionCondition;
 import org.iguana.grammar.symbol.Alt;
+import org.iguana.grammar.symbol.Error;
 import org.iguana.grammar.symbol.Opt;
 import org.iguana.grammar.symbol.Plus;
 import org.iguana.grammar.symbol.Star;
@@ -16,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public interface SymbolToSymbolVisitor extends ISymbolVisitor<Symbol>, IConditionVisitor<Condition>, RegularExpressionVisitor<RegularExpression> {
+public interface SymbolToSymbolVisitor
+    extends ISymbolVisitor<Symbol>, IConditionVisitor<Condition>, RegularExpressionVisitor<RegularExpression> {
 
     @Override
     default Symbol visit(Align symbol) {
@@ -189,6 +191,11 @@ public interface SymbolToSymbolVisitor extends ISymbolVisitor<Symbol>, IConditio
         return symbol;
     }
 
+    @Override
+    default Symbol visit(Error error) {
+        return error;
+    }
+
     default Symbol visitSymbol(Symbol symbol) {
         List<Symbol> newChildren = symbol.getChildren().stream().map(s -> s.accept(this)).collect(Collectors.toList());
         Symbol newSymbol = symbol.copy()
@@ -221,7 +228,8 @@ public interface SymbolToSymbolVisitor extends ISymbolVisitor<Symbol>, IConditio
     }
 
     default RegularExpression visitRegularExpression(RegularExpression regex) {
-        List<RegularExpression> newChildren = regex.getChildren().stream().map(r -> r.accept(this)).collect(Collectors.toList());
+        List<RegularExpression> newChildren = regex.getChildren().stream().map(r -> r.accept(this))
+            .collect(Collectors.toList());
         RegularExpression newRegex = regex.copy().setChildren(newChildren).build();
         if (newRegex.equals(regex)) {
             return regex;

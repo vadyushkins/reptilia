@@ -79,10 +79,10 @@ public class Seq<T extends RegularExpression> extends AbstractRegularExpression 
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == this)
+		if (obj == this)
 			return true;
 		
-		if(!(obj instanceof Seq))
+		if (!(obj instanceof Seq))
 			return false;
 		
 		Seq<?> other = (Seq<?>) obj;
@@ -98,7 +98,8 @@ public class Seq<T extends RegularExpression> extends AbstractRegularExpression 
     @Override
     public String toString() {
         if (symbols.stream().allMatch(c -> c instanceof Char))
-            return "'" + symbols.stream().map(c -> Char.getName(((Char) c).getValue())).collect(Collectors.joining("")) + "'";
+            return "'" + symbols.stream().map(c -> Char.getName(((Char) c).getValue()))
+				.collect(Collectors.joining("")) + "'";
         return "(" + symbols.stream().map(a -> a.toString()).collect(Collectors.joining(" ")) + ")";
     }
 
@@ -110,9 +111,9 @@ public class Seq<T extends RegularExpression> extends AbstractRegularExpression 
 	@Override
 	public Set<CharRange> getFirstSet() {
 		Set<CharRange> firstSet = new HashSet<>();
-		for(RegularExpression regex : symbols) {
+		for (RegularExpression regex : symbols) {
 			firstSet.addAll(regex.getFirstSet());
-			if(!regex.isNullable()) {
+			if (!regex.isNullable()) {
 				break;
 			}
 		}

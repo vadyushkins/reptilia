@@ -1,0 +1,40 @@
+{
+  "rules" : [
+    {
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "A",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
+      },
+      "priorityLevels" : [
+        {
+          "alternatives" : [
+            {
+              "seqs" : [
+                {
+                  "symbols" : [ ],
+                  "associativity" : "UNDEFINED"
+                }
+              ],
+              "associativity" : "UNDEFINED"
+            }
+          ]
+        }
+      ],
+      "layoutStrategy" : "INHERITED"
+    }
+  ],
+  "regularExpressionDefinitions" : { },
+  "literals" : { },
+  "startSymbols" : [
+    {
+      "kind" : "Start",
+      "name" : "Start(A)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "A"
+    }
+  ],
+  "globals" : { }
+}
