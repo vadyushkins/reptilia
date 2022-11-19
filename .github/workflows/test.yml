@@ -1,4 +1,4 @@
-name: Iguana build
+name: Tests
 
 on: [ push, pull_request ]
 
@@ -17,5 +17,5 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-      - name: Test with Maven
+      - name: Run tests with Maven
         run: mvn -B test --file pom.xml -Dtest=GrammarTest
