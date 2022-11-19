@@ -1,263 +1,263 @@
 {
-  "rules": [
+  "rules" : [
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "S",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "S",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Nonterminal",
-                      "name": "E",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "arguments": [
+                      "kind" : "Nonterminal",
+                      "name" : "E",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "arguments" : [
                         {
-                          "kind": "Integer",
-                          "value": 0
+                          "kind" : "Integer",
+                          "value" : 0
                         },
                         {
-                          "kind": "Integer",
-                          "value": 0
+                          "kind" : "Integer",
+                          "value" : 0
                         }
                       ]
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "E",
-        "preConditions": [],
-        "postConditions": [],
-        "parameters": [
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "E",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "parameters" : [
           "l",
           "r"
         ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Nonterminal",
-                      "name": "E",
-                      "preConditions": [
+                      "kind" : "Nonterminal",
+                      "name" : "E",
+                      "preConditions" : [
                         {
-                          "kind": "DataDependentCondition",
-                          "type": "DATA_DEPENDENT",
-                          "expression": {
-                            "kind": "GreaterThanEqual",
-                            "lhs": {
-                              "kind": "Integer",
-                              "value": 3
+                          "kind" : "DataDependentCondition",
+                          "type" : "DATA_DEPENDENT",
+                          "expression" : {
+                            "kind" : "GreaterThanEqual",
+                            "lhs" : {
+                              "kind" : "Integer",
+                              "value" : 3
                             },
-                            "rhs": {
-                              "kind": "Name",
-                              "name": "l",
-                              "i": -1
+                            "rhs" : {
+                              "kind" : "Name",
+                              "name" : "l",
+                              "i" : -1
                             }
                           }
                         },
                         {
-                          "kind": "DataDependentCondition",
-                          "type": "DATA_DEPENDENT",
-                          "expression": {
-                            "kind": "GreaterThanEqual",
-                            "lhs": {
-                              "kind": "Integer",
-                              "value": 3
+                          "kind" : "DataDependentCondition",
+                          "type" : "DATA_DEPENDENT",
+                          "expression" : {
+                            "kind" : "GreaterThanEqual",
+                            "lhs" : {
+                              "kind" : "Integer",
+                              "value" : 3
                             },
-                            "rhs": {
-                              "kind": "Name",
-                              "name": "r",
-                              "i": -1
-                            }
-                          }
-                        }
-                      ],
-                      "postConditions": [],
-                      "arguments": [
-                        {
-                          "kind": "Integer",
-                          "value": 4
-                        },
-                        {
-                          "kind": "Name",
-                          "name": "r",
-                          "i": -1
-                        }
-                      ]
-                    },
-                    {
-                      "kind": "Terminal",
-                      "name": "'^'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 94
-                      }
-                    },
-                    {
-                      "kind": "Nonterminal",
-                      "name": "E",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "arguments": [
-                        {
-                          "kind": "Integer",
-                          "value": 0
-                        },
-                        {
-                          "kind": "Integer",
-                          "value": 3
-                        }
-                      ]
-                    }
-                  ],
-                  "associativity": "UNDEFINED"
-                }
-              ],
-              "associativity": "UNDEFINED"
-            },
-            {
-              "seqs": [
-                {
-                  "symbols": [
-                    {
-                      "kind": "Nonterminal",
-                      "name": "E",
-                      "preConditions": [
-                        {
-                          "kind": "DataDependentCondition",
-                          "type": "DATA_DEPENDENT",
-                          "expression": {
-                            "kind": "GreaterThanEqual",
-                            "lhs": {
-                              "kind": "Integer",
-                              "value": 2
-                            },
-                            "rhs": {
-                              "kind": "Name",
-                              "name": "r",
-                              "i": -1
+                            "rhs" : {
+                              "kind" : "Name",
+                              "name" : "r",
+                              "i" : -1
                             }
                           }
                         }
                       ],
-                      "postConditions": [],
-                      "arguments": [
+                      "postConditions" : [ ],
+                      "arguments" : [
                         {
-                          "kind": "Integer",
-                          "value": 0
+                          "kind" : "Integer",
+                          "value" : 4
                         },
                         {
-                          "kind": "Integer",
-                          "value": 0
+                          "kind" : "Name",
+                          "name" : "r",
+                          "i" : -1
                         }
                       ]
                     },
                     {
-                      "kind": "Terminal",
-                      "name": "'-'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 45
+                      "kind" : "Terminal",
+                      "name" : "'^'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 94
                       }
+                    },
+                    {
+                      "kind" : "Nonterminal",
+                      "name" : "E",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "arguments" : [
+                        {
+                          "kind" : "Integer",
+                          "value" : 0
+                        },
+                        {
+                          "kind" : "Integer",
+                          "value" : 3
+                        }
+                      ]
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             },
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Terminal",
-                      "name": "'a'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 97
+                      "kind" : "Nonterminal",
+                      "name" : "E",
+                      "preConditions" : [
+                        {
+                          "kind" : "DataDependentCondition",
+                          "type" : "DATA_DEPENDENT",
+                          "expression" : {
+                            "kind" : "GreaterThanEqual",
+                            "lhs" : {
+                              "kind" : "Integer",
+                              "value" : 2
+                            },
+                            "rhs" : {
+                              "kind" : "Name",
+                              "name" : "r",
+                              "i" : -1
+                            }
+                          }
+                        }
+                      ],
+                      "postConditions" : [ ],
+                      "arguments" : [
+                        {
+                          "kind" : "Integer",
+                          "value" : 0
+                        },
+                        {
+                          "kind" : "Integer",
+                          "value" : 0
+                        }
+                      ]
+                    },
+                    {
+                      "kind" : "Terminal",
+                      "name" : "'-'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 45
                       }
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
+            },
+            {
+              "seqs" : [
+                {
+                  "symbols" : [
+                    {
+                      "kind" : "Terminal",
+                      "name" : "'a'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 97
+                      }
+                    }
+                  ],
+                  "associativity" : "UNDEFINED"
+                }
+              ],
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     }
   ],
-  "regularExpressionDefinitions": {},
-  "literals": {
-    "^": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 94
+  "regularExpressionDefinitions" : { },
+  "literals" : {
+    "^" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 94
     },
-    "-": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 45
+    "-" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 45
     },
-    "a": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 97
+    "a" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 97
     }
   },
-  "startSymbols": [
+  "startSymbols" : [
     {
-      "kind": "Start",
-      "name": "Start(S)",
-      "preConditions": [],
-      "postConditions": [],
-      "startSymbol": "S"
+      "kind" : "Start",
+      "name" : "Start(S)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "S"
     }
   ],
-  "globals": {}
+  "globals" : { }
 }

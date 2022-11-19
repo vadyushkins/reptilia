@@ -44,12 +44,12 @@ public class ParseError<T extends Result> {
     private final String description;
 
     public ParseError(
-            GrammarSlot slot,
-            GSSNode<T> gssNode,
-            int inputIndex,
-            int lineNumber,
-            int columnNumber,
-            String description
+        GrammarSlot slot,
+        GSSNode<T> gssNode,
+        int inputIndex,
+        int lineNumber,
+        int columnNumber,
+        String description
     ) {
         this.slot = slot;
         this.inputIndex = inputIndex;
@@ -85,8 +85,8 @@ public class ParseError<T extends Result> {
         if (!(obj instanceof ParseError)) return false;
         ParseError<?> other = (ParseError<?>) obj;
         return inputIndex == other.inputIndex &&
-                lineNumber == other.lineNumber &&
-                columnNumber == other.columnNumber;
+               lineNumber == other.lineNumber &&
+               columnNumber == other.columnNumber;
     }
 
     public GSSNode<T> getGssNode() {
@@ -101,6 +101,6 @@ public class ParseError<T extends Result> {
     @Override
     public String toString() {
         return String.format("Parse error at input index: %d, line: %d, column: %d, grammar rule: %s, description: %s",
-                inputIndex, lineNumber, columnNumber, slot, description);
+            inputIndex, lineNumber, columnNumber, slot, description);
     }
 }

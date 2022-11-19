@@ -48,7 +48,7 @@ public class IntArrayEnvironmentTest {
         IntArrayEvaluatorContext context = new IntArrayEvaluatorContext();
         Environment init = context.getEmptyEnvironment();
 
-        Environment env = init.declare(new Integer[]{1, 2, 3, 4, 5, 6});
+        Environment env = init.declare(new Integer[] {1, 2, 3, 4, 5, 6});
         assertEquals(6, env.size());
 
         assertEquals(1, env.lookup(0));

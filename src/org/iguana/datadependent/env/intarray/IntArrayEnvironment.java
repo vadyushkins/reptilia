@@ -7,22 +7,15 @@ import static java.lang.Integer.toUnsignedLong;
 
 public class IntArrayEnvironment implements Environment {
 
-    static final IntArrayEnvironment EMPTY = new IntArrayEnvironment(0);
     /**
      * size [o6, o5] [o4, o3] o2 o1
      */
     private long value;
 
+    static final IntArrayEnvironment EMPTY = new IntArrayEnvironment(0);
+
     private IntArrayEnvironment(long value) {
         this.value = value;
-    }
-
-    private static long set(int i, int value, long currentValue) {
-        if (value > 511) throw new RuntimeException("The value has to be smaller than 512");
-
-        long bitmask = ~(0x00000000000003FFL << (i * 10));
-
-        return (currentValue & bitmask) | (toUnsignedLong(value) << (i * 10));
     }
 
     public void init(long value) {
@@ -98,6 +91,14 @@ public class IntArrayEnvironment implements Environment {
         }
 
         return new IntArrayEnvironment(result);
+    }
+
+    private static long set(int i, int value, long currentValue) {
+        if (value > 511) throw new RuntimeException("The value has to be smaller than 512");
+
+        long bitmask = ~(0x00000000000003FFL << (i * 10));
+
+        return (currentValue & bitmask) | (toUnsignedLong(value) << (i * 10));
     }
 
     private long setSize(int size, long currentValue) {
@@ -186,11 +187,11 @@ public class IntArrayEnvironment implements Environment {
         int sixth = (int) (secondTuple & 0x0000_0000_FFFF_FFF);
 
         sb.append("{")
-                .append(first).append(", ")
-                .append(second).append(", ")
-                .append("[").append(third).append(", ").append(fourth).append("], ")
-                .append("[").append(fifth).append(", ").append(sixth).append("]")
-                .append("}");
+            .append(first).append(", ")
+            .append(second).append(", ")
+            .append("[").append(third).append(", ").append(fourth).append("], ")
+            .append("[").append(fifth).append(", ").append(sixth).append("]")
+        .append("}");
         return sb.toString();
     }
 }

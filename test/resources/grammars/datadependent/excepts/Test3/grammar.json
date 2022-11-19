@@ -1,267 +1,267 @@
 {
-  "rules": [
+  "rules" : [
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "S",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "S",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Identifier",
-                      "name": "E",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": [
+                      "kind" : "Identifier",
+                      "name" : "E",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [
                         "star"
                       ]
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "E",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "E",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Identifier",
-                      "name": "E",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": [
+                      "kind" : "Identifier",
+                      "name" : "E",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [
                         "plus"
                       ]
                     },
                     {
-                      "kind": "Terminal",
-                      "name": "'*'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 42
+                      "kind" : "Terminal",
+                      "name" : "'*'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 42
                       }
                     },
                     {
-                      "kind": "Identifier",
-                      "name": "E",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": [
+                      "kind" : "Identifier",
+                      "name" : "E",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [
                         "star",
                         "hat"
                       ]
                     }
                   ],
-                  "associativity": "UNDEFINED",
-                  "label": "star"
+                  "associativity" : "UNDEFINED",
+                  "label" : "star"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             },
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Identifier",
-                      "name": "E",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": [
+                      "kind" : "Identifier",
+                      "name" : "E",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [
                         "minus",
                         "plus"
                       ]
                     },
                     {
-                      "kind": "Terminal",
-                      "name": "'^'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 94
+                      "kind" : "Terminal",
+                      "name" : "'^'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 94
                       }
                     },
                     {
-                      "kind": "Identifier",
-                      "name": "E",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": [
+                      "kind" : "Identifier",
+                      "name" : "E",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [
                         "hat"
                       ]
                     }
                   ],
-                  "associativity": "UNDEFINED",
-                  "label": "hat"
+                  "associativity" : "UNDEFINED",
+                  "label" : "hat"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             },
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Terminal",
-                      "name": "'-'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 45
+                      "kind" : "Terminal",
+                      "name" : "'-'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 45
                       }
                     },
                     {
-                      "kind": "Identifier",
-                      "name": "E",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": []
+                      "kind" : "Identifier",
+                      "name" : "E",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [ ]
                     }
                   ],
-                  "associativity": "UNDEFINED",
-                  "label": "minus"
+                  "associativity" : "UNDEFINED",
+                  "label" : "minus"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             },
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Terminal",
-                      "name": "'+'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 43
+                      "kind" : "Terminal",
+                      "name" : "'+'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 43
                       }
                     },
                     {
-                      "kind": "Identifier",
-                      "name": "E",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": []
+                      "kind" : "Identifier",
+                      "name" : "E",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [ ]
                     }
                   ],
-                  "associativity": "UNDEFINED",
-                  "label": "plus"
+                  "associativity" : "UNDEFINED",
+                  "label" : "plus"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             },
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Terminal",
-                      "name": "'a'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 97
+                      "kind" : "Terminal",
+                      "name" : "'a'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 97
                       }
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     }
   ],
-  "regularExpressionDefinitions": {},
-  "literals": {
-    "*": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 42
+  "regularExpressionDefinitions" : { },
+  "literals" : {
+    "*" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 42
     },
-    "^": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 94
+    "^" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 94
     },
-    "-": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 45
+    "-" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 45
     },
-    "+": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 43
+    "+" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 43
     },
-    "a": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 97
+    "a" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 97
     }
   },
-  "startSymbols": [
+  "startSymbols" : [
     {
-      "kind": "Start",
-      "name": "Start(S)",
-      "preConditions": [],
-      "postConditions": [],
-      "startSymbol": "S"
+      "kind" : "Start",
+      "name" : "Start(S)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "S"
     }
   ],
-  "globals": {}
+  "globals" : { }
 }

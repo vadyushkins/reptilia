@@ -1,68 +1,68 @@
 {
-  "rules": [
+  "rules" : [
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "A",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "A",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Star",
-                      "name": "'a'*",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "s": {
-                        "kind": "Terminal",
-                        "name": "'a'",
-                        "preConditions": [],
-                        "postConditions": [],
-                        "nodeType": "Literal",
-                        "regex": {
-                          "kind": "Char",
-                          "lookaheads": [],
-                          "lookbehinds": [],
-                          "val": 97
+                      "kind" : "Star",
+                      "name" : "'a'*",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "s" : {
+                        "kind" : "Terminal",
+                        "name" : "'a'",
+                        "preConditions" : [ ],
+                        "postConditions" : [ ],
+                        "nodeType" : "Literal",
+                        "regex" : {
+                          "kind" : "Char",
+                          "lookaheads" : [ ],
+                          "lookbehinds" : [ ],
+                          "val" : 97
                         }
                       },
-                      "separators": []
+                      "separators" : [ ]
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     }
   ],
-  "regularExpressionDefinitions": {},
-  "literals": {
-    "a": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 97
+  "regularExpressionDefinitions" : { },
+  "literals" : {
+    "a" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 97
     }
   },
-  "startSymbols": [
+  "startSymbols" : [
     {
-      "kind": "Start",
-      "name": "Start(A)",
-      "preConditions": [],
-      "postConditions": [],
-      "startSymbol": "A"
+      "kind" : "Start",
+      "name" : "Start(A)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "A"
     }
   ],
-  "globals": {}
+  "globals" : { }
 }

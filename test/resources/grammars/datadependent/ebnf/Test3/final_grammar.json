@@ -1,126 +1,126 @@
 {
-  "rules": [
+  "rules" : [
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "S",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "S",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Nonterminal",
-          "name": "X",
-          "preConditions": [],
-          "postConditions": []
+          "kind" : "Nonterminal",
+          "name" : "X",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
         }
       ],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "(B)",
-        "preConditions": [],
-        "postConditions": [],
-        "parameters": [
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "(B)",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "parameters" : [
           "a",
           "b.lExt"
         ],
-        "nodeType": "Seq"
+        "nodeType" : "Seq"
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Nonterminal",
-          "name": "B",
-          "preConditions": [],
-          "postConditions": [
+          "kind" : "Nonterminal",
+          "name" : "B",
+          "preConditions" : [ ],
+          "postConditions" : [
             {
-              "kind": "DataDependentCondition",
-              "type": "DATA_DEPENDENT",
-              "expression": {
-                "kind": "Equal",
-                "lhs": {
-                  "kind": "RightExtent",
-                  "label": "a"
+              "kind" : "DataDependentCondition",
+              "type" : "DATA_DEPENDENT",
+              "expression" : {
+                "kind" : "Equal",
+                "lhs" : {
+                  "kind" : "RightExtent",
+                  "label" : "a"
                 },
-                "rhs": {
-                  "kind": "LeftExtent",
-                  "label": "b"
+                "rhs" : {
+                  "kind" : "LeftExtent",
+                  "label" : "b"
                 }
               }
             }
           ]
         }
       ],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       },
-      "definition": {
-        "kind": "Sequence",
-        "name": "(B)",
-        "preConditions": [],
-        "postConditions": [],
-        "symbols": [
+      "definition" : {
+        "kind" : "Sequence",
+        "name" : "(B)",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "symbols" : [
           {
-            "kind": "Nonterminal",
-            "name": "B",
-            "preConditions": [],
-            "postConditions": [
+            "kind" : "Nonterminal",
+            "name" : "B",
+            "preConditions" : [ ],
+            "postConditions" : [
               {
-                "kind": "DataDependentCondition",
-                "type": "DATA_DEPENDENT",
-                "expression": {
-                  "kind": "Equal",
-                  "lhs": {
-                    "kind": "RightExtent",
-                    "label": "a"
+                "kind" : "DataDependentCondition",
+                "type" : "DATA_DEPENDENT",
+                "expression" : {
+                  "kind" : "Equal",
+                  "lhs" : {
+                    "kind" : "RightExtent",
+                    "label" : "a"
                   },
-                  "rhs": {
-                    "kind": "LeftExtent",
-                    "label": "b"
+                  "rhs" : {
+                    "kind" : "LeftExtent",
+                    "label" : "b"
                   }
                 }
               }
@@ -130,116 +130,116 @@
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "(B)+",
-        "preConditions": [],
-        "postConditions": [],
-        "parameters": [
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "(B)+",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "parameters" : [
           "a",
           "b.lExt"
         ],
-        "nodeType": "Plus"
+        "nodeType" : "Plus"
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Nonterminal",
-          "name": "(B)+",
-          "preConditions": [],
-          "postConditions": [],
-          "parameters": [
+          "kind" : "Nonterminal",
+          "name" : "(B)+",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "parameters" : [
             "a",
             "b.lExt"
           ],
-          "arguments": [
+          "arguments" : [
             {
-              "kind": "Name",
-              "name": "a",
-              "i": -1
+              "kind" : "Name",
+              "name" : "a",
+              "i" : -1
             },
             {
-              "kind": "Name",
-              "name": "b.lExt",
-              "i": -1
+              "kind" : "Name",
+              "name" : "b.lExt",
+              "i" : -1
             }
           ],
-          "nodeType": "Plus"
+          "nodeType" : "Plus"
         },
         {
-          "kind": "Nonterminal",
-          "name": "(B)",
-          "preConditions": [],
-          "postConditions": [],
-          "parameters": [
+          "kind" : "Nonterminal",
+          "name" : "(B)",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "parameters" : [
             "a",
             "b.lExt"
           ],
-          "arguments": [
+          "arguments" : [
             {
-              "kind": "Name",
-              "name": "a",
-              "i": -1
+              "kind" : "Name",
+              "name" : "a",
+              "i" : -1
             },
             {
-              "kind": "Name",
-              "name": "b.lExt",
-              "i": -1
+              "kind" : "Name",
+              "name" : "b.lExt",
+              "i" : -1
             }
           ],
-          "nodeType": "Seq"
+          "nodeType" : "Seq"
         }
       ],
-      "recursion": "LEFT_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": 1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "LEFT_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : 1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       },
-      "definition": {
-        "kind": "Plus",
-        "name": "(B)+",
-        "preConditions": [],
-        "postConditions": [],
-        "s": {
-          "kind": "Sequence",
-          "name": "(B)",
-          "preConditions": [],
-          "postConditions": [],
-          "symbols": [
+      "definition" : {
+        "kind" : "Plus",
+        "name" : "(B)+",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "s" : {
+          "kind" : "Sequence",
+          "name" : "(B)",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "symbols" : [
             {
-              "kind": "Nonterminal",
-              "name": "B",
-              "preConditions": [],
-              "postConditions": [
+              "kind" : "Nonterminal",
+              "name" : "B",
+              "preConditions" : [ ],
+              "postConditions" : [
                 {
-                  "kind": "DataDependentCondition",
-                  "type": "DATA_DEPENDENT",
-                  "expression": {
-                    "kind": "Equal",
-                    "lhs": {
-                      "kind": "RightExtent",
-                      "label": "a"
+                  "kind" : "DataDependentCondition",
+                  "type" : "DATA_DEPENDENT",
+                  "expression" : {
+                    "kind" : "Equal",
+                    "lhs" : {
+                      "kind" : "RightExtent",
+                      "label" : "a"
                     },
-                    "rhs": {
-                      "kind": "LeftExtent",
-                      "label": "b"
+                    "rhs" : {
+                      "kind" : "LeftExtent",
+                      "label" : "b"
                     }
                   }
                 }
@@ -247,97 +247,97 @@
             }
           ]
         },
-        "separators": []
+        "separators" : [ ]
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "(B)+",
-        "preConditions": [],
-        "postConditions": [],
-        "parameters": [
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "(B)+",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "parameters" : [
           "a",
           "b.lExt"
         ],
-        "nodeType": "Plus"
+        "nodeType" : "Plus"
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Nonterminal",
-          "name": "(B)",
-          "preConditions": [],
-          "postConditions": [],
-          "parameters": [
+          "kind" : "Nonterminal",
+          "name" : "(B)",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "parameters" : [
             "a",
             "b.lExt"
           ],
-          "arguments": [
+          "arguments" : [
             {
-              "kind": "Name",
-              "name": "a",
-              "i": -1
+              "kind" : "Name",
+              "name" : "a",
+              "i" : -1
             },
             {
-              "kind": "Name",
-              "name": "b.lExt",
-              "i": -1
+              "kind" : "Name",
+              "name" : "b.lExt",
+              "i" : -1
             }
           ],
-          "nodeType": "Seq"
+          "nodeType" : "Seq"
         }
       ],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       },
-      "definition": {
-        "kind": "Plus",
-        "name": "(B)+",
-        "preConditions": [],
-        "postConditions": [],
-        "s": {
-          "kind": "Sequence",
-          "name": "(B)",
-          "preConditions": [],
-          "postConditions": [],
-          "symbols": [
+      "definition" : {
+        "kind" : "Plus",
+        "name" : "(B)+",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "s" : {
+          "kind" : "Sequence",
+          "name" : "(B)",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "symbols" : [
             {
-              "kind": "Nonterminal",
-              "name": "B",
-              "preConditions": [],
-              "postConditions": [
+              "kind" : "Nonterminal",
+              "name" : "B",
+              "preConditions" : [ ],
+              "postConditions" : [
                 {
-                  "kind": "DataDependentCondition",
-                  "type": "DATA_DEPENDENT",
-                  "expression": {
-                    "kind": "Equal",
-                    "lhs": {
-                      "kind": "RightExtent",
-                      "label": "a"
+                  "kind" : "DataDependentCondition",
+                  "type" : "DATA_DEPENDENT",
+                  "expression" : {
+                    "kind" : "Equal",
+                    "lhs" : {
+                      "kind" : "RightExtent",
+                      "label" : "a"
                     },
-                    "rhs": {
-                      "kind": "LeftExtent",
-                      "label": "b"
+                    "rhs" : {
+                      "kind" : "LeftExtent",
+                      "label" : "b"
                     }
                   }
                 }
@@ -345,98 +345,98 @@
             }
           ]
         },
-        "separators": []
+        "separators" : [ ]
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "(B)*",
-        "preConditions": [],
-        "postConditions": [],
-        "parameters": [
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "(B)*",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "parameters" : [
           "a",
           "b.lExt"
         ],
-        "nodeType": "Star"
+        "nodeType" : "Star"
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Nonterminal",
-          "name": "(B)+",
-          "preConditions": [],
-          "postConditions": [],
-          "parameters": [
+          "kind" : "Nonterminal",
+          "name" : "(B)+",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "parameters" : [
             "a",
             "b.lExt"
           ],
-          "arguments": [
+          "arguments" : [
             {
-              "kind": "Name",
-              "name": "a",
-              "i": -1
+              "kind" : "Name",
+              "name" : "a",
+              "i" : -1
             },
             {
-              "kind": "Name",
-              "name": "b.lExt",
-              "i": -1
+              "kind" : "Name",
+              "name" : "b.lExt",
+              "i" : -1
             }
           ],
-          "nodeType": "Plus"
+          "nodeType" : "Plus"
         }
       ],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       },
-      "definition": {
-        "kind": "Star",
-        "name": "(B)*",
-        "label": "b",
-        "preConditions": [],
-        "postConditions": [],
-        "s": {
-          "kind": "Sequence",
-          "name": "(B)",
-          "preConditions": [],
-          "postConditions": [],
-          "symbols": [
+      "definition" : {
+        "kind" : "Star",
+        "name" : "(B)*",
+        "label" : "b",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "s" : {
+          "kind" : "Sequence",
+          "name" : "(B)",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "symbols" : [
             {
-              "kind": "Nonterminal",
-              "name": "B",
-              "preConditions": [],
-              "postConditions": [
+              "kind" : "Nonterminal",
+              "name" : "B",
+              "preConditions" : [ ],
+              "postConditions" : [
                 {
-                  "kind": "DataDependentCondition",
-                  "type": "DATA_DEPENDENT",
-                  "expression": {
-                    "kind": "Equal",
-                    "lhs": {
-                      "kind": "RightExtent",
-                      "label": "a"
+                  "kind" : "DataDependentCondition",
+                  "type" : "DATA_DEPENDENT",
+                  "expression" : {
+                    "kind" : "Equal",
+                    "lhs" : {
+                      "kind" : "RightExtent",
+                      "label" : "a"
                     },
-                    "rhs": {
-                      "kind": "LeftExtent",
-                      "label": "b"
+                    "rhs" : {
+                      "kind" : "LeftExtent",
+                      "label" : "b"
                     }
                   }
                 }
@@ -444,74 +444,74 @@
             }
           ]
         },
-        "separators": []
+        "separators" : [ ]
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "(B)*",
-        "preConditions": [],
-        "postConditions": [],
-        "parameters": [
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "(B)*",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "parameters" : [
           "a",
           "b.lExt"
         ],
-        "nodeType": "Star"
+        "nodeType" : "Star"
       },
-      "body": [],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "body" : [ ],
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       },
-      "definition": {
-        "kind": "Star",
-        "name": "(B)*",
-        "label": "b",
-        "preConditions": [],
-        "postConditions": [],
-        "s": {
-          "kind": "Sequence",
-          "name": "(B)",
-          "preConditions": [],
-          "postConditions": [],
-          "symbols": [
+      "definition" : {
+        "kind" : "Star",
+        "name" : "(B)*",
+        "label" : "b",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "s" : {
+          "kind" : "Sequence",
+          "name" : "(B)",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "symbols" : [
             {
-              "kind": "Nonterminal",
-              "name": "B",
-              "preConditions": [],
-              "postConditions": [
+              "kind" : "Nonterminal",
+              "name" : "B",
+              "preConditions" : [ ],
+              "postConditions" : [
                 {
-                  "kind": "DataDependentCondition",
-                  "type": "DATA_DEPENDENT",
-                  "expression": {
-                    "kind": "Equal",
-                    "lhs": {
-                      "kind": "RightExtent",
-                      "label": "a"
+                  "kind" : "DataDependentCondition",
+                  "type" : "DATA_DEPENDENT",
+                  "expression" : {
+                    "kind" : "Equal",
+                    "lhs" : {
+                      "kind" : "RightExtent",
+                      "label" : "a"
                     },
-                    "rhs": {
-                      "kind": "LeftExtent",
-                      "label": "b"
+                    "rhs" : {
+                      "kind" : "LeftExtent",
+                      "label" : "b"
                     }
                   }
                 }
@@ -519,258 +519,258 @@
             }
           ]
         },
-        "separators": []
+        "separators" : [ ]
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "X",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "X",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Nonterminal",
-          "name": "A",
-          "label": "a",
-          "preConditions": [],
-          "postConditions": []
+          "kind" : "Nonterminal",
+          "name" : "A",
+          "label" : "a",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
         },
         {
-          "kind": "Nonterminal",
-          "name": "(B)*",
-          "label": "b",
-          "preConditions": [],
-          "postConditions": [],
-          "parameters": [
+          "kind" : "Nonterminal",
+          "name" : "(B)*",
+          "label" : "b",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "parameters" : [
             "a",
             "b.lExt"
           ],
-          "arguments": [
+          "arguments" : [
             {
-              "kind": "Name",
-              "name": "a",
-              "i": -1
+              "kind" : "Name",
+              "name" : "a",
+              "i" : -1
             },
             {
-              "kind": "Name",
-              "name": "b.lExt",
-              "i": -1
+              "kind" : "Name",
+              "name" : "b.lExt",
+              "i" : -1
             }
           ],
-          "nodeType": "Star"
+          "nodeType" : "Star"
         }
       ],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "A",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "A",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Terminal",
-          "name": "'a'",
-          "preConditions": [],
-          "postConditions": [],
-          "nodeType": "Literal",
-          "regex": {
-            "kind": "Char",
-            "lookaheads": [],
-            "lookbehinds": [],
-            "val": 97
+          "kind" : "Terminal",
+          "name" : "'a'",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "nodeType" : "Literal",
+          "regex" : {
+            "kind" : "Char",
+            "lookaheads" : [ ],
+            "lookbehinds" : [ ],
+            "val" : 97
           }
         }
       ],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "B",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "B",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Terminal",
-          "name": "'b'",
-          "preConditions": [],
-          "postConditions": [],
-          "nodeType": "Literal",
-          "regex": {
-            "kind": "Char",
-            "lookaheads": [],
-            "lookbehinds": [],
-            "val": 98
+          "kind" : "Terminal",
+          "name" : "'b'",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "nodeType" : "Literal",
+          "regex" : {
+            "kind" : "Char",
+            "lookaheads" : [ ],
+            "lookbehinds" : [ ],
+            "val" : 98
           }
         }
       ],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "Start(S)",
-        "preConditions": [],
-        "postConditions": [],
-        "nodeType": "Start"
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "Start(S)",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "nodeType" : "Start"
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Nonterminal",
-          "name": "S",
-          "label": "top",
-          "preConditions": [],
-          "postConditions": []
+          "kind" : "Nonterminal",
+          "name" : "S",
+          "label" : "top",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
         }
       ],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       },
-      "definition": {
-        "kind": "Start",
-        "name": "Start(S)",
-        "preConditions": [],
-        "postConditions": [],
-        "startSymbol": "S"
+      "definition" : {
+        "kind" : "Start",
+        "name" : "Start(S)",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "startSymbol" : "S"
       }
     }
   ],
-  "regularExpressionDefinitions": {},
-  "ebnfLefts": {
-    "(B)*": [
+  "regularExpressionDefinitions" : { },
+  "ebnfLefts" : {
+    "(B)*" : [
       "(B)+"
     ],
-    "(B)": [
+    "(B)" : [
       "B"
     ],
-    "(B)+": [
+    "(B)+" : [
       "(B)"
     ]
   },
-  "ebnfRights": {
-    "(B)*": [
+  "ebnfRights" : {
+    "(B)*" : [
       "B",
       "$B",
       "(B)+",
       "(B)"
     ],
-    "(B)": [
+    "(B)" : [
       "B",
       "$B"
     ],
-    "(B)+": [
+    "(B)+" : [
       "B",
       "$B",
       "(B)"
     ]
   },
-  "startSymbols": [
+  "startSymbols" : [
     {
-      "kind": "Start",
-      "name": "Start(S)",
-      "preConditions": [],
-      "postConditions": [],
-      "startSymbol": "S"
+      "kind" : "Start",
+      "name" : "Start(S)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "S"
     },
     {
-      "kind": "Start",
-      "name": "Start(S)",
-      "preConditions": [],
-      "postConditions": [],
-      "startSymbol": "S"
+      "kind" : "Start",
+      "name" : "Start(S)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "S"
     }
   ],
-  "globals": {}
+  "globals" : { }
 }

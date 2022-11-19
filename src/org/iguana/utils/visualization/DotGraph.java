@@ -9,21 +9,6 @@ public class DotGraph {
 
     private StringBuilder sb = new StringBuilder();
 
-    public DotGraph() {
-        this(Direction.TO_DOWN);
-    }
-
-    public DotGraph(Direction direction) {
-        sb.append("digraph sppf {").append("\n");
-        sb.append("layout=dot").append("\n");
-        sb.append("nodesep=.6").append("\n");
-        sb.append("ranksep=.4").append("\n");
-        sb.append("ordering=out").append("\n");
-        sb.append("forcelabels=true").append("\n");
-        if (direction == Direction.LEFT_TO_RIGHT)
-            sb.append("rankdir=LR").append("\n");
-    }
-
     public static Node newNode(int id) {
         return newNode(id, "");
     }
@@ -40,12 +25,19 @@ public class DotGraph {
         return edgeInstance.init(sourceId, targetId).setLabel(label);
     }
 
-    private static String escape(String s) {
-        return s.replace("\\", "\\\\")
-                .replace("\t", "\\\\t")
-                .replace("\n", "\\\\n")
-                .replace("\r", "\\\\r")
-                .replace("\"", "\\\"");
+    public DotGraph() {
+        this(Direction.TO_DOWN);
+    }
+
+    public DotGraph(Direction direction) {
+        sb.append("digraph sppf {").append("\n");
+        sb.append("layout=dot").append("\n");
+        sb.append("nodesep=.6").append("\n");
+        sb.append("ranksep=.4").append("\n");
+        sb.append("ordering=out").append("\n");
+        sb.append("forcelabels=true").append("\n");
+        if (direction == Direction.LEFT_TO_RIGHT)
+            sb.append("rankdir=LR").append("\n");
     }
 
     public void addNode(Node node) {
@@ -78,6 +70,14 @@ public class DotGraph {
 
         if (exitCode != 0)
             throw new RuntimeException("");
+    }
+
+    private static String escape(String s) {
+        return s.replace("\\", "\\\\")
+                .replace("\t", "\\\\t")
+                .replace("\n", "\\\\n")
+                .replace("\r", "\\\\r")
+                .replace("\"", "\\\"");
     }
 
     public enum Direction {
@@ -119,22 +119,6 @@ public class DotGraph {
         private int fontSize;
         private double width;
         private double height;
-
-        private static String shapeToString(Shape shape) {
-            switch (shape) {
-                case RECTANGLE:
-                    return "shape = \"box\"";
-                case ROUNDED_RECTANGLE:
-                    return "shape = \"box\" style=rounded";
-                case CIRCLE:
-                    return "shape = \"circle\"";
-                case DOUBLE_CIRCLE:
-                    return "shape = \"doublecircle\"";
-                case DIAMOND:
-                    return "shape = \"diamond\"";
-            }
-            throw new RuntimeException("Unknown shape");
-        }
 
         private Node init(int id, String label) {
             this.id = id;
@@ -195,6 +179,17 @@ public class DotGraph {
                     "fontsize = " + fontSize +
                     "]\n";
         }
+
+        private static String shapeToString(Shape shape) {
+            switch (shape) {
+                case RECTANGLE:         return "shape = \"box\"";
+                case ROUNDED_RECTANGLE: return "shape = \"box\" style=rounded";
+                case CIRCLE:            return "shape = \"circle\"";
+                case DOUBLE_CIRCLE:     return "shape = \"doublecircle\"";
+                case DIAMOND:           return "shape = \"diamond\"";
+            }
+            throw new RuntimeException("Unknown shape");
+        }
     }
 
     public static class Edge {
@@ -227,13 +222,13 @@ public class DotGraph {
         @Override
         public String toString() {
             return String.valueOf(sourceId) + "->" + String.valueOf(targetId) + " " +
-                    "[" +
-                    "color = black, " +
-                    "style = solid, " +
-                    "penwidth = 0.5, " +
-                    "arrowsize = 0.7, " + "" +
-                    "label = \"" + (label == null ? "" : label) + "\"" +
-                    "];\n";
+                   "[" +
+                   "color = black, " +
+                   "style = solid, " +
+                   "penwidth = 0.5, " +
+                   "arrowsize = 0.7, " + "" +
+                   "label = \"" + (label == null ? "" : label) + "\"" +
+                   "];\n";
         }
     }
 }

@@ -1,587 +1,587 @@
 {
-  "rules": [
+  "rules" : [
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "X",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "X",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Nonterminal",
-                      "name": "S",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "arguments": [
+                      "kind" : "Nonterminal",
+                      "name" : "S",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "arguments" : [
                         {
-                          "kind": "Integer",
-                          "value": 1
+                          "kind" : "Integer",
+                          "value" : 1
                         },
                         {
-                          "kind": "Integer",
-                          "value": 2
+                          "kind" : "Integer",
+                          "value" : 2
                         }
                       ]
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "S",
-        "preConditions": [],
-        "postConditions": [],
-        "parameters": [
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "S",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "parameters" : [
           "a",
           "b"
         ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Code",
-                      "name": "l1:A {assert(l1.lExt == 0,l1.rExt == 1 || l1.rExt == 2,a == 1,b == 2)}",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "symbol": {
-                        "kind": "Identifier",
-                        "name": "A",
-                        "label": "l1",
-                        "preConditions": [],
-                        "postConditions": [],
-                        "excepts": []
+                      "kind" : "Code",
+                      "name" : "l1:A {assert(l1.lExt == 0,l1.rExt == 1 || l1.rExt == 2,a == 1,b == 2)}",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "symbol" : {
+                        "kind" : "Identifier",
+                        "name" : "A",
+                        "label" : "l1",
+                        "preConditions" : [ ],
+                        "postConditions" : [ ],
+                        "excepts" : [ ]
                       },
-                      "statements": [
+                      "statements" : [
                         {
-                          "kind": "ExpressionStatement",
-                          "exp": {
-                            "kind": "Assert",
-                            "arguments": [
+                          "kind" : "ExpressionStatement",
+                          "exp" : {
+                            "kind" : "Assert",
+                            "arguments" : [
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "LeftExtent",
-                                  "label": "l1"
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "LeftExtent",
+                                  "label" : "l1"
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 0
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 0
                                 }
                               },
                               {
-                                "kind": "Or",
-                                "lhs": {
-                                  "kind": "Equal",
-                                  "lhs": {
-                                    "kind": "RightExtent",
-                                    "label": "l1"
+                                "kind" : "Or",
+                                "lhs" : {
+                                  "kind" : "Equal",
+                                  "lhs" : {
+                                    "kind" : "RightExtent",
+                                    "label" : "l1"
                                   },
-                                  "rhs": {
-                                    "kind": "Integer",
-                                    "value": 1
+                                  "rhs" : {
+                                    "kind" : "Integer",
+                                    "value" : 1
                                   }
                                 },
-                                "rhs": {
-                                  "kind": "Equal",
-                                  "lhs": {
-                                    "kind": "RightExtent",
-                                    "label": "l1"
+                                "rhs" : {
+                                  "kind" : "Equal",
+                                  "lhs" : {
+                                    "kind" : "RightExtent",
+                                    "label" : "l1"
                                   },
-                                  "rhs": {
-                                    "kind": "Integer",
-                                    "value": 2
+                                  "rhs" : {
+                                    "kind" : "Integer",
+                                    "value" : 2
                                   }
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "Name",
-                                  "name": "a",
-                                  "i": -1
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "Name",
+                                  "name" : "a",
+                                  "i" : -1
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 1
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 1
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "Name",
-                                  "name": "b",
-                                  "i": -1
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "Name",
+                                  "name" : "b",
+                                  "i" : -1
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 2
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 2
                                 }
                               }
                             ],
-                            "fun": "assert"
+                            "fun" : "assert"
                           }
                         }
                       ]
                     },
                     {
-                      "kind": "Code",
-                      "name": "l2:B {assert(l2.lExt == 1 || l2.lExt == 2,l2.rExt == 3)}",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "symbol": {
-                        "kind": "Identifier",
-                        "name": "B",
-                        "label": "l2",
-                        "preConditions": [],
-                        "postConditions": [],
-                        "excepts": []
+                      "kind" : "Code",
+                      "name" : "l2:B {assert(l2.lExt == 1 || l2.lExt == 2,l2.rExt == 3)}",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "symbol" : {
+                        "kind" : "Identifier",
+                        "name" : "B",
+                        "label" : "l2",
+                        "preConditions" : [ ],
+                        "postConditions" : [ ],
+                        "excepts" : [ ]
                       },
-                      "statements": [
+                      "statements" : [
                         {
-                          "kind": "ExpressionStatement",
-                          "exp": {
-                            "kind": "Assert",
-                            "arguments": [
+                          "kind" : "ExpressionStatement",
+                          "exp" : {
+                            "kind" : "Assert",
+                            "arguments" : [
                               {
-                                "kind": "Or",
-                                "lhs": {
-                                  "kind": "Equal",
-                                  "lhs": {
-                                    "kind": "LeftExtent",
-                                    "label": "l2"
+                                "kind" : "Or",
+                                "lhs" : {
+                                  "kind" : "Equal",
+                                  "lhs" : {
+                                    "kind" : "LeftExtent",
+                                    "label" : "l2"
                                   },
-                                  "rhs": {
-                                    "kind": "Integer",
-                                    "value": 1
+                                  "rhs" : {
+                                    "kind" : "Integer",
+                                    "value" : 1
                                   }
                                 },
-                                "rhs": {
-                                  "kind": "Equal",
-                                  "lhs": {
-                                    "kind": "LeftExtent",
-                                    "label": "l2"
+                                "rhs" : {
+                                  "kind" : "Equal",
+                                  "lhs" : {
+                                    "kind" : "LeftExtent",
+                                    "label" : "l2"
                                   },
-                                  "rhs": {
-                                    "kind": "Integer",
-                                    "value": 2
+                                  "rhs" : {
+                                    "kind" : "Integer",
+                                    "value" : 2
                                   }
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "RightExtent",
-                                  "label": "l2"
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "RightExtent",
+                                  "label" : "l2"
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 3
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 3
                                 }
                               }
                             ],
-                            "fun": "assert"
+                            "fun" : "assert"
                           }
                         }
                       ]
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             },
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Identifier",
-                      "name": "C",
-                      "label": "l1",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": []
+                      "kind" : "Identifier",
+                      "name" : "C",
+                      "label" : "l1",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [ ]
                     },
                     {
-                      "kind": "Code",
-                      "name": "l2:A {assert(l1.lExt == 0,l1.rExt == 1,l2.lExt == 1,l2.rExt == 2,a == 1,b == 2)}",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "symbol": {
-                        "kind": "Identifier",
-                        "name": "A",
-                        "label": "l2",
-                        "preConditions": [],
-                        "postConditions": [],
-                        "excepts": []
+                      "kind" : "Code",
+                      "name" : "l2:A {assert(l1.lExt == 0,l1.rExt == 1,l2.lExt == 1,l2.rExt == 2,a == 1,b == 2)}",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "symbol" : {
+                        "kind" : "Identifier",
+                        "name" : "A",
+                        "label" : "l2",
+                        "preConditions" : [ ],
+                        "postConditions" : [ ],
+                        "excepts" : [ ]
                       },
-                      "statements": [
+                      "statements" : [
                         {
-                          "kind": "ExpressionStatement",
-                          "exp": {
-                            "kind": "Assert",
-                            "arguments": [
+                          "kind" : "ExpressionStatement",
+                          "exp" : {
+                            "kind" : "Assert",
+                            "arguments" : [
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "LeftExtent",
-                                  "label": "l1"
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "LeftExtent",
+                                  "label" : "l1"
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 0
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 0
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "RightExtent",
-                                  "label": "l1"
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "RightExtent",
+                                  "label" : "l1"
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 1
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 1
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "LeftExtent",
-                                  "label": "l2"
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "LeftExtent",
+                                  "label" : "l2"
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 1
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 1
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "RightExtent",
-                                  "label": "l2"
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "RightExtent",
+                                  "label" : "l2"
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 2
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 2
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "Name",
-                                  "name": "a",
-                                  "i": -1
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "Name",
+                                  "name" : "a",
+                                  "i" : -1
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 1
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 1
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "Name",
-                                  "name": "b",
-                                  "i": -1
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "Name",
+                                  "name" : "b",
+                                  "i" : -1
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 2
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 2
                                 }
                               }
                             ],
-                            "fun": "assert"
+                            "fun" : "assert"
                           }
                         }
                       ]
                     },
                     {
-                      "kind": "Identifier",
-                      "name": "D",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": []
+                      "kind" : "Identifier",
+                      "name" : "D",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [ ]
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "A",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "A",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Terminal",
-                      "name": "'a'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 97
+                      "kind" : "Terminal",
+                      "name" : "'a'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 97
                       }
                     },
                     {
-                      "kind": "Terminal",
-                      "name": "'a'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 97
+                      "kind" : "Terminal",
+                      "name" : "'a'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 97
                       }
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             },
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Terminal",
-                      "name": "'a'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 97
+                      "kind" : "Terminal",
+                      "name" : "'a'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 97
                       }
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "B",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "B",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Terminal",
-                      "name": "'b'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 98
+                      "kind" : "Terminal",
+                      "name" : "'b'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 98
                       }
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             },
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Terminal",
-                      "name": "'a'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 97
+                      "kind" : "Terminal",
+                      "name" : "'a'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 97
                       }
                     },
                     {
-                      "kind": "Terminal",
-                      "name": "'b'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 98
+                      "kind" : "Terminal",
+                      "name" : "'b'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 98
                       }
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "C",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "C",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Terminal",
-                      "name": "'a'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 97
+                      "kind" : "Terminal",
+                      "name" : "'a'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 97
                       }
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "D",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "D",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Terminal",
-                      "name": "'b'",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "nodeType": "Literal",
-                      "regex": {
-                        "kind": "Char",
-                        "lookaheads": [],
-                        "lookbehinds": [],
-                        "val": 98
+                      "kind" : "Terminal",
+                      "name" : "'b'",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "nodeType" : "Literal",
+                      "regex" : {
+                        "kind" : "Char",
+                        "lookaheads" : [ ],
+                        "lookbehinds" : [ ],
+                        "val" : 98
                       }
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     }
   ],
-  "regularExpressionDefinitions": {},
-  "literals": {
-    "a": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 97
+  "regularExpressionDefinitions" : { },
+  "literals" : {
+    "a" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 97
     },
-    "b": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 98
+    "b" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 98
     }
   },
-  "startSymbols": [
+  "startSymbols" : [
     {
-      "kind": "Start",
-      "name": "Start(X)",
-      "preConditions": [],
-      "postConditions": [],
-      "startSymbol": "X"
+      "kind" : "Start",
+      "name" : "Start(X)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "X"
     }
   ],
-  "globals": {}
+  "globals" : { }
 }

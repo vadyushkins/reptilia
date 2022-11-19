@@ -52,6 +52,14 @@ public class PackedNode implements SPPFNode {
         this.rightChild = rightChild;
     }
 
+    public void setLeftChild(NonPackedNode leftChild) {
+        this.leftChild = leftChild;
+    }
+
+    public void setRightChild(NonPackedNode rightChild) {
+        this.rightChild = rightChild;
+    }
+
     private int getPivot() {
         return leftChild.getRightExtent();
     }
@@ -85,16 +93,8 @@ public class PackedNode implements SPPFNode {
         return leftChild;
     }
 
-    public void setLeftChild(NonPackedNode leftChild) {
-        this.leftChild = leftChild;
-    }
-
     public NonPackedNode getRightChild() {
         return rightChild;
-    }
-
-    public void setRightChild(NonPackedNode rightChild) {
-        this.rightChild = rightChild;
     }
 
     @Override

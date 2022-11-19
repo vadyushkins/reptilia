@@ -6,10 +6,11 @@ import static java.util.Collections.emptyList;
 
 public class RangeMapBuilder<T> {
 
-    private static RangeMap<?> emptyRangeMap = (RangeMap<Object>) key -> emptyList();
-    private static IntRangeMap emptyIntRangeMap = key -> -2;
     private List<Range> ranges = new ArrayList<>();
     private List<T> values = new ArrayList<>();
+
+    private static RangeMap<?> emptyRangeMap = (RangeMap<Object>) key -> emptyList();
+    private static IntRangeMap emptyIntRangeMap = key -> -2;
 
     public RangeMapBuilder<T> put(Range range, T value) {
         ranges.add(range);
@@ -195,7 +196,7 @@ public class RangeMapBuilder<T> {
         public int compareTo(Point<T> other) {
             int d = this.index - other.index;
             if (d != 0) return d;
-            return -Boolean.compare(this.isStart(), other.isStart());
+            return - Boolean.compare(this.isStart(), other.isStart());
         }
 
         @Override

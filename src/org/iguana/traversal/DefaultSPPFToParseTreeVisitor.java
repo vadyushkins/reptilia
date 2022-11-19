@@ -32,25 +32,15 @@ public class DefaultSPPFToParseTreeVisitor<T> implements SPPFVisitor<T> {
     private final ParserResultOps resultOps;
 
     public DefaultSPPFToParseTreeVisitor(
-            ParseTreeBuilder<T> parseTreeBuilder,
-            Input input,
-            boolean ignoreLayout,
-            ParserResultOps resultOps
+        ParseTreeBuilder<T> parseTreeBuilder,
+        Input input,
+        boolean ignoreLayout,
+        ParserResultOps resultOps
     ) {
         this.parseTreeBuilder = parseTreeBuilder;
         this.input = input;
         this.ignoreLayout = ignoreLayout;
         this.resultOps = resultOps;
-    }
-
-    private static <T> void addChildren(T result, List<T> children) {
-        if (result instanceof List<?>) {
-            children.addAll((List<T>) result);
-        } else {
-            if (result != null) {
-                children.add(result);
-            }
-        }
     }
 
     @Override
@@ -59,7 +49,7 @@ public class DefaultSPPFToParseTreeVisitor<T> implements SPPFVisitor<T> {
             return null;
         }
         return parseTreeBuilder.terminalNode(node.getGrammarSlot().getTerminal(), node.getLeftExtent(),
-                node.getRightExtent());
+            node.getRightExtent());
     }
 
     @Override
@@ -147,6 +137,16 @@ public class DefaultSPPFToParseTreeVisitor<T> implements SPPFVisitor<T> {
         return parseTreeBuilder.nonterminalNode(slot.getRule(), children, leftExtent, rightExtent);
     }
 
+    private static <T> void addChildren(T result, List<T> children) {
+        if (result instanceof List<?>) {
+            children.addAll((List<T>) result);
+        } else {
+            if (result != null) {
+                children.add(result);
+            }
+        }
+    }
+
     private T convertStar(NonPackedNode node, Star symbol, int leftExtent, int rightExtent) {
         if (node.isAmbiguous()) {
             handleAmbiguousNode(node);
@@ -202,7 +202,7 @@ public class DefaultSPPFToParseTreeVisitor<T> implements SPPFVisitor<T> {
 
     private T convertStart(NonPackedNode node, Start symbol, int leftExtent, int rightExtent) {
         List<T> children = new ArrayList<>(
-                ignoreLayout ? 3 : 1); // Layout is inserted before and after the start symbol
+            ignoreLayout ? 3 : 1); // Layout is inserted before and after the start symbol
         addChildren(node.accept(this), children);
         reverse(children);
         return parseTreeBuilder.metaSymbolNode(symbol, children, leftExtent, rightExtent);

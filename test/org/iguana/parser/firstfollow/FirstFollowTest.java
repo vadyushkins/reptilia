@@ -17,9 +17,9 @@ public class FirstFollowTest {
     @Test
     public void test() {
         RuntimeGrammar grammar = GrammarTransformer.transform(fromIggyGrammar(
-                "start A = B C | 'a'\n" +
-                        "B = A | 'b'\n" +
-                        "C = 'c'").toRuntimeGrammar());
+            "start A = B C | 'a'\n" +
+            "B = A | 'b'\n" +
+            "C = 'c'").toRuntimeGrammar());
 
         Nonterminal A = Nonterminal.withName("A");
         Nonterminal B = Nonterminal.withName("B");
@@ -30,9 +30,9 @@ public class FirstFollowTest {
 
         FirstFollowSets firstFollowSets = new FirstFollowSets(grammar);
         assertEquals(set(a, b), firstFollowSets.getFirstSet(A));
-        assertEquals(set(a, b), firstFollowSets.getFirstSet(B));
-        assertEquals(set(c), firstFollowSets.getFirstSet(C));
-        assertEquals(set(c, EOF.asCharRange()), firstFollowSets.getFollowSet(A));
-        assertEquals(set(c, EOF.asCharRange()), firstFollowSets.getFollowSet(B));
+		assertEquals(set(a, b), firstFollowSets.getFirstSet(B));
+		assertEquals(set(c), firstFollowSets.getFirstSet(C));
+		assertEquals(set(c, EOF.asCharRange()), firstFollowSets.getFollowSet(A));
+		assertEquals(set(c, EOF.asCharRange()), firstFollowSets.getFollowSet(B));
     }
 }

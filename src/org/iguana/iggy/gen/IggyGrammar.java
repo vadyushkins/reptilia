@@ -18,7 +18,7 @@ public class IggyGrammar {
             grammar = loadGrammar();
         }
         return grammar;
-    }
+     }
 
     private static Grammar loadGrammar() {
         String grammarJsonFile = grammarName + ".json";

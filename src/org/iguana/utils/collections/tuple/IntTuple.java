@@ -10,10 +10,6 @@ public class IntTuple {
         this.second = second;
     }
 
-    public static IntTuple of(int first, int second) {
-        return new IntTuple(first, second);
-    }
-
     public int first() {
         return first;
     }
@@ -38,5 +34,9 @@ public class IntTuple {
     @Override
     public String toString() {
         return "(" + first + "," + second + ")";
+    }
+
+    public static IntTuple of(int first, int second) {
+        return new IntTuple(first, second);
     }
 }

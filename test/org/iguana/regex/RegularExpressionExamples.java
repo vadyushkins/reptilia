@@ -95,12 +95,12 @@ public class RegularExpressionExamples {
     // "/*" (![*] | [*] !>> [/])* "*/"
     public static RegularExpression getMultilineComment() {
         return Seq.builder()
-                .add(Seq.from("/*"))
-                .add(Star.from(Alt.from(
-                        Alt.not(Char.from('*')),
-                        Char.builder('*').addLookahead(Char.from('/')).build())))
-                .add(Seq.from("*/"))
-                .build();
+            .add(Seq.from("/*"))
+            .add(Star.from(Alt.from(
+                Alt.not(Char.from('*')),
+                Char.builder('*').addLookahead(Char.from('/')).build())))
+            .add(Seq.from("*/"))
+            .build();
     }
 
 }

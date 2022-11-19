@@ -32,9 +32,12 @@ import org.iguana.traversal.SPPFVisitor;
 
 public class IntermediateNode extends NonPackedNode {
 
-    private final BodyGrammarSlot slot;
     private NonPackedNode leftChild;
+
     private NonPackedNode rightChild;
+
+    private final BodyGrammarSlot slot;
+
     private boolean ambiguous;
 
     public IntermediateNode(BodyGrammarSlot slot, NonPackedNode leftChild, NonPackedNode rightChild) {
@@ -80,13 +83,13 @@ public class IntermediateNode extends NonPackedNode {
     }
 
     @Override
-    public boolean isAmbiguous() {
-        return ambiguous;
+    public void setAmbiguous(boolean ambiguous) {
+        this.ambiguous = ambiguous;
     }
 
     @Override
-    public void setAmbiguous(boolean ambiguous) {
-        this.ambiguous = ambiguous;
+    public boolean isAmbiguous() {
+        return ambiguous;
     }
 
     @Override

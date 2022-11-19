@@ -1,214 +1,214 @@
 {
-  "rules": [
+  "rules" : [
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "S",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "S",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Nonterminal",
-          "name": "S",
-          "preConditions": [],
-          "postConditions": []
+          "kind" : "Nonterminal",
+          "name" : "S",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
         },
         {
-          "kind": "Nonterminal",
-          "name": "S",
-          "preConditions": [],
-          "postConditions": []
+          "kind" : "Nonterminal",
+          "name" : "S",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
         },
         {
-          "kind": "Nonterminal",
-          "name": "S",
-          "preConditions": [],
-          "postConditions": []
+          "kind" : "Nonterminal",
+          "name" : "S",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
         }
       ],
-      "recursion": "LEFT_RIGHT_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": 1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": 1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 2,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "LEFT_RIGHT_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : 1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : 1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 2,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "S",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "S",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Nonterminal",
-          "name": "S",
-          "preConditions": [],
-          "postConditions": []
+          "kind" : "Nonterminal",
+          "name" : "S",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
         },
         {
-          "kind": "Nonterminal",
-          "name": "S",
-          "preConditions": [],
-          "postConditions": []
+          "kind" : "Nonterminal",
+          "name" : "S",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
         }
       ],
-      "recursion": "LEFT_RIGHT_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": 1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": 1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 2,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "LEFT_RIGHT_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : 1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : 1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 2,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "S",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "S",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Terminal",
-          "name": "'b'",
-          "preConditions": [],
-          "postConditions": [],
-          "nodeType": "Literal",
-          "regex": {
-            "kind": "Char",
-            "lookaheads": [],
-            "lookbehinds": [],
-            "val": 98
+          "kind" : "Terminal",
+          "name" : "'b'",
+          "preConditions" : [ ],
+          "postConditions" : [ ],
+          "nodeType" : "Literal",
+          "regex" : {
+            "kind" : "Char",
+            "lookaheads" : [ ],
+            "lookbehinds" : [ ],
+            "val" : 98
           }
         }
       ],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": 1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 2,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : 1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 2,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       }
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "Start(S)",
-        "preConditions": [],
-        "postConditions": [],
-        "nodeType": "Start"
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "Start(S)",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "nodeType" : "Start"
       },
-      "body": [
+      "body" : [
         {
-          "kind": "Nonterminal",
-          "name": "S",
-          "label": "top",
-          "preConditions": [],
-          "postConditions": []
+          "kind" : "Nonterminal",
+          "name" : "S",
+          "label" : "top",
+          "preConditions" : [ ],
+          "postConditions" : [ ]
         }
       ],
-      "recursion": "NON_REC",
-      "irecursion": "NON_REC",
-      "leftEnd": "",
-      "rightEnd": "",
-      "leftEnds": [],
-      "rightEnds": [],
-      "associativity": "UNDEFINED",
-      "precedence": -1,
-      "precedenceLevel": {
-        "lhs": 1,
-        "rhs": 1,
-        "undefined": -1,
-        "hasPrefixUnary": false,
-        "hasPostfixUnary": false,
-        "hasPrefixUnaryBelow": false,
-        "prefixUnaryBelow": [],
-        "hasPostfixUnaryBelow": false,
-        "postfixUnaryBelow": [],
-        "index": 1,
-        "containsAssociativityGroup": false,
-        "assoc_lhs": -1,
-        "assoc_rhs": -1
+      "recursion" : "NON_REC",
+      "irecursion" : "NON_REC",
+      "leftEnd" : "",
+      "rightEnd" : "",
+      "leftEnds" : [ ],
+      "rightEnds" : [ ],
+      "associativity" : "UNDEFINED",
+      "precedence" : -1,
+      "precedenceLevel" : {
+        "lhs" : 1,
+        "rhs" : 1,
+        "undefined" : -1,
+        "hasPrefixUnary" : false,
+        "hasPostfixUnary" : false,
+        "hasPrefixUnaryBelow" : false,
+        "prefixUnaryBelow" : [ ],
+        "hasPostfixUnaryBelow" : false,
+        "postfixUnaryBelow" : [ ],
+        "index" : 1,
+        "containsAssociativityGroup" : false,
+        "assoc_lhs" : -1,
+        "assoc_rhs" : -1
       },
-      "definition": {
-        "kind": "Start",
-        "name": "Start(S)",
-        "preConditions": [],
-        "postConditions": [],
-        "startSymbol": "S"
+      "definition" : {
+        "kind" : "Start",
+        "name" : "Start(S)",
+        "preConditions" : [ ],
+        "postConditions" : [ ],
+        "startSymbol" : "S"
       }
     }
   ],
-  "regularExpressionDefinitions": {},
-  "ebnfLefts": {},
-  "ebnfRights": {},
-  "startSymbols": [
+  "regularExpressionDefinitions" : { },
+  "ebnfLefts" : { },
+  "ebnfRights" : { },
+  "startSymbols" : [
     {
-      "kind": "Start",
-      "name": "Start(S)",
-      "preConditions": [],
-      "postConditions": [],
-      "startSymbol": "S"
+      "kind" : "Start",
+      "name" : "Start(S)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "S"
     },
     {
-      "kind": "Start",
-      "name": "Start(S)",
-      "preConditions": [],
-      "postConditions": [],
-      "startSymbol": "S"
+      "kind" : "Start",
+      "name" : "Start(S)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "S"
     }
   ],
-  "globals": {}
+  "globals" : { }
 }

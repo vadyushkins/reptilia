@@ -11,7 +11,7 @@ public class IntUtilsTest {
     public void testMerge() {
         long merge = IntUtils.merge(5, 6);
 
-        assertEquals((long) (5 * Math.pow(2, 32) + 6), merge);
+        assertEquals((long)(5 * Math.pow(2, 32) + 6), merge);
 
         int high = IntUtils.high(merge);
         int low = IntUtils.low(merge);

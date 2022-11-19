@@ -1,40 +1,40 @@
 {
-  "rules": [
+  "rules" : [
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "A",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "A",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [],
-                  "associativity": "UNDEFINED"
+                  "symbols" : [ ],
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     }
   ],
-  "regularExpressionDefinitions": {},
-  "literals": {},
-  "startSymbols": [
+  "regularExpressionDefinitions" : { },
+  "literals" : { },
+  "startSymbols" : [
     {
-      "kind": "Start",
-      "name": "Start(A)",
-      "preConditions": [],
-      "postConditions": [],
-      "startSymbol": "A"
+      "kind" : "Start",
+      "name" : "Start(A)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "A"
     }
   ],
-  "globals": {}
+  "globals" : { }
 }

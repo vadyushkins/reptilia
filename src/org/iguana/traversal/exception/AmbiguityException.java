@@ -23,6 +23,6 @@ public class AmbiguityException extends RuntimeException {
         int columnNumber = input.getColumnNumber(node.getRightExtent());
         String ambiguousSubstring = input.subString(node.getLeftExtent(), node.getRightExtent());
         return String.format("Ambiguity found for node %s at (%d, %d): '%s'", node, lineNumber, columnNumber,
-                ambiguousSubstring);
+            ambiguousSubstring);
     }
 }

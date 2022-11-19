@@ -39,9 +39,9 @@ public class IggyRegexCategoriesTest {
         Grammar grammar = IggyGrammar.getGrammar();
         IguanaTokenizer iguanaTokenizer = new IguanaTokenizer(IggyRegexCategories.getCategories());
         Input input = Input.fromString(
-                "// this is a comment\n" +
-                        "     " +
-                        "var a = 1");
+            "// this is a comment\n" +
+            "     " +
+            "var a = 1");
         iguanaTokenizer.prepare(input, 0);
 
         RuntimeGrammar runtimeGrammar = grammar.toRuntimeGrammar();
@@ -59,15 +59,15 @@ public class IggyRegexCategoriesTest {
         }
 
         List<Token> expected = Arrays.asList(
-                new Token(singleLineComment, "SingleLineComment", input, 0, 21),
-                new Token(whitespace, "WhiteSpace", input, 21, 26),
-                new Token(var, "Keyword", input, 26, 29),
-                new Token(whitespace, "WhiteSpace", input, 29, 30),
-                new Token(id, "LetterOrDigits", input, 30, 31),
-                new Token(whitespace, "WhiteSpace", input, 31, 32),
-                new Token(equals, "=", input, 32, 33),
-                new Token(whitespace, "WhiteSpace", input, 33, 34),
-                new Token(number, "Number", input, 34, 35)
+            new Token(singleLineComment, "SingleLineComment", input, 0, 21),
+            new Token(whitespace, "WhiteSpace", input, 21, 26),
+            new Token(var, "Keyword", input, 26, 29),
+            new Token(whitespace, "WhiteSpace", input, 29, 30),
+            new Token(id, "LetterOrDigits", input, 30, 31),
+            new Token(whitespace, "WhiteSpace", input, 31, 32),
+            new Token(equals, "=", input, 32, 33),
+            new Token(whitespace, "WhiteSpace", input, 33, 34),
+            new Token(number, "Number", input, 34, 35)
         );
 
         assertEquals(expected, actual);
@@ -85,17 +85,17 @@ public class IggyRegexCategoriesTest {
         tokenizer.prepare(input, 0);
 
         List<Token> expected = Arrays.asList(
-                new Token(id, "Identifier", input, 0, 3),
-                new Token(null, "Error", input, 3, 4),
-                new Token(null, "Error", input, 4, 5),
-                new Token(null, "Error", input, 5, 6),
-                new Token(null, "Error", input, 6, 7),
-                new Token(null, "Error", input, 7, 8),
-                new Token(floatNumber, "Float", input, 8, 11),
-                new Token(null, "Error", input, 11, 12),
-                new Token(id, "Identifier", input, 12, 15),
-                new Token(null, "Error", input, 15, 16),
-                new Token(floatNumber, "Float", input, 16, 19)
+            new Token(id, "Identifier", input, 0, 3),
+            new Token(null, "Error", input, 3, 4),
+            new Token(null, "Error", input, 4, 5),
+            new Token(null, "Error", input, 5, 6),
+            new Token(null, "Error", input, 6, 7),
+            new Token(null, "Error", input, 7, 8),
+            new Token(floatNumber, "Float", input, 8, 11),
+            new Token(null, "Error", input, 11, 12),
+            new Token(id, "Identifier", input, 12, 15),
+            new Token(null, "Error", input, 15, 16),
+            new Token(floatNumber, "Float", input, 16, 19)
         );
 
         List<Token> actual = new ArrayList<>();

@@ -54,213 +54,18 @@ public class ToSlotActionConditionVisitor implements IConditionVisitor<SlotActio
         this.factory = factory;
     }
 
-    private static SlotAction create(PositionalCondition condition) {
-        switch (condition.getType()) {
-            case START_OF_LINE:
-                return new SlotAction() {
-
-                    @Override
-                    public <T extends Result> boolean execute(
-                            Input input,
-                            BodyGrammarSlot slot,
-                            GSSNode<T> gssNode,
-                            int leftExtent,
-                            int rightExtent,
-                            IEvaluatorContext ctx
-                    ) {
-                        return !input.isStartOfLine(rightExtent);
-                    }
-
-                    @Override
-                    public String toString() {
-                        return condition.getType().getDescription();
-                    }
-                };
-
-
-            case END_OF_LINE:
-                return new SlotAction() {
-
-                    @Override
-                    public <T extends Result> boolean execute(
-                            Input input,
-                            BodyGrammarSlot slot,
-                            GSSNode<T> gssNode,
-                            int leftExtent,
-                            int rightExtent,
-                            IEvaluatorContext ctx
-                    ) {
-                        return !input.isEndOfLine(rightExtent);
-                    }
-
-                    @Override
-                    public String toString() {
-                        return condition.getType().getDescription();
-                    }
-                };
-
-            case END_OF_FILE:
-                return new SlotAction() {
-
-                    @Override
-                    public <T extends Result> boolean execute(
-                            Input input,
-                            BodyGrammarSlot slot,
-                            GSSNode<T> gssNode,
-                            int leftExtent,
-                            int rightExtent,
-                            IEvaluatorContext ctx
-                    ) {
-                        return !input.isEndOfFile(rightExtent);
-                    }
-
-                    @Override
-                    public String toString() {
-                        return condition.getType().getDescription();
-                    }
-                };
-
-
-            default:
-                throw new RuntimeException();
-        }
-    }
-
-    private static SlotAction create(RegularExpressionCondition condition, MatcherFactory factory) {
-
-        switch (condition.getType()) {
-            case FOLLOW:
-            case FOLLOW_IGNORE_LAYOUT:
-                return new SlotAction() {
-                    final Matcher matcher = factory.getMatcher(condition.getRegularExpression());
-
-                    @Override
-                    public <T extends Result> boolean execute(
-                            Input input,
-                            BodyGrammarSlot slot,
-                            GSSNode<T> gssNode,
-                            int leftExtent,
-                            int rightExtent,
-                            IEvaluatorContext ctx
-                    ) {
-                        return matcher.match(input, rightExtent) == -1;
-                    }
-
-                    @Override
-                    public String toString() {
-                        return condition.getType().getDescription();
-                    }
-                };
-
-            case NOT_FOLLOW:
-            case NOT_FOLLOW_IGNORE_LAYOUT:
-                return new SlotAction() {
-                    final Matcher matcher = factory.getMatcher(condition.getRegularExpression());
-
-                    @Override
-                    public <T extends Result> boolean execute(
-                            Input input,
-                            BodyGrammarSlot slot,
-                            GSSNode<T> gssNode,
-                            int leftExtent,
-                            int rightExtent,
-                            IEvaluatorContext ctx
-                    ) {
-                        return matcher.match(input, rightExtent) >= 0;
-                    }
-
-                    @Override
-                    public String toString() {
-                        return condition.getType().toString();
-                    }
-                };
-
-            case MATCH:
-                throw new RuntimeException("Unsupported");
-
-            case NOT_MATCH:
-                return new SlotAction() {
-                    final Matcher matcher = factory.getMatcher(condition.getRegularExpression());
-
-                    @Override
-                    public <T extends Result> boolean execute(
-                            Input input,
-                            BodyGrammarSlot slot,
-                            GSSNode<T> gssNode,
-                            int leftExtent,
-                            int rightExtent,
-                            IEvaluatorContext ctx
-                    ) {
-                        return matcher.match(input, gssNode.getInputIndex(), rightExtent);
-                    }
-
-                    @Override
-                    public String toString() {
-                        return condition.getType().toString();
-                    }
-                };
-
-            case NOT_PRECEDE:
-                return new SlotAction() {
-                    final Matcher matcher = factory.getBackwardsMatcher(condition.getRegularExpression());
-
-                    @Override
-                    public <T extends Result> boolean execute(
-                            Input input,
-                            BodyGrammarSlot slot,
-                            GSSNode<T> gssNode,
-                            int leftExtent,
-                            int rightExtent,
-                            IEvaluatorContext ctx
-                    ) {
-                        return matcher.match(input, rightExtent) >= 0;
-                    }
-
-                    @Override
-                    public String toString() {
-                        return condition.getType().toString();
-                    }
-                };
-
-            case PRECEDE:
-                return new SlotAction() {
-                    final Matcher matcher = factory.getBackwardsMatcher(condition.getRegularExpression());
-
-                    @Override
-                    public <T extends Result> boolean execute(
-                            Input input,
-                            BodyGrammarSlot slot,
-                            GSSNode<T> gssNode,
-                            int leftExtent,
-                            int rightExtent,
-                            IEvaluatorContext ctx
-                    ) {
-                        return matcher.match(input, rightExtent) == -1;
-                    }
-
-                    @Override
-                    public String toString() {
-                        return condition.getType().toString();
-                    }
-                };
-
-            default:
-                throw new RuntimeException("Unexpected error occurred.");
-        }
-    }
-
     @Override
     public SlotAction visit(DataDependentCondition condition) {
         return new SlotAction() {
 
             @Override
             public <T extends Result> boolean execute(
-                    Input input,
-                    BodyGrammarSlot slot,
-                    GSSNode<T> gssNode,
-                    int leftExtent,
-                    int rightExtent,
-                    IEvaluatorContext ctx
+                Input input,
+                BodyGrammarSlot slot,
+                GSSNode<T> gssNode,
+                int leftExtent,
+                int rightExtent,
+                IEvaluatorContext ctx
             ) {
                 Object value = condition.getExpression().interpret(ctx, input);
                 if (!(value instanceof Boolean))
@@ -280,9 +85,204 @@ public class ToSlotActionConditionVisitor implements IConditionVisitor<SlotActio
         return cachePositional.computeIfAbsent(condition, ToSlotActionConditionVisitor::create);
     }
 
+    private static SlotAction create(PositionalCondition condition) {
+        switch (condition.getType()) {
+            case START_OF_LINE:
+                return new SlotAction() {
+
+                    @Override
+                    public <T extends Result> boolean execute(
+                        Input input,
+                        BodyGrammarSlot slot,
+                        GSSNode<T> gssNode,
+                        int leftExtent,
+                        int rightExtent,
+                        IEvaluatorContext ctx
+                    ) {
+                        return !input.isStartOfLine(rightExtent);
+                    }
+
+                    @Override
+                    public String toString() {
+                        return condition.getType().getDescription();
+                    }
+                };
+
+
+            case END_OF_LINE:
+                return new SlotAction() {
+
+                    @Override
+                    public <T extends Result> boolean execute(
+                        Input input,
+                        BodyGrammarSlot slot,
+                        GSSNode<T> gssNode,
+                        int leftExtent,
+                        int rightExtent,
+                        IEvaluatorContext ctx
+                    ) {
+                        return !input.isEndOfLine(rightExtent);
+                    }
+
+                    @Override
+                    public String toString() {
+                        return condition.getType().getDescription();
+                    }
+                };
+
+            case END_OF_FILE:
+                return new SlotAction() {
+
+                    @Override
+                    public <T extends Result> boolean execute(
+                        Input input,
+                        BodyGrammarSlot slot,
+                        GSSNode<T> gssNode,
+                        int leftExtent,
+                        int rightExtent,
+                        IEvaluatorContext ctx
+                    ) {
+                        return !input.isEndOfFile(rightExtent);
+                    }
+
+                    @Override
+                    public String toString() {
+                        return condition.getType().getDescription();
+                    }
+                };
+
+
+            default:
+                throw new RuntimeException();
+        }
+    }
+
     @Override
     public SlotAction visit(RegularExpressionCondition condition) {
         return cacheRegular.computeIfAbsent(condition, c -> create(c, factory));
+    }
+
+    private static SlotAction create(RegularExpressionCondition condition, MatcherFactory factory) {
+
+        switch (condition.getType()) {
+            case FOLLOW:
+            case FOLLOW_IGNORE_LAYOUT:
+                return new SlotAction() {
+                    final Matcher matcher = factory.getMatcher(condition.getRegularExpression());
+
+                    @Override
+                    public <T extends Result> boolean execute(
+                        Input input,
+                        BodyGrammarSlot slot,
+                        GSSNode<T> gssNode,
+                        int leftExtent,
+                        int rightExtent,
+                        IEvaluatorContext ctx
+                    ) {
+                        return matcher.match(input, rightExtent) == -1;
+                    }
+
+                    @Override
+                    public String toString() {
+                        return condition.getType().getDescription();
+                    }
+                };
+
+            case NOT_FOLLOW:
+            case NOT_FOLLOW_IGNORE_LAYOUT:
+                return new SlotAction() {
+                    final Matcher matcher = factory.getMatcher(condition.getRegularExpression());
+
+                    @Override
+                    public <T extends Result> boolean execute(
+                        Input input,
+                        BodyGrammarSlot slot,
+                        GSSNode<T> gssNode,
+                        int leftExtent,
+                        int rightExtent,
+                        IEvaluatorContext ctx
+                    ) {
+                        return matcher.match(input, rightExtent) >= 0;
+                    }
+
+                    @Override
+                    public String toString() {
+                        return condition.getType().toString();
+                    }
+                };
+
+            case MATCH:
+                throw new RuntimeException("Unsupported");
+
+            case NOT_MATCH:
+                return new SlotAction() {
+                    final Matcher matcher = factory.getMatcher(condition.getRegularExpression());
+
+                    @Override
+                    public <T extends Result> boolean execute(
+                        Input input,
+                        BodyGrammarSlot slot,
+                        GSSNode<T> gssNode,
+                        int leftExtent,
+                        int rightExtent,
+                        IEvaluatorContext ctx
+                    ) {
+                        return matcher.match(input, gssNode.getInputIndex(), rightExtent);
+                    }
+
+                    @Override
+                    public String toString() {
+                        return condition.getType().toString();
+                    }
+                };
+
+            case NOT_PRECEDE:
+                return new SlotAction() {
+                    final Matcher matcher = factory.getBackwardsMatcher(condition.getRegularExpression());
+
+                    @Override
+                    public <T extends Result> boolean execute(
+                        Input input,
+                        BodyGrammarSlot slot,
+                        GSSNode<T> gssNode,
+                        int leftExtent,
+                        int rightExtent,
+                        IEvaluatorContext ctx
+                    ) {
+                        return matcher.match(input, rightExtent) >= 0;
+                    }
+
+                    @Override
+                    public String toString() {
+                        return condition.getType().toString();
+                    }
+                };
+
+            case PRECEDE:
+                return new SlotAction() {
+                    final Matcher matcher = factory.getBackwardsMatcher(condition.getRegularExpression());
+
+                    @Override
+                    public <T extends Result> boolean execute(
+                        Input input,
+                        BodyGrammarSlot slot,
+                        GSSNode<T> gssNode,
+                        int leftExtent,
+                        int rightExtent,
+                        IEvaluatorContext ctx
+                    ) {
+                        return matcher.match(input, rightExtent) == -1;
+                    }
+
+                    @Override
+                    public String toString() {
+                        return condition.getType().toString();
+                    }
+                };
+
+            default:
+                throw new RuntimeException("Unexpected error occurred.");
+        }
     }
 
 }

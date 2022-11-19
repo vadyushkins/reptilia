@@ -17,13 +17,13 @@ public interface GSSNode<T extends Result> {
     Object[] getData();
 
     void addGSSEdge(
-            Input input,
-            BodyGrammarSlot returnSlot,
-            int i,
-            GSSNode<T> destination,
-            T w,
-            Environment env,
-            IguanaRuntime<T> runtime
+        Input input,
+        BodyGrammarSlot returnSlot,
+        int i,
+        GSSNode<T> destination,
+        T w,
+        Environment env,
+        IguanaRuntime<T> runtime
     );
 
     boolean pop(Input input, EndGrammarSlot slot, T child, IguanaRuntime<T> runtime);

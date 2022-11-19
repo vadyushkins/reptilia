@@ -8,12 +8,12 @@ import java.util.Objects;
  * A rule is comprised of a list of priority levels, which are separated by &gt; in the textual grammar notation.
  * In the following example, there are two priority groups, one consisting of the alternative A B | C D,
  * and second of the alternative E F | G H.
- * <p>
+ *
  * S : A B
- * | C D
- * &gt; E F
- * | G H
- * ;
+ *   | C D
+ *   &gt; E F
+ *   | G H
+ *   ;
  */
 public class Rule {
 
@@ -83,8 +83,7 @@ public class Rule {
         private List<PriorityLevel> priorityLevels = new ArrayList<>();
         private LayoutStrategy layoutStrategy = LayoutStrategy.INHERITED;
 
-        private Builder() {
-        }
+        private Builder() { }
 
         public Builder(Rule rule) {
             this.head = rule.head;

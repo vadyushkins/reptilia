@@ -24,14 +24,14 @@ public class RangeMapTest {
         assertEquals(list("a"), map.get(1));
         assertEquals(list("a"), map.get(3));
         assertEquals(list("a"), map.get(7));
-        assertEquals(emptyList(), map.get(8));
+        assertEquals(emptyList(),   map.get(8));
     }
 
 
     /**
      * 1-----7                             a
-     * 9--------13                 b
-     * 17----21    c
+     *         9--------13                 b
+     *                         17----21    c
      */
     @Test
     public void testNonOverlapping1() {
@@ -45,7 +45,7 @@ public class RangeMapTest {
         assertEquals(list("a"), map.get(1));
         assertEquals(list("a"), map.get(3));
         assertEquals(list("a"), map.get(7));
-        assertEquals(emptyList(), map.get(8));
+        assertEquals(emptyList(),   map.get(8));
         assertEquals(list("b"), map.get(9));
         assertEquals(list("b"), map.get(11));
         assertEquals(list("b"), map.get(13));
@@ -58,8 +58,8 @@ public class RangeMapTest {
 
     /**
      * 1-1                 a
-     * 5-5           b
-     * 10-10    c
+     *       5-5           b
+     *            10-10    c
      */
     @Test
     public void testNonOverlapping2() {
@@ -73,7 +73,7 @@ public class RangeMapTest {
         assertEquals(list("a"), map.get(1));
         assertEquals(emptyList(), map.get(3));
         assertEquals(list("b"), map.get(5));
-        assertEquals(emptyList(), map.get(7));
+        assertEquals(emptyList(),   map.get(7));
         assertEquals(list("c"), map.get(10));
         assertEquals(emptyList(), map.get(11));
     }
@@ -81,8 +81,8 @@ public class RangeMapTest {
 
     /**
      * 1-----7                          a
-     * 5------------13              b
-     * 6---------------------21    c
+     *     5------------13              b
+     *      6---------------------21    c
      */
     @Test
     public void testOverlapping() {
@@ -107,8 +107,8 @@ public class RangeMapTest {
 
     /**
      * 1---5                a
-     * 5--8             b
-     * 8-------12    c
+     *     5--8             b
+     *        8-------12    c
      */
     @Test
     public void testOverlapping2() {
@@ -130,12 +130,12 @@ public class RangeMapTest {
     }
 
     /**
-     * 10-10                   a
-     * 5----------------13           b
-     * 10------13           c
+     *           10-10                   a
+     *     5----------------13           b
+     *              10------13           c
      * 1---5                             d
-     * 3-------------11                e
-     * 11---13           f
+     *   3-------------11                e
+     *                 11---13           f
      * 1---------------------------17    g
      */
     @Test
@@ -166,8 +166,8 @@ public class RangeMapTest {
     }
 
     /**
-     * 5----------------13           a
-     * 5----------------13           b
+     *     5----------------13           a
+     *     5----------------13           b
      */
     @Test
     public void testOverlapping4() {
@@ -185,12 +185,12 @@ public class RangeMapTest {
     }
 
     /**
-     * 5-7                                  a
-     * 9-11                             b
-     * 10---15                         c
-     * 18-20               d
-     * 19--23            e
-     * 21---25         f
+     *     5-7                                  a
+     *         9-11                             b
+     *          10---15                         c
+     *                      18-20               d
+     *                        19--23            e
+     *                          21---25         f
      */
     @Test
     public void testOverlapping5() {

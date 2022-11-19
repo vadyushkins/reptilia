@@ -51,15 +51,11 @@ public abstract class Expression extends AbstractAST {
         return false;
     }
 
-    public boolean isInteger() {
-        return false;
-    }
-
-    public boolean isString() {
-        return false;
-    }
-
     public static abstract class Boolean extends Expression {
+
+        public boolean isBoolean() {
+            return true;
+        }
 
         static final Boolean TRUE = new Boolean() {
 
@@ -78,6 +74,7 @@ public abstract class Expression extends AbstractAST {
                 return visitor.visit(this);
             }
         };
+
         static final Boolean FALSE = new Boolean() {
 
             @Override
@@ -97,10 +94,10 @@ public abstract class Expression extends AbstractAST {
 
         };
 
-        public boolean isBoolean() {
-            return true;
-        }
+    }
 
+    public boolean isInteger() {
+        return false;
     }
 
     public static class Integer extends Expression {
@@ -185,6 +182,10 @@ public abstract class Expression extends AbstractAST {
             return visitor.visit(this);
         }
 
+    }
+
+    public boolean isString() {
+        return false;
     }
 
     public static class String extends Expression {
@@ -310,7 +311,7 @@ public abstract class Expression extends AbstractAST {
         @Override
         public java.lang.String toString() {
             return "(" + listToString(Arrays.stream(elements).map(Object::toString)
-                    .collect(Collectors.toList()), ",") + ")";
+                .collect(Collectors.toList()), ",") + ")";
         }
 
         @Override
@@ -520,7 +521,7 @@ public abstract class Expression extends AbstractAST {
         @Override
         public java.lang.String toString() {
             return i != -1 ? java.lang.String.format("%s:%s = %s", id, i, exp)
-                    : java.lang.String.format("%s = %s", id, exp);
+                           : java.lang.String.format("%s = %s", id, exp);
         }
 
         @Override
@@ -671,9 +672,9 @@ public abstract class Expression extends AbstractAST {
             if (!(obj instanceof OrIndent)) return false;
             OrIndent other = (OrIndent) obj;
             return this.index.equals(other.index) &&
-                    this.ind.equals(other.ind) &&
-                    this.first.equals(other.first) &&
-                    this.lExt.equals(other.lExt);
+                this.ind.equals(other.ind) &&
+                this.first.equals(other.first) &&
+                this.lExt.equals(other.lExt);
         }
 
         @Override
@@ -743,7 +744,7 @@ public abstract class Expression extends AbstractAST {
 //			return returnIndex? "(" +first + " && " + lExt + " - " + index + " == 0)?" + index
 //					          : first + " && " + lExt + " - " + index + " == 0";
             return returnIndex ? java.lang.String.format("g(%s,%s,%s,%s)", index, first, lExt, 1)
-                    : java.lang.String.format("g(%s,%s,%s,%s)", index, first, lExt, 0);
+                : java.lang.String.format("g(%s,%s,%s,%s)", index, first, lExt, 0);
         }
 
         @Override
@@ -752,8 +753,8 @@ public abstract class Expression extends AbstractAST {
             if (!(obj instanceof AndIndent)) return false;
             AndIndent other = (AndIndent) obj;
             return this.index.equals(other.index) &&
-                    this.first.equals(other.first) &&
-                    this.lExt.equals(other.lExt);
+                this.first.equals(other.first) &&
+                this.lExt.equals(other.lExt);
         }
 
         @Override
@@ -799,8 +800,8 @@ public abstract class Expression extends AbstractAST {
             if (!(obj instanceof BinaryExpression)) return false;
             BinaryExpression other = (BinaryExpression) obj;
             return this.lhs.equals(other.lhs) &&
-                    this.rhs.equals(other.rhs) &&
-                    Objects.equals(this.symbolName, other.symbolName);
+                   this.rhs.equals(other.rhs) &&
+                   Objects.equals(this.symbolName, other.symbolName);
         }
 
         @Override
@@ -1281,7 +1282,7 @@ public abstract class Expression extends AbstractAST {
             } // In case of recognizer, we don't have a node.
             else if (value instanceof RecognizerResult) {
                 return input.subString(((RecognizerResult) value).getLeftExtent(),
-                        ((RecognizerResult) value).getRightExtent());
+                    ((RecognizerResult) value).getRightExtent());
             } else {
                 throw new UnexpectedTypeOfArgumentException(this);
             }
@@ -1290,7 +1291,7 @@ public abstract class Expression extends AbstractAST {
         @Override
         public java.lang.String toString() {
             return i == -1 ? java.lang.String.format("%s.yield", label)
-                    : java.lang.String.format("%s:%d.yield", label, i);
+                           : java.lang.String.format("%s:%d.yield", label, i);
         }
 
         @Override
@@ -1456,8 +1457,8 @@ public abstract class Expression extends AbstractAST {
             if (!(obj instanceof IfThenElse)) return false;
             IfThenElse other = (IfThenElse) obj;
             return this.condition.equals(other.condition) &&
-                    this.thenPart.equals(other.thenPart) &&
-                    this.elsePart.equals(other.elsePart);
+                this.thenPart.equals(other.thenPart) &&
+                this.elsePart.equals(other.elsePart);
         }
 
         @Override

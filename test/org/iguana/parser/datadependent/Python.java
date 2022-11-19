@@ -358,7 +358,7 @@
 //			.addRule(Rule.withHead(new Nonterminal.Builder("HexInteger").build()).addSymbol(Sequence.builder(Character.builder(48).build()).build()).addSymbol(Alt.builder(Sequence.builder(Character.builder(120).build()).build(), Sequence.builder(Character.builder(88).build()).build()).build()).addSymbol(new Plus.Builder(new Nonterminal.Builder("HexDigit").build()).build()).build())
 //			//Power ::= Atom Trailer* ("**" Factor)?
 //			.addRule(Rule.withHead(new Nonterminal.Builder("Power").build()).addSymbol(new Nonterminal.Builder("Atom").build()).addSymbol(Star.builder(new Nonterminal.Builder("Trailer").build()).build()).addSymbol(org.iguana.regex.Opt.builder(Sequence.builder(Sequence.builder(Character.builder(42).build(), Character.builder(42).build()).build(), new Nonterminal.Builder("Factor").build()).build()).build()).build())
-//			//NewLine ::= 
+//			//NewLine ::= \u000A
 //			.addRule(Rule.withHead(new Nonterminal.Builder("NewLine").build()).addSymbol(Character.builder(10).build()).build())
 //			//YieldStmt ::= YieldExpr
 //			.addRule(Rule.withHead(new Nonterminal.Builder("YieldStmt").build()).addSymbol(new Nonterminal.Builder("YieldExpr").build()).build())

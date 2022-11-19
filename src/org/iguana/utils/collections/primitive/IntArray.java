@@ -2,11 +2,15 @@ package org.iguana.utils.collections.primitive;
 
 public class IntArray implements IntIterable {
 
-    public static final IntArray EMPTY = new IntArray(new int[]{}, 0, 0);
+    public static final IntArray EMPTY = new IntArray(new int[] {}, 0, 0);
 
     private final int[] arr;
     private final int start; // including
     private final int end;   // excluding
+
+    public static IntArray of(int...arr) {
+        return new IntArray(arr);
+    }
 
     public IntArray(int[] arr) {
         this(arr, 0, arr.length);
@@ -18,10 +22,6 @@ public class IntArray implements IntIterable {
         this.arr = arr;
         this.start = start;
         this.end = end;
-    }
-
-    public static IntArray of(int... arr) {
-        return new IntArray(arr);
     }
 
     public int size() {
@@ -51,16 +51,8 @@ public class IntArray implements IntIterable {
     public IntIterator iterator() {
         return new IntIterator() {
             int i = start;
-
-            @Override
-            public boolean hasNext() {
-                return i < end;
-            }
-
-            @Override
-            public int next() {
-                return arr[i++];
-            }
+            @Override public boolean hasNext() { return i < end; }
+            @Override public int next() { return arr[i++]; }
         };
     }
 

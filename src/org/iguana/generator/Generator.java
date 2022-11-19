@@ -38,6 +38,7 @@ public abstract class Generator {
     }
 
     /**
+     *
      * @param f a function from the nonterminal name to the generated string
      */
     protected void generateTypes(StringBuilder sb, Function<String, String> f) {
@@ -54,7 +55,7 @@ public abstract class Generator {
                     if (alternative.getLabel() == null)
                         throw new RuntimeException("All alternatives must have a label: " + alternative);
                     String nodeName = alternative.getLabel() + nonterminalName.substring(0, 1).toUpperCase() +
-                            nonterminalName.substring(1);
+                                      nonterminalName.substring(1);
                     sb.append(f.apply(nodeName));
                 }
             }

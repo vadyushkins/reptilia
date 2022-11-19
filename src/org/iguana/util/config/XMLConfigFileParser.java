@@ -58,7 +58,7 @@ public class XMLConfigFileParser implements ConfigFileParser {
 
                 case "EnvironmentImpl":
                     builder.setEnvironmentImpl(
-                            Configuration.EnvironmentImpl.valueOf(node.getTextContent().toUpperCase()));
+                        Configuration.EnvironmentImpl.valueOf(node.getTextContent().toUpperCase()));
                     break;
             }
         }

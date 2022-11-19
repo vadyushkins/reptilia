@@ -58,34 +58,23 @@ import static org.iguana.grammar.GrammarGraph.epsilonSlot;
 
 public class GrammarGraphBuilder {
 
-    private static final MatcherFactory matcherFactory = new DFAMatcherFactory();
     private final Map<Nonterminal, NonterminalGrammarSlot> nonterminalsMap;
+
     private final Map<Terminal, TerminalGrammarSlot> terminalsMap;
+
     private final List<BodyGrammarSlot> bodyGrammarSlots;
+
+    private FirstFollowSets firstFollow;
+
     private final RuntimeGrammar grammar;
 
     private final Configuration config;
 
     private final Map<Integer, Map<String, Integer>> mapping;
-    private FirstFollowSets firstFollow;
+
     private Map<String, Integer> current;
 
-    private GrammarGraphBuilder(RuntimeGrammar grammar, Configuration config) {
-        if (config.getEnvImpl() == EnvironmentImpl.ARRAY || config.getEnvImpl() == EnvironmentImpl.INT_ARRAY) {
-            // TODO: move this transformation to IguanaRecognizer
-            VarToInt transformer = new VarToInt();
-            this.grammar = transformer.transform(grammar);
-            this.mapping = transformer.getMapping();
-        } else {
-            this.grammar = grammar;
-            this.mapping = new HashMap<>();
-        }
-
-        this.config = config;
-        this.nonterminalsMap = new LinkedHashMap<>();
-        this.terminalsMap = new LinkedHashMap<>();
-        this.bodyGrammarSlots = new ArrayList<>();
-    }
+    private static final MatcherFactory matcherFactory = new DFAMatcherFactory();
 
     public static GrammarGraph from(RuntimeGrammar grammar) {
         return from(grammar, Configuration.load());
@@ -99,15 +88,6 @@ public class GrammarGraphBuilder {
         grammarSlots.addAll(builder.terminalsMap.values());
         grammarSlots.addAll(builder.bodyGrammarSlots);
         return new GrammarGraph(grammarSlots, builder.nonterminalsMap, grammar.getGlobals());
-    }
-
-    static private void validateNumberOfArguments(Nonterminal nonterminal, Expression[] arguments) {
-        List<String> parameters = nonterminal.getParameters();
-        if ((parameters == null && arguments == null) ||
-                (Objects.requireNonNull(parameters).size() == Objects.requireNonNull(arguments).length))
-            return;
-
-        throw new IncorrectNumberOfArgumentsException(nonterminal, arguments);
     }
 
     private void convert() {
@@ -126,6 +106,23 @@ public class GrammarGraphBuilder {
         }
 
         nonterminals.forEach(this::setFirstFollowTests);
+    }
+
+    private GrammarGraphBuilder(RuntimeGrammar grammar, Configuration config) {
+        if (config.getEnvImpl() == EnvironmentImpl.ARRAY || config.getEnvImpl() == EnvironmentImpl.INT_ARRAY) {
+            // TODO: move this transformation to IguanaRecognizer
+            VarToInt transformer = new VarToInt();
+            this.grammar = transformer.transform(grammar);
+            this.mapping = transformer.getMapping();
+        } else {
+            this.grammar = grammar;
+            this.mapping = new HashMap<>();
+        }
+
+        this.config = config;
+        this.nonterminalsMap = new LinkedHashMap<>();
+        this.terminalsMap = new LinkedHashMap<>();
+        this.bodyGrammarSlots = new ArrayList<>();
     }
 
     public NonterminalGrammarSlot getHead(Nonterminal start) {
@@ -153,8 +150,8 @@ public class GrammarGraphBuilder {
     }
 
     private RangeMap<BodyGrammarSlot> getLookAheadTest(
-            Nonterminal nonterminal,
-            NonterminalGrammarSlot nonterminalSlot
+        Nonterminal nonterminal,
+        NonterminalGrammarSlot nonterminalSlot
     ) {
         if (config.getLookAheadCount() == 0)
             return i -> nonterminalSlot.getFirstSlots();
@@ -197,96 +194,6 @@ public class GrammarGraphBuilder {
             rule2graph.nextSymbol();
     }
 
-    private TerminalTransition getTerminalTransition(TerminalGrammarSlot slot,
-                                                     BodyGrammarSlot origin,
-                                                     BodyGrammarSlot dest,
-                                                     List<Condition> preConditions,
-                                                     List<Condition> postConditions) {
-
-        return new TerminalTransition(slot, origin, dest, getConditions(preConditions), getConditions(postConditions));
-    }
-
-    private TerminalGrammarSlot getTerminalGrammarSlot(Terminal t) {
-        return terminalsMap.computeIfAbsent(t, k -> new TerminalGrammarSlot(t, matcherFactory));
-    }
-
-    private NonterminalGrammarSlot getNonterminalSlot(Nonterminal nonterminal) {
-        NonterminalGrammarSlot ntSlot = nonterminalsMap.computeIfAbsent(nonterminal,
-                k -> new NonterminalGrammarSlot(nonterminal));
-        return ntSlot;
-    }
-
-    private BodyGrammarSlot getFirstGrammarSlot(RuntimeRule rule, NonterminalGrammarSlot nonterminal) {
-        BodyGrammarSlot slot;
-
-        if (rule.size() == 0) {
-            slot = new EpsilonGrammarSlot(rule.getPosition(0, 0), nonterminal, epsilonSlot, ConditionsFactory.DEFAULT);
-        } else {
-            // TODO: This is not a final solution; in particular,
-            //       not any precondition of the first symbol (due to labels) can currently be moved to the first slot.
-            List<Condition> preConditions = new ArrayList<>(rule.symbolAt(0).getPreConditions());
-
-            slot = new BodyGrammarSlot(rule.getPosition(0, 0), rule.symbolAt(0).getLabel(), null, null,
-                    getConditions(preConditions), FollowTest.DEFAULT);
-        }
-        bodyGrammarSlots.add(slot);
-        return slot;
-    }
-
-    private BodyGrammarSlot getBodyGrammarSlot(
-            RuntimeRule rule,
-            int i,
-            Position position,
-            String label,
-            String variable,
-            Set<String> state
-    ) {
-        assert (i - 1) < rule.size();
-
-        BodyGrammarSlot slot;
-        if (current != null)
-            slot = new BodyGrammarSlot(position, label, (label != null && !label.isEmpty()) ? current.get(label) : -1,
-                    variable, (variable != null && !variable.isEmpty()) ? current.get(variable) : -1, state,
-                    getConditions(rule.symbolAt(i - 1).getPostConditions()), getFollowTest(rule, i));
-        else
-            slot = new BodyGrammarSlot(position, label, variable, state,
-                    getConditions(rule.symbolAt(i - 1).getPostConditions()), getFollowTest(rule, i));
-
-        bodyGrammarSlots.add(slot);
-        return slot;
-    }
-
-    private BodyGrammarSlot getEndSlot(
-            RuntimeRule rule,
-            int i,
-            Position position,
-            NonterminalGrammarSlot nonterminal,
-            String label,
-            String variable,
-            Set<String> state
-    ) {
-        assert i == rule.size();
-
-        BodyGrammarSlot slot;
-        if (current != null)
-            slot = new EndGrammarSlot(position, nonterminal, label,
-                    (label != null && !label.isEmpty()) ? current.get(label) : -1,
-                    variable, (variable != null && !variable.isEmpty()) ? current.get(variable) : -1, state,
-                    getConditions(rule.symbolAt(i - 1).getPostConditions()), getFollowTest(rule, i));
-        else
-            slot = new EndGrammarSlot(position, nonterminal, label, variable, state,
-                    getConditions(rule.symbolAt(i - 1).getPostConditions()), getFollowTest(rule, i));
-
-        bodyGrammarSlots.add(slot);
-        return slot;
-    }
-
-    private Conditions getConditions(List<Condition> conditions) {
-        if (conditions.isEmpty())
-            return ConditionsFactory.DEFAULT;
-        return ConditionsFactory.getConditions(conditions, matcherFactory);
-    }
-
     private class GrammarGraphSymbolVisitor extends AbstractGrammarGraphSymbolVisitor<Void> {
 
         private final NonterminalGrammarSlot head;
@@ -319,10 +226,10 @@ public class GrammarGraphBuilder {
             BodyGrammarSlot slot;
             if (i == rule.size() - 1 && j == -1)
                 slot = getEndSlot(rule, i + 1, rule.getPosition(i + 1), head, symbol.getLabel(), symbol.getVariable(),
-                        symbol.getState());
+                    symbol.getState());
             else
                 slot = getBodyGrammarSlot(rule, i + 1, rule.getPosition(i + 1), symbol.getLabel(), symbol.getVariable(),
-                        symbol.getState());
+                    symbol.getState());
 
             Expression[] arguments = symbol.getArguments();
 
@@ -330,7 +237,7 @@ public class GrammarGraphBuilder {
 
             List<Condition> preConditions = (i == 0 && j == -1) ? new ArrayList<>() : symbol.getPreConditions();
             setTransition(
-                    new NonterminalTransition(nonterminalSlot, currentSlot, slot, arguments, getConditions(preConditions)));
+                new NonterminalTransition(nonterminalSlot, currentSlot, slot, arguments, getConditions(preConditions)));
 
             currentSlot = slot;
 
@@ -391,7 +298,7 @@ public class GrammarGraphBuilder {
             else {
                 if (rule.size() == 1)
                     done = new EpsilonGrammarSlot(rule.getPosition(i + 1), head, epsilonSlot,
-                            ConditionsFactory.DEFAULT);
+                        ConditionsFactory.DEFAULT);
                 else
                     done = getEndSlot(rule, i + 1, rule.getPosition(i + 1), head, null, null, null);
             }
@@ -416,7 +323,7 @@ public class GrammarGraphBuilder {
 
             List<Condition> preConditions = (i == 0 && j == -1) ? Collections.emptyList() : symbol.getPreConditions();
             TerminalTransition transition = getTerminalTransition(terminalSlot, currentSlot, slot, preConditions,
-                    symbol.getPostConditions());
+                symbol.getPostConditions());
             setTransition(transition);
             currentSlot = slot;
 
@@ -429,9 +336,9 @@ public class GrammarGraphBuilder {
         private void visitSymbol(Symbol symbol) {
 
             if (symbol instanceof Nonterminal ||
-                    symbol instanceof Terminal ||
-                    symbol instanceof Error ||
-                    symbol instanceof Return) { // TODO: I think this can be unified
+                symbol instanceof Terminal ||
+                symbol instanceof Error ||
+                symbol instanceof Return) { // TODO: I think this can be unified
                 symbol.accept(this);
                 return;
             }
@@ -441,7 +348,7 @@ public class GrammarGraphBuilder {
             if (symbol.getLabel() != null) {
                 BodyGrammarSlot declared = getBodyGrammarSlot(rule, i + 1, rule.getPosition(i + 1), null, null, null);
                 EpsilonTransition transition = new EpsilonTransition(Type.DECLARE_LABEL, symbol.getLabel(),
-                        preconditions, currentSlot, declared);
+                    preconditions, currentSlot, declared);
                 setTransition(transition);
                 currentSlot = declared;
             } else {
@@ -466,7 +373,7 @@ public class GrammarGraphBuilder {
                     stored = getBodyGrammarSlot(rule, i + 1, rule.getPosition(i + 1), null, null, null);
 
                 EpsilonTransition transition = new EpsilonTransition(Type.STORE_LABEL, symbol.getLabel(),
-                        getConditions(symbol.getPostConditions()), currentSlot, stored);
+                    getConditions(symbol.getPostConditions()), currentSlot, stored);
                 setTransition(transition);
                 currentSlot = stored;
             } else {
@@ -478,7 +385,7 @@ public class GrammarGraphBuilder {
                     checked = getBodyGrammarSlot(rule, i + 1, rule.getPosition(i + 1), null, null, null);
 
                 EpsilonTransition transition = new EpsilonTransition(getConditions(symbol.getPostConditions()),
-                        currentSlot, checked);
+                    currentSlot, checked);
                 setTransition(transition);
                 currentSlot = checked;
             }
@@ -489,5 +396,104 @@ public class GrammarGraphBuilder {
             transition.destination().setInTransition(transition);
         }
 
+    }
+
+    private TerminalTransition getTerminalTransition(TerminalGrammarSlot slot,
+                                                     BodyGrammarSlot origin,
+                                                     BodyGrammarSlot dest,
+                                                     List<Condition> preConditions,
+                                                     List<Condition> postConditions) {
+
+        return new TerminalTransition(slot, origin, dest, getConditions(preConditions), getConditions(postConditions));
+    }
+
+    private TerminalGrammarSlot getTerminalGrammarSlot(Terminal t) {
+        return terminalsMap.computeIfAbsent(t, k -> new TerminalGrammarSlot(t, matcherFactory));
+    }
+
+    private NonterminalGrammarSlot getNonterminalSlot(Nonterminal nonterminal) {
+        NonterminalGrammarSlot ntSlot = nonterminalsMap.computeIfAbsent(nonterminal,
+                k -> new NonterminalGrammarSlot(nonterminal));
+        return ntSlot;
+    }
+
+    private BodyGrammarSlot getFirstGrammarSlot(RuntimeRule rule, NonterminalGrammarSlot nonterminal) {
+        BodyGrammarSlot slot;
+
+        if (rule.size() == 0) {
+            slot = new EpsilonGrammarSlot(rule.getPosition(0, 0), nonterminal, epsilonSlot, ConditionsFactory.DEFAULT);
+        } else {
+            // TODO: This is not a final solution; in particular,
+            //       not any precondition of the first symbol (due to labels) can currently be moved to the first slot.
+            List<Condition> preConditions = new ArrayList<>(rule.symbolAt(0).getPreConditions());
+
+            slot = new BodyGrammarSlot(rule.getPosition(0, 0), rule.symbolAt(0).getLabel(), null, null,
+                getConditions(preConditions), FollowTest.DEFAULT);
+        }
+        bodyGrammarSlots.add(slot);
+        return slot;
+    }
+
+    private BodyGrammarSlot getBodyGrammarSlot(
+        RuntimeRule rule,
+        int i,
+        Position position,
+        String label,
+        String variable,
+        Set<String> state
+    ) {
+        assert (i - 1) < rule.size();
+
+        BodyGrammarSlot slot;
+        if (current != null)
+            slot = new BodyGrammarSlot(position, label, (label != null && !label.isEmpty()) ? current.get(label) : -1,
+                variable, (variable != null && !variable.isEmpty()) ? current.get(variable) : -1, state,
+                getConditions(rule.symbolAt(i - 1).getPostConditions()), getFollowTest(rule, i));
+        else
+            slot = new BodyGrammarSlot(position, label, variable, state,
+                getConditions(rule.symbolAt(i - 1).getPostConditions()), getFollowTest(rule, i));
+
+        bodyGrammarSlots.add(slot);
+        return slot;
+    }
+
+    private BodyGrammarSlot getEndSlot(
+        RuntimeRule rule,
+        int i,
+        Position position,
+        NonterminalGrammarSlot nonterminal,
+        String label,
+        String variable,
+        Set<String> state
+    ) {
+        assert i == rule.size();
+
+        BodyGrammarSlot slot;
+        if (current != null)
+            slot = new EndGrammarSlot(position, nonterminal, label,
+                (label != null && !label.isEmpty()) ? current.get(label) : -1,
+                variable, (variable != null && !variable.isEmpty()) ? current.get(variable) : -1, state,
+                getConditions(rule.symbolAt(i - 1).getPostConditions()), getFollowTest(rule, i));
+        else
+            slot = new EndGrammarSlot(position, nonterminal, label, variable, state,
+                getConditions(rule.symbolAt(i - 1).getPostConditions()), getFollowTest(rule, i));
+
+        bodyGrammarSlots.add(slot);
+        return slot;
+    }
+
+    static private void validateNumberOfArguments(Nonterminal nonterminal, Expression[] arguments) {
+        List<String> parameters = nonterminal.getParameters();
+        if ((parameters == null && arguments == null) ||
+            (Objects.requireNonNull(parameters).size() == Objects.requireNonNull(arguments).length))
+            return;
+
+        throw new IncorrectNumberOfArgumentsException(nonterminal, arguments);
+    }
+
+    private Conditions getConditions(List<Condition> conditions) {
+        if (conditions.isEmpty())
+            return ConditionsFactory.DEFAULT;
+        return ConditionsFactory.getConditions(conditions, matcherFactory);
     }
 }

@@ -5,20 +5,13 @@ import java.util.Arrays;
 
 public abstract class AbstractInput implements Input {
 
+    private int[] lineStarts;
     private final int lineCount;
     private final URI uri;
-    private int[] lineStarts;
 
     public AbstractInput(int lineCount, URI uri) {
         this.lineCount = lineCount;
         this.uri = uri;
-    }
-
-    private static void checkBounds(int index, int length) {
-        if (index < 0 || index >= length) {
-            throw new IndexOutOfBoundsException(
-                    "index must be greater than or equal to 0 and smaller than the input length (" + length + ")");
-        }
     }
 
     @Override
@@ -76,6 +69,13 @@ public abstract class AbstractInput implements Input {
     private void checkLineStartsInitialized() {
         if (lineStarts == null) {
             lineStarts = calculateLineLengths(getLineCount());
+        }
+    }
+
+    private static void checkBounds(int index, int length) {
+        if (index < 0 || index >= length) {
+            throw new IndexOutOfBoundsException(
+                "index must be greater than or equal to 0 and smaller than the input length (" + length + ")");
         }
     }
 }

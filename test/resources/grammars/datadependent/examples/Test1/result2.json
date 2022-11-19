@@ -1,6 +1,6 @@
 {
-  "inputIndex": 24,
-  "lineNumber": 2,
-  "columnNumber": 18,
-  "description": "[n.yield == s]"
+  "inputIndex" : 24,
+  "lineNumber" : 2,
+  "columnNumber" : 18,
+  "description" : "[n.yield == s]"
 }

@@ -54,48 +54,6 @@ public class Grammar {
         this.name = builder.name;
     }
 
-    public static Grammar fromJsonFile(String path) {
-        try {
-            return JsonSerializer.deserialize(Files.newInputStream(new File(path).toPath()), Grammar.class);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static Set<String> getTopLevelRegularExpressions(Grammar grammar) {
-        Set<String> references = new LinkedHashSet<>();
-        for (Rule rule : grammar.getRules()) {
-            for (PriorityLevel priorityLevel : rule.getPriorityLevels()) {
-                for (Alternative alternative : priorityLevel.getAlternatives()) {
-                    for (Sequence seq : alternative.seqs()) {
-                        for (Symbol symbol : seq.getSymbols()) {
-                            GatherTopLevelRegularExpressionsVisitor visitor =
-                                    new GatherTopLevelRegularExpressionsVisitor(grammar);
-                            symbol.accept(visitor);
-                            references.addAll(visitor.references);
-                        }
-                    }
-                }
-            }
-        }
-        return references;
-    }
-
-    private static void addAll(List<Symbol> symbols, List<Symbol> rest) {
-        int i = 0;
-        while (i < rest.size()) {
-            Symbol current = rest.get(i);
-            if (i < rest.size() - 1 && rest.get(i + 1) instanceof CodeHolder) {
-                CodeHolder holder = (CodeHolder) rest.get(i + 1);
-                symbols.add(Code.code(current, holder.statement));
-                i += 2;
-            } else {
-                symbols.add(current);
-                i += 1;
-            }
-        }
-    }
-
     public List<Rule> getRules() {
         return rules;
     }
@@ -157,7 +115,7 @@ public class Grammar {
                     newLayout = ((Nonterminal) newLayout).copy().setNodeType(NonterminalNodeType.Layout).build();
                 } else {
                     throw new RuntimeException("Layout can only be an instance of a terminal or nonterminal, but was " +
-                            newLayout.getClass().getSimpleName());
+                                                   newLayout.getClass().getSimpleName());
                 }
             }
 
@@ -251,13 +209,21 @@ public class Grammar {
         }
     }
 
+    public static Grammar fromJsonFile(String path) {
+        try {
+            return JsonSerializer.deserialize(Files.newInputStream(new File(path).toPath()), Grammar.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof Grammar)) return false;
         Grammar other = (Grammar) obj;
         return this.rules.equals(other.rules) && Objects.equals(this.layout, other.layout)
-                && Objects.equals(this.startSymbols, other.startSymbols);
+            && Objects.equals(this.startSymbols, other.startSymbols);
     }
 
     @Override
@@ -273,195 +239,6 @@ public class Grammar {
         }
         sb.delete(sb.length() - 1, sb.length());
         return sb.toString();
-    }
-
-    private List<RuntimeRule> getRules(
-            Rule highLevelRule,
-            Map<String, Set<String>> leftEnds,
-            Map<String, Set<String>> rightEnds,
-            Set<String> ebnfs
-    ) {
-        List<PriorityLevel> priorityLevels = highLevelRule.getPriorityLevels();
-
-        List<RuntimeRule> rules = new ArrayList<>();
-        PrecedenceLevel level = PrecedenceLevel.getFirst();
-        Nonterminal head = highLevelRule.getHead();
-
-        ListIterator<PriorityLevel> altsIt = priorityLevels.listIterator(priorityLevels.size());
-        while (altsIt.hasPrevious()) {
-            PriorityLevel group = altsIt.previous();
-            ListIterator<Alternative> altIt = group.getAlternatives().listIterator(group.getAlternatives().size());
-            while (altIt.hasPrevious()) {
-                Alternative alternative = altIt.previous();
-                if (alternative.rest() != null) { // Associativity group
-                    AssociativityGroup assocGroup = new AssociativityGroup(alternative.associativity, level);
-                    List<Sequence> sequences = new ArrayList<>(Arrays.asList(alternative.first()));
-                    sequences.addAll(alternative.rest());
-                    ListIterator<Sequence> seqIt = sequences.listIterator(sequences.size());
-                    while (seqIt.hasPrevious()) {
-                        Sequence sequence = seqIt.previous();
-                        RuntimeRule rule = getRule(head, sequence.getSymbols(), sequence.associativity, sequence.label,
-                                highLevelRule.getLayoutStrategy(), leftEnds, rightEnds, ebnfs);
-                        int precedence = assocGroup.getPrecedence(rule);
-                        rule = rule.copy()
-                                .setPrecedence(precedence)
-                                .setPrecedenceLevel(level)
-                                .setAssociativityGroup(assocGroup)
-                                .setAttributes(sequence.getAttributes())
-                                .build();
-                        rules.add(rule);
-                    }
-                    assocGroup.done();
-                    level.containsAssociativityGroup(assocGroup.getLhs(), assocGroup.getRhs());
-                } else {
-                    List<Symbol> symbols = new ArrayList<>();
-                    if (alternative.first().isEmpty()) { // Empty alternative
-                        Sequence sequence = alternative.first();
-                        String label = sequence.label;
-                        RuntimeRule rule = getRule(head, symbols, Associativity.UNDEFINED, label,
-                                highLevelRule.getLayoutStrategy(), leftEnds, rightEnds, ebnfs);
-                        int precedence = level.getPrecedence(rule);
-                        rule = rule.copy()
-                                .setPrecedence(precedence)
-                                .setPrecedenceLevel(level)
-                                .setAttributes(sequence.getAttributes())
-                                .build();
-                        rules.add(rule);
-                    } else {
-                        Sequence sequence = alternative.first();
-                        symbols.add(sequence.first());
-                        if (sequence.rest() != null)
-                            addAll(symbols, sequence.rest());
-                        RuntimeRule rule = getRule(head, symbols, sequence.associativity, sequence.label,
-                                highLevelRule.getLayoutStrategy(), leftEnds, rightEnds, ebnfs);
-                        int precedence = level.getPrecedence(rule);
-                        rule = rule.copy()
-                                .setPrecedence(precedence)
-                                .setPrecedenceLevel(level)
-                                .setAttributes(sequence.getAttributes())
-                                .build();
-                        rules.add(rule);
-                    }
-                }
-            }
-            level.setUndefinedIfNeeded();
-            level = level.getNext();
-        }
-        level.done();
-        Collections.reverse(rules);
-        return rules;
-    }
-
-    private RuntimeRule getRule(
-            Nonterminal head,
-            List<Symbol> body,
-            Associativity associativity,
-            String label,
-            LayoutStrategy layoutStrategy,
-            Map<String, Set<String>> leftEnds,
-            Map<String, Set<String>> rightEnds,
-            Set<String> ebnfs
-    ) {
-        boolean isLeft = body.size() != 0 && body.get(0).accept(
-                new IsRecursive(head, Recursion.LEFT_REC, leftEnds, ebnfs));
-        boolean isRight = body.size() != 0 && body.get(body.size() - 1).accept(
-                new IsRecursive(head, Recursion.RIGHT_REC, leftEnds, ebnfs));
-
-        IsRecursive visitor = new IsRecursive(head, Recursion.iLEFT_REC, leftEnds, ebnfs);
-
-        boolean isiLeft = body.size() != 0 && body.get(0).accept(visitor);
-        String leftEnd = visitor.getEnd();
-
-        visitor = new IsRecursive(head, Recursion.iRIGHT_REC, rightEnds, ebnfs);
-        boolean isiRight = body.size() != 0 && body.get(body.size() - 1).accept(visitor);
-        String rightEnd = visitor.getEnd();
-
-        Recursion recursion = Recursion.NON_REC;
-        Recursion irecursion = Recursion.NON_REC;
-        int precedence = -1;
-
-        if (isLeft && isRight)
-            recursion = Recursion.LEFT_RIGHT_REC;
-        else if (isLeft)
-            recursion = Recursion.LEFT_REC;
-        else if (isRight)
-            recursion = Recursion.RIGHT_REC;
-
-        if (isiLeft && isiRight)
-            irecursion = Recursion.iLEFT_RIGHT_REC;
-        else if (isiLeft)
-            irecursion = Recursion.iLEFT_REC;
-        else if (isiRight)
-            irecursion = Recursion.iRIGHT_REC;
-
-        if (recursion == Recursion.NON_REC && irecursion == Recursion.NON_REC)
-            associativity = Associativity.UNDEFINED;
-
-        // Mixed cases
-        boolean isPrefixOrCanBePrefix = (irecursion != Recursion.iLEFT_REC && recursion == Recursion.RIGHT_REC)
-                || (recursion != Recursion.LEFT_REC && irecursion == Recursion.iRIGHT_REC);
-        boolean isPostfixOrCanBePostfix = (recursion == Recursion.LEFT_REC && irecursion != Recursion.iRIGHT_REC)
-                || (irecursion == Recursion.iLEFT_REC && recursion != Recursion.RIGHT_REC);
-
-        if ((isPrefixOrCanBePrefix || isPostfixOrCanBePostfix) && associativity != Associativity.NON_ASSOC)
-            associativity = Associativity.UNDEFINED;
-
-        if (associativity == null) {
-            associativity = Associativity.UNDEFINED;
-        }
-
-        return RuntimeRule.withHead(head)
-                .addSymbols(body)
-                .setRecursion(recursion)
-                .setiRecursion(irecursion)
-                .setLeftEnd(leftEnd)
-                .setRightEnd(rightEnd)
-                .setLeftEnds(leftEnds.get(head.getName()))
-                .setRightEnds(rightEnds.get(head.getName()))
-                .setAssociativity(associativity)
-                .setPrecedence(precedence)
-                .setLayoutStrategy(layoutStrategy)
-                .setLabel(label)
-                .build();
-    }
-
-    private void computeEnds(
-            Nonterminal head,
-            List<Symbol> symbols,
-            Map<String, Set<String>> leftEnds,
-            Map<String, Set<String>> rightEnds,
-            Set<String> ebnfs
-    ) {
-        if (symbols.size() >= 1) {
-            Symbol first = symbols.get(0);
-            Symbol last = symbols.get(symbols.size() - 1);
-
-            IsRecursive isLeft = new IsRecursive(head, Recursion.LEFT_REC, ebnfs);
-
-            if (!first.accept(isLeft) && !isLeft.getEnd().isEmpty()) {
-                Set<String> ends = leftEnds.get(head.getName());
-                if (ends == null) {
-                    ends = new HashSet<>();
-                    leftEnds.put(head.getName(), ends);
-                }
-                ends.add(isLeft.getEnd());
-                if (!isLeft.ends.isEmpty()) // EBNF related
-                    leftEnds.putAll(isLeft.ends);
-            }
-
-            IsRecursive isRight = new IsRecursive(head, Recursion.RIGHT_REC, ebnfs);
-
-            if (!last.accept(isRight) && !isRight.getEnd().isEmpty()) {
-                Set<String> ends = rightEnds.get(head.getName());
-                if (ends == null) {
-                    ends = new HashSet<>();
-                    rightEnds.put(head.getName(), ends);
-                }
-                ends.add(isRight.getEnd());
-                if (!isRight.ends.isEmpty()) // EBNF related
-                    rightEnds.putAll(isRight.ends);
-            }
-        }
     }
 
     public static class Builder {
@@ -539,11 +316,219 @@ public class Grammar {
         }
     }
 
+    private List<RuntimeRule> getRules(
+        Rule highLevelRule,
+        Map<String, Set<String>> leftEnds,
+        Map<String, Set<String>> rightEnds,
+        Set<String> ebnfs
+    ) {
+        List<PriorityLevel> priorityLevels = highLevelRule.getPriorityLevels();
+
+        List<RuntimeRule> rules = new ArrayList<>();
+        PrecedenceLevel level = PrecedenceLevel.getFirst();
+        Nonterminal head = highLevelRule.getHead();
+
+        ListIterator<PriorityLevel> altsIt = priorityLevels.listIterator(priorityLevels.size());
+        while (altsIt.hasPrevious()) {
+            PriorityLevel group = altsIt.previous();
+            ListIterator<Alternative> altIt = group.getAlternatives().listIterator(group.getAlternatives().size());
+            while (altIt.hasPrevious()) {
+                Alternative alternative = altIt.previous();
+                if (alternative.rest() != null) { // Associativity group
+                    AssociativityGroup assocGroup = new AssociativityGroup(alternative.associativity, level);
+                    List<Sequence> sequences = new ArrayList<>(Arrays.asList(alternative.first()));
+                    sequences.addAll(alternative.rest());
+                    ListIterator<Sequence> seqIt = sequences.listIterator(sequences.size());
+                    while (seqIt.hasPrevious()) {
+                        Sequence sequence = seqIt.previous();
+                        RuntimeRule rule = getRule(head, sequence.getSymbols(), sequence.associativity, sequence.label,
+                                                   highLevelRule.getLayoutStrategy(), leftEnds, rightEnds, ebnfs);
+                        int precedence = assocGroup.getPrecedence(rule);
+                        rule = rule.copy()
+                            .setPrecedence(precedence)
+                            .setPrecedenceLevel(level)
+                            .setAssociativityGroup(assocGroup)
+                            .setAttributes(sequence.getAttributes())
+                            .build();
+                        rules.add(rule);
+                    }
+                    assocGroup.done();
+                    level.containsAssociativityGroup(assocGroup.getLhs(), assocGroup.getRhs());
+                } else {
+                    List<Symbol> symbols = new ArrayList<>();
+                    if (alternative.first().isEmpty()) { // Empty alternative
+                        Sequence sequence = alternative.first();
+                        String label = sequence.label;
+                        RuntimeRule rule = getRule(head, symbols, Associativity.UNDEFINED, label,
+                                                   highLevelRule.getLayoutStrategy(), leftEnds, rightEnds, ebnfs);
+                        int precedence = level.getPrecedence(rule);
+                        rule = rule.copy()
+                            .setPrecedence(precedence)
+                            .setPrecedenceLevel(level)
+                            .setAttributes(sequence.getAttributes())
+                            .build();
+                        rules.add(rule);
+                    } else {
+                        Sequence sequence = alternative.first();
+                        symbols.add(sequence.first());
+                        if (sequence.rest() != null)
+                            addAll(symbols, sequence.rest());
+                        RuntimeRule rule = getRule(head, symbols, sequence.associativity, sequence.label,
+                                                   highLevelRule.getLayoutStrategy(), leftEnds, rightEnds, ebnfs);
+                        int precedence = level.getPrecedence(rule);
+                        rule = rule.copy()
+                            .setPrecedence(precedence)
+                            .setPrecedenceLevel(level)
+                            .setAttributes(sequence.getAttributes())
+                            .build();
+                        rules.add(rule);
+                    }
+                }
+            }
+            level.setUndefinedIfNeeded();
+            level = level.getNext();
+        }
+        level.done();
+        Collections.reverse(rules);
+        return rules;
+    }
+
+    private RuntimeRule getRule(
+        Nonterminal head,
+        List<Symbol> body,
+        Associativity associativity,
+        String label,
+        LayoutStrategy layoutStrategy,
+        Map<String, Set<String>> leftEnds,
+        Map<String, Set<String>> rightEnds,
+        Set<String> ebnfs
+    ) {
+        boolean isLeft = body.size() != 0 && body.get(0).accept(
+            new IsRecursive(head, Recursion.LEFT_REC, leftEnds, ebnfs));
+        boolean isRight = body.size() != 0 && body.get(body.size() - 1).accept(
+            new IsRecursive(head, Recursion.RIGHT_REC, leftEnds, ebnfs));
+
+        IsRecursive visitor = new IsRecursive(head, Recursion.iLEFT_REC, leftEnds, ebnfs);
+
+        boolean isiLeft = body.size() != 0 && body.get(0).accept(visitor);
+        String leftEnd = visitor.getEnd();
+
+        visitor = new IsRecursive(head, Recursion.iRIGHT_REC, rightEnds, ebnfs);
+        boolean isiRight = body.size() != 0 && body.get(body.size() - 1).accept(visitor);
+        String rightEnd = visitor.getEnd();
+
+        Recursion recursion = Recursion.NON_REC;
+        Recursion irecursion = Recursion.NON_REC;
+        int precedence = -1;
+
+        if (isLeft && isRight)
+            recursion = Recursion.LEFT_RIGHT_REC;
+        else if (isLeft)
+            recursion = Recursion.LEFT_REC;
+        else if (isRight)
+            recursion = Recursion.RIGHT_REC;
+
+        if (isiLeft && isiRight)
+            irecursion = Recursion.iLEFT_RIGHT_REC;
+        else if (isiLeft)
+            irecursion = Recursion.iLEFT_REC;
+        else if (isiRight)
+            irecursion = Recursion.iRIGHT_REC;
+
+        if (recursion == Recursion.NON_REC && irecursion == Recursion.NON_REC)
+            associativity = Associativity.UNDEFINED;
+
+        // Mixed cases
+        boolean isPrefixOrCanBePrefix = (irecursion != Recursion.iLEFT_REC && recursion == Recursion.RIGHT_REC)
+            || (recursion != Recursion.LEFT_REC && irecursion == Recursion.iRIGHT_REC);
+        boolean isPostfixOrCanBePostfix = (recursion == Recursion.LEFT_REC && irecursion != Recursion.iRIGHT_REC)
+            || (irecursion == Recursion.iLEFT_REC && recursion != Recursion.RIGHT_REC);
+
+        if ((isPrefixOrCanBePrefix || isPostfixOrCanBePostfix) && associativity != Associativity.NON_ASSOC)
+            associativity = Associativity.UNDEFINED;
+
+        if (associativity == null) {
+            associativity = Associativity.UNDEFINED;
+        }
+
+        return RuntimeRule.withHead(head)
+            .addSymbols(body)
+            .setRecursion(recursion)
+            .setiRecursion(irecursion)
+            .setLeftEnd(leftEnd)
+            .setRightEnd(rightEnd)
+            .setLeftEnds(leftEnds.get(head.getName()))
+            .setRightEnds(rightEnds.get(head.getName()))
+            .setAssociativity(associativity)
+            .setPrecedence(precedence)
+            .setLayoutStrategy(layoutStrategy)
+            .setLabel(label)
+            .build();
+    }
+
+    private void computeEnds(
+        Nonterminal head,
+        List<Symbol> symbols,
+        Map<String, Set<String>> leftEnds,
+        Map<String, Set<String>> rightEnds,
+        Set<String> ebnfs
+    ) {
+        if (symbols.size() >= 1) {
+            Symbol first = symbols.get(0);
+            Symbol last = symbols.get(symbols.size() - 1);
+
+            IsRecursive isLeft = new IsRecursive(head, Recursion.LEFT_REC, ebnfs);
+
+            if (!first.accept(isLeft) && !isLeft.getEnd().isEmpty()) {
+                Set<String> ends = leftEnds.get(head.getName());
+                if (ends == null) {
+                    ends = new HashSet<>();
+                    leftEnds.put(head.getName(), ends);
+                }
+                ends.add(isLeft.getEnd());
+                if (!isLeft.ends.isEmpty()) // EBNF related
+                    leftEnds.putAll(isLeft.ends);
+            }
+
+            IsRecursive isRight = new IsRecursive(head, Recursion.RIGHT_REC, ebnfs);
+
+            if (!last.accept(isRight) && !isRight.getEnd().isEmpty()) {
+                Set<String> ends = rightEnds.get(head.getName());
+                if (ends == null) {
+                    ends = new HashSet<>();
+                    rightEnds.put(head.getName(), ends);
+                }
+                ends.add(isRight.getEnd());
+                if (!isRight.ends.isEmpty()) // EBNF related
+                    rightEnds.putAll(isRight.ends);
+            }
+        }
+    }
+
+    private static Set<String> getTopLevelRegularExpressions(Grammar grammar) {
+        Set<String> references = new LinkedHashSet<>();
+        for (Rule rule : grammar.getRules()) {
+            for (PriorityLevel priorityLevel : rule.getPriorityLevels()) {
+                for (Alternative alternative : priorityLevel.getAlternatives()) {
+                    for (Sequence seq : alternative.seqs()) {
+                        for (Symbol symbol : seq.getSymbols()) {
+                            GatherTopLevelRegularExpressionsVisitor visitor =
+                                new GatherTopLevelRegularExpressionsVisitor(grammar);
+                            symbol.accept(visitor);
+                            references.addAll(visitor.references);
+                        }
+                    }
+                }
+            }
+        }
+        return references;
+    }
+
     // Top-level regular expressions are the ones that are directly reachable from context free rules.
     // They define the tokens of the language.
     // TODO: unify this with SymbolToSymbolVisitor
     private static class GatherTopLevelRegularExpressionsVisitor
-            implements ISymbolVisitor<Void>, RegularExpressionVisitor<Void>, IConditionVisitor<Void> {
+        implements ISymbolVisitor<Void>, RegularExpressionVisitor<Void>, IConditionVisitor<Void> {
 
         private final Set<String> references = new LinkedHashSet<>();
         private final Grammar grammar;
@@ -824,7 +809,7 @@ public class Grammar {
         @Override
         public Boolean visit(IfThenElse symbol) {
             return symbol.getThenPart().accept(this)
-                    || symbol.getElsePart().accept(this);
+                || symbol.getElsePart().accept(this);
         }
 
         @Override
@@ -856,8 +841,8 @@ public class Grammar {
 
             if (recursion == Recursion.LEFT_REC || recursion == Recursion.RIGHT_REC) {
                 if (symbol.getName().equals(head.getName())
-                        && ((head.getParameters() == null && symbol.getArguments() == null)
-                        || (head.getParameters().size() == symbol.getArguments().length)))
+                    && ((head.getParameters() == null && symbol.getArguments() == null)
+                    || (head.getParameters().size() == symbol.getArguments().length)))
                     return true;
 
             } else {
@@ -1042,5 +1027,20 @@ public class Grammar {
             return null;
         }
 
+    }
+
+    private static void addAll(List<Symbol> symbols, List<Symbol> rest) {
+        int i = 0;
+        while (i < rest.size()) {
+            Symbol current = rest.get(i);
+            if (i < rest.size() - 1 && rest.get(i + 1) instanceof CodeHolder) {
+                CodeHolder holder = (CodeHolder) rest.get(i + 1);
+                symbols.add(Code.code(current, holder.statement));
+                i += 2;
+            } else {
+                symbols.add(current);
+                i += 1;
+            }
+        }
     }
 }

@@ -1,274 +1,274 @@
 {
-  "rules": [
+  "rules" : [
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "X",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "X",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Identifier",
-                      "name": "S",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": []
+                      "kind" : "Identifier",
+                      "name" : "S",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [ ]
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     },
     {
-      "head": {
-        "kind": "Nonterminal",
-        "name": "S",
-        "preConditions": [],
-        "postConditions": []
+      "head" : {
+        "kind" : "Nonterminal",
+        "name" : "S",
+        "preConditions" : [ ],
+        "postConditions" : [ ]
       },
-      "priorityLevels": [
+      "priorityLevels" : [
         {
-          "alternatives": [
+          "alternatives" : [
             {
-              "seqs": [
+              "seqs" : [
                 {
-                  "symbols": [
+                  "symbols" : [
                     {
-                      "kind": "Code",
-                      "name": "'a' {assert(a.rExt == 1,indent(a.rExt) == 2)}",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "symbol": {
-                        "kind": "Terminal",
-                        "name": "'a'",
-                        "label": "a",
-                        "preConditions": [],
-                        "postConditions": [
+                      "kind" : "Code",
+                      "name" : "'a' {assert(a.rExt == 1,indent(a.rExt) == 2)}",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "symbol" : {
+                        "kind" : "Terminal",
+                        "name" : "'a'",
+                        "label" : "a",
+                        "preConditions" : [ ],
+                        "postConditions" : [
                           {
-                            "kind": "DataDependentCondition",
-                            "type": "DATA_DEPENDENT",
-                            "expression": {
-                              "kind": "Equal",
-                              "lhs": {
-                                "kind": "LeftExtent",
-                                "label": "a"
+                            "kind" : "DataDependentCondition",
+                            "type" : "DATA_DEPENDENT",
+                            "expression" : {
+                              "kind" : "Equal",
+                              "lhs" : {
+                                "kind" : "LeftExtent",
+                                "label" : "a"
                               },
-                              "rhs": {
-                                "kind": "Integer",
-                                "value": 0
+                              "rhs" : {
+                                "kind" : "Integer",
+                                "value" : 0
                               }
                             }
                           }
                         ],
-                        "nodeType": "Literal",
-                        "regex": {
-                          "kind": "Char",
-                          "lookaheads": [],
-                          "lookbehinds": [],
-                          "val": 97
+                        "nodeType" : "Literal",
+                        "regex" : {
+                          "kind" : "Char",
+                          "lookaheads" : [ ],
+                          "lookbehinds" : [ ],
+                          "val" : 97
                         }
                       },
-                      "statements": [
+                      "statements" : [
                         {
-                          "kind": "ExpressionStatement",
-                          "exp": {
-                            "kind": "Assert",
-                            "arguments": [
+                          "kind" : "ExpressionStatement",
+                          "exp" : {
+                            "kind" : "Assert",
+                            "arguments" : [
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "RightExtent",
-                                  "label": "a"
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "RightExtent",
+                                  "label" : "a"
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 1
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 1
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "Indent",
-                                  "fun": "indent",
-                                  "arguments": [
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "Indent",
+                                  "fun" : "indent",
+                                  "arguments" : [
                                     {
-                                      "kind": "RightExtent",
-                                      "label": "a"
+                                      "kind" : "RightExtent",
+                                      "label" : "a"
                                     }
                                   ]
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 2
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 2
                                 }
                               }
                             ],
-                            "fun": "assert"
+                            "fun" : "assert"
                           }
                         }
                       ]
                     },
                     {
-                      "kind": "Identifier",
-                      "name": "Layout",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "excepts": []
+                      "kind" : "Identifier",
+                      "name" : "Layout",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "excepts" : [ ]
                     },
                     {
-                      "kind": "Code",
-                      "name": "'b' {assert(b.lExt == 5,b.rExt == 6,indent(b.rExt) == 7)}",
-                      "preConditions": [],
-                      "postConditions": [],
-                      "symbol": {
-                        "kind": "Terminal",
-                        "name": "'b'",
-                        "label": "b",
-                        "preConditions": [],
-                        "postConditions": [
+                      "kind" : "Code",
+                      "name" : "'b' {assert(b.lExt == 5,b.rExt == 6,indent(b.rExt) == 7)}",
+                      "preConditions" : [ ],
+                      "postConditions" : [ ],
+                      "symbol" : {
+                        "kind" : "Terminal",
+                        "name" : "'b'",
+                        "label" : "b",
+                        "preConditions" : [ ],
+                        "postConditions" : [
                           {
-                            "kind": "DataDependentCondition",
-                            "type": "DATA_DEPENDENT",
-                            "expression": {
-                              "kind": "Equal",
-                              "lhs": {
-                                "kind": "LeftExtent",
-                                "label": "b"
+                            "kind" : "DataDependentCondition",
+                            "type" : "DATA_DEPENDENT",
+                            "expression" : {
+                              "kind" : "Equal",
+                              "lhs" : {
+                                "kind" : "LeftExtent",
+                                "label" : "b"
                               },
-                              "rhs": {
-                                "kind": "Integer",
-                                "value": 5
+                              "rhs" : {
+                                "kind" : "Integer",
+                                "value" : 5
                               }
                             }
                           }
                         ],
-                        "nodeType": "Literal",
-                        "regex": {
-                          "kind": "Char",
-                          "lookaheads": [],
-                          "lookbehinds": [],
-                          "val": 98
+                        "nodeType" : "Literal",
+                        "regex" : {
+                          "kind" : "Char",
+                          "lookaheads" : [ ],
+                          "lookbehinds" : [ ],
+                          "val" : 98
                         }
                       },
-                      "statements": [
+                      "statements" : [
                         {
-                          "kind": "ExpressionStatement",
-                          "exp": {
-                            "kind": "Assert",
-                            "arguments": [
+                          "kind" : "ExpressionStatement",
+                          "exp" : {
+                            "kind" : "Assert",
+                            "arguments" : [
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "LeftExtent",
-                                  "label": "b"
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "LeftExtent",
+                                  "label" : "b"
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 5
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 5
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "RightExtent",
-                                  "label": "b"
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "RightExtent",
+                                  "label" : "b"
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 6
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 6
                                 }
                               },
                               {
-                                "kind": "Equal",
-                                "lhs": {
-                                  "kind": "Indent",
-                                  "fun": "indent",
-                                  "arguments": [
+                                "kind" : "Equal",
+                                "lhs" : {
+                                  "kind" : "Indent",
+                                  "fun" : "indent",
+                                  "arguments" : [
                                     {
-                                      "kind": "RightExtent",
-                                      "label": "b"
+                                      "kind" : "RightExtent",
+                                      "label" : "b"
                                     }
                                   ]
                                 },
-                                "rhs": {
-                                  "kind": "Integer",
-                                  "value": 7
+                                "rhs" : {
+                                  "kind" : "Integer",
+                                  "value" : 7
                                 }
                               }
                             ],
-                            "fun": "assert"
+                            "fun" : "assert"
                           }
                         }
                       ]
                     }
                   ],
-                  "associativity": "UNDEFINED"
+                  "associativity" : "UNDEFINED"
                 }
               ],
-              "associativity": "UNDEFINED"
+              "associativity" : "UNDEFINED"
             }
           ]
         }
       ],
-      "layoutStrategy": "INHERITED"
+      "layoutStrategy" : "INHERITED"
     }
   ],
-  "regularExpressionDefinitions": {
-    "Layout": {
-      "kind": "regex.Star",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "regex": {
-        "kind": "regex.Alt",
-        "lookaheads": [],
-        "lookbehinds": [],
-        "symbols": [
+  "regularExpressionDefinitions" : {
+    "Layout" : {
+      "kind" : "regex.Star",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "regex" : {
+        "kind" : "regex.Alt",
+        "lookaheads" : [ ],
+        "lookbehinds" : [ ],
+        "symbols" : [
           {
-            "kind": "Char",
-            "lookaheads": [],
-            "lookbehinds": [],
-            "val": 32
+            "kind" : "Char",
+            "lookaheads" : [ ],
+            "lookbehinds" : [ ],
+            "val" : 32
           }
         ]
       },
-      "separators": []
+      "separators" : [ ]
     }
   },
-  "literals": {
-    "a": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 97
+  "literals" : {
+    "a" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 97
     },
-    "b": {
-      "kind": "Char",
-      "lookaheads": [],
-      "lookbehinds": [],
-      "val": 98
+    "b" : {
+      "kind" : "Char",
+      "lookaheads" : [ ],
+      "lookbehinds" : [ ],
+      "val" : 98
     }
   },
-  "startSymbols": [
+  "startSymbols" : [
     {
-      "kind": "Start",
-      "name": "Start(X)",
-      "preConditions": [],
-      "postConditions": [],
-      "startSymbol": "X"
+      "kind" : "Start",
+      "name" : "Start(X)",
+      "preConditions" : [ ],
+      "postConditions" : [ ],
+      "startSymbol" : "X"
     }
   ],
-  "globals": {}
+  "globals" : { }
 }

@@ -23,7 +23,7 @@ public class InlineReferences {
             for (String reference : references) {
                 if (!referencesMap.containsKey(reference)) {
                     throw new RuntimeException(
-                            reference + " refers to a name which is not a defined regular expression");
+                        reference + " refers to a name which is not a defined regular expression");
                 }
             }
         }
@@ -57,7 +57,7 @@ public class InlineReferences {
     private static void visit(String node, Map<String, List<String>> map, LinkedHashSet<String> visited) {
         if (visited.contains(node)) {
             throw new RuntimeException("Regular expression references cannot be cyclic: " +
-                    String.join("->", visited) + "->" + node);
+                String.join("->", visited) + "->" + node);
         }
 
         visited.add(node);

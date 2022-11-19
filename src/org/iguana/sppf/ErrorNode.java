@@ -47,12 +47,12 @@ public class ErrorNode extends NonPackedNode {
     }
 
     @Override
-    public boolean isAmbiguous() {
+    public void setAmbiguous(boolean ambiguous) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void setAmbiguous(boolean ambiguous) {
+    public boolean isAmbiguous() {
         throw new UnsupportedOperationException();
     }
 

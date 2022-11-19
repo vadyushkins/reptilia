@@ -4,34 +4,36 @@ package org.iguana.utils.collections;
 import java.util.function.IntFunction;
 
 /**
+ * 
  * @author Ali Afroozeh
+ *
  */
 public interface IntHashMap<T> extends Iterable<Entry<T>> {
+	
+	boolean containsKey(int key);
+	
+	T computeIfAbsent(int key, IntFunction<T> f);
 
-    boolean containsKey(int key);
+	/**
+	 * @return null if there is already a value associated with a key
+	 */
+	T compute(int key, IntKeyMapper<T> mapper);
+	
+	T put(int key, T value);
+	
+	T remove(int key);
 
-    T computeIfAbsent(int key, IntFunction<T> f);
+	T get(int key);
 
-    /**
-     * @return null if there is already a value associated with a key
-     */
-    T compute(int key, IntKeyMapper<T> mapper);
+	int size();
+	
+	int getInitialCapacity();
+	
+	boolean isEmpty();
 
-    T put(int key, T value);
+	void clear();
 
-    T remove(int key);
-
-    T get(int key);
-
-    int size();
-
-    int getInitialCapacity();
-
-    boolean isEmpty();
-
-    void clear();
-
-    Iterable<T> values();
+	Iterable<T> values();
 
 }
 

@@ -52,6 +52,7 @@ class UTF32Input extends AbstractInput {
     /**
      * Returns a string representation of this input instance from the
      * given start (including) and end (excluding) indices.
+     *
      */
     public String subString(int start, int end) {
         List<Character> charList = new ArrayList<>();

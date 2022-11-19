@@ -12,9 +12,9 @@ public class TopLevelPrecedenceNonterminals {
         for (Rule rule : rules) {
             if (isPrecedenceRule(rule)) {
                 Rule newRule = new Rule.Builder(rule.getHead().copy().setName("$_" + rule.getHead().getName()).build())
-                        .addPriorityLevel(PriorityLevel.from(Alternative.from(Sequence.from(
-                                rule.getHead().copy().setLabel("child").build()
-                        )))).build();
+                    .addPriorityLevel(PriorityLevel.from(Alternative.from(Sequence.from(
+                        rule.getHead().copy().setLabel("child").build()
+                    )))).build();
                 newRules.add(newRule);
             }
         }
@@ -35,6 +35,6 @@ public class TopLevelPrecedenceNonterminals {
         if (alternatives.stream().anyMatch(alternative -> alternative.getAssociativity() != Associativity.UNDEFINED))
             return true;
         return alternatives.stream().flatMap(alternative -> alternative.seqs().stream())
-                .anyMatch(sequence -> sequence.getAssociativity() != Associativity.UNDEFINED);
+                                    .anyMatch(sequence -> sequence.getAssociativity() != Associativity.UNDEFINED);
     }
 }

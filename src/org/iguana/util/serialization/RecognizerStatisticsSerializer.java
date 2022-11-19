@@ -19,10 +19,10 @@ public class RecognizerStatisticsSerializer {
     static {
         mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .setVisibility(mapper.getSerializationConfig().getDefaultVisibilityChecker()
-                        .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
-                        .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
-                        .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
+               .setVisibility(mapper.getSerializationConfig().getDefaultVisibilityChecker()
+               .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
+               .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
+               .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
 
         mapper.addMixIn(RecognizerStatistics.class, RecognizerStatisticsMixIn.class);
     }

@@ -70,7 +70,7 @@ public class GenerateBasicFiles {
             writer.println("public class " + language + "Lang extends Language {");
             writer.println("    public static final " + language + "Lang instance = new " + language + "Lang();");
             writer.println("    public static final Icon file = IconLoader.getIcon(\"/" + language.toLowerCase() +
-                    "/gen/icons/icon.png\");");
+                           "/gen/icons/icon.png\");");
             writer.println("    private " + language + "Lang() { super(\"" + language + "\"); }");
             writer.println("}");
             writer.println();
@@ -93,7 +93,7 @@ public class GenerateBasicFiles {
             writer.println();
             writer.println("public class " + language + "FileType extends LanguageFileType {");
             writer.println(
-                    "    public static final " + language + "FileType instance = new " + language + "FileType();");
+                "    public static final " + language + "FileType instance = new " + language + "FileType();");
             writer.println("    private " + language + "FileType() { super(" + language + "Lang.instance); }");
             writer.println();
             writer.println("    public String getName() { return \"" + language + "\"; }");
@@ -121,8 +121,8 @@ public class GenerateBasicFiles {
             writer.println();
             writer.println("public class " + language + "FileTypeFactory extends FileTypeFactory {");
             writer.println(
-                    "    public void createFileTypes(FileTypeConsumer fileTypeConsumer) { fileTypeConsumer.consume(" +
-                            language + "FileType.instance, \"" + extension + "\"); }");
+                "    public void createFileTypes(FileTypeConsumer fileTypeConsumer) { fileTypeConsumer.consume(" +
+                language + "FileType.instance, \"" + extension + "\"); }");
             writer.println("}");
             writer.println();
             writer.close();
@@ -144,7 +144,7 @@ public class GenerateBasicFiles {
             writer.println();
             writer.println("public class " + language + "ElementType extends IElementType {");
             writer.println("    public " + language + "ElementType(String debugName) { super(debugName, " + language +
-                    "Lang.instance); }");
+                           "Lang.instance); }");
             writer.println("}");
             writer.println();
             writer.close();
@@ -166,9 +166,9 @@ public class GenerateBasicFiles {
             writer.println();
             writer.println("public class " + language + "TokenType extends IElementType {");
             writer.println("    public " + language + "TokenType(String debugName) { super(debugName, " + language +
-                    "Lang.instance); }");
+                           "Lang.instance); }");
             writer.println(
-                    "    public String toString() { return \"" + language + "TokenType.\" + super.toString(); }");
+                "    public String toString() { return \"" + language + "TokenType.\" + super.toString(); }");
             writer.println("}");
             writer.println();
             writer.close();

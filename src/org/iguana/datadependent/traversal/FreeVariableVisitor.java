@@ -55,19 +55,11 @@ public class FreeVariableVisitor implements IAbstractASTVisitor<Void>, ISymbolVi
      */
     private final Set<java.lang.String> freeVariables;
     private final Set<java.lang.String> updates;
-    /*
-     * State variable bindings of nonterminals in the rule
-     */
-    private final Map<Nonterminal, Set<java.lang.String>> nonterminal_uses;
-    // Given assignments to state variables within a nonterminal
-    private final Map<Nonterminal, Set<java.lang.String>> nonterminal_updates;
-    // Given uses of updated state variables of a nonterminal after a use of a nonterminal in all the rules
-    private final Map<Nonterminal, Set<java.lang.String>> nonterminal_returns;
-    // Given uses of updated state variables of a nonterminal after a use of the nonterminal in the current rule
-    private Map<Nonterminal, Set<java.lang.String>> nonterminal_bindings;
+
     public FreeVariableVisitor(Set<java.lang.String> freeVariables) {
         this(freeVariables, null);
     }
+
     public FreeVariableVisitor(Set<java.lang.String> freeVariables, Set<java.lang.String> updates) {
         this.freeVariables = freeVariables;
         this.updates = updates;
@@ -75,18 +67,6 @@ public class FreeVariableVisitor implements IAbstractASTVisitor<Void>, ISymbolVi
         this.nonterminal_updates = null;
         this.nonterminal_returns = null;
         this.nonterminal_bindings = null;
-    }
-    public FreeVariableVisitor(
-            Map<Nonterminal, Set<java.lang.String>> nonterminal_uses,
-            Map<Nonterminal, Set<java.lang.String>> nonterminal_updates,
-            Map<Nonterminal, Set<java.lang.String>> nonterminal_returns
-    ) {
-        this.freeVariables = null;
-        this.updates = null;
-        this.nonterminal_uses = nonterminal_uses;
-        this.nonterminal_updates = nonterminal_updates;
-        this.nonterminal_returns = nonterminal_returns;
-        this.nonterminal_bindings = new HashMap<>();
     }
 
     public void compute(RuntimeRule rule) {
@@ -109,6 +89,30 @@ public class FreeVariableVisitor implements IAbstractASTVisitor<Void>, ISymbolVi
             symbol.setEmpty();
         }
 
+    }
+
+    /*
+     * State variable bindings of nonterminals in the rule
+     */
+    private final Map<Nonterminal, Set<java.lang.String>> nonterminal_uses;
+    // Given assignments to state variables within a nonterminal
+    private final Map<Nonterminal, Set<java.lang.String>> nonterminal_updates;
+    // Given uses of updated state variables of a nonterminal after a use of a nonterminal in all the rules
+    private final Map<Nonterminal, Set<java.lang.String>> nonterminal_returns;
+    // Given uses of updated state variables of a nonterminal after a use of the nonterminal in the current rule
+    private Map<Nonterminal, Set<java.lang.String>> nonterminal_bindings;
+
+    public FreeVariableVisitor(
+        Map<Nonterminal, Set<java.lang.String>> nonterminal_uses,
+        Map<Nonterminal, Set<java.lang.String>> nonterminal_updates,
+        Map<Nonterminal, Set<java.lang.String>> nonterminal_returns
+    ) {
+        this.freeVariables = null;
+        this.updates = null;
+        this.nonterminal_uses = nonterminal_uses;
+        this.nonterminal_updates = nonterminal_updates;
+        this.nonterminal_returns = nonterminal_returns;
+        this.nonterminal_bindings = new HashMap<>();
     }
 
     public Map<Nonterminal, Set<java.lang.String>> computeBindings(RuntimeRule rule) {
@@ -370,7 +374,7 @@ public class FreeVariableVisitor implements IAbstractASTVisitor<Void>, ISymbolVi
     public Void visit(LeftExtent expression) {
 
         java.lang.String name = java.lang.String.format(org.iguana.datadependent.ast.Expression.LeftExtent.format,
-                expression.getLabel());
+            expression.getLabel());
 
         if (!expression.getEnv().contains(name))
             use(name);
@@ -619,8 +623,8 @@ public class FreeVariableVisitor implements IAbstractASTVisitor<Void>, ISymbolVi
         }
 
         if (nonterminal_bindings != null
-                && !nonterminal_bindings.containsKey(symbol)
-                && nonterminal_updates.containsKey(symbol))
+            && !nonterminal_bindings.containsKey(symbol)
+            && nonterminal_updates.containsKey(symbol))
             nonterminal_bindings.put(symbol, new HashSet<>());
 
         symbol.setEnv(env);

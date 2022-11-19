@@ -40,27 +40,6 @@ public class DFAMatcherFactory implements MatcherFactory {
     private final Map<RegularExpression, Matcher> matcherCache = new HashMap<>();
     private final Map<RegularExpression, Matcher> backwardsMatcherCache = new HashMap<>();
 
-    public static org.iguana.regex.matcher.Matcher characterMatcher(Char c) {
-        return (input, i) -> input.charAt(i) == c.getValue() ? 1 : -1;
-    }
-
-    public static org.iguana.regex.matcher.Matcher characterBackwardsMatcher(Char c) {
-        return (input, i) -> i == 0 ? -1 : (input.charAt(i - 1) == c.getValue() ? 1 : -1);
-    }
-
-    public static org.iguana.regex.matcher.Matcher characterRangeMatcher(CharRange range) {
-        return (input, i) -> input.charAt(i) >= range.getStart() && input.charAt(i) <= range.getEnd() ? 1 : -1;
-    }
-
-    public static org.iguana.regex.matcher.Matcher characterRangeBackwardsMatcher(CharRange range) {
-        return (input, i) -> i == 0 ? -1
-                : (input.charAt(i - 1) >= range.getStart() && input.charAt(i - 1) <= range.getEnd() ? 1 : -1);
-    }
-
-    public static Matcher epsilonMatcher() {
-        return (input, i) -> 0;
-    }
-
     public org.iguana.regex.matcher.Matcher getMatcher(RegularExpression regex) {
 
         if (regex == Epsilon.getInstance())
@@ -84,6 +63,27 @@ public class DFAMatcherFactory implements MatcherFactory {
             return characterRangeBackwardsMatcher((CharRange) regex);
 
         return backwardsMatcherCache.computeIfAbsent(regex, DFABackwardsMatcher::new);
+    }
+
+    public static org.iguana.regex.matcher.Matcher characterMatcher(Char c) {
+        return (input, i) -> input.charAt(i) == c.getValue() ? 1 : -1;
+    }
+
+    public static org.iguana.regex.matcher.Matcher characterBackwardsMatcher(Char c) {
+        return (input, i) -> i == 0 ? -1 : (input.charAt(i - 1) == c.getValue() ? 1 : -1);
+    }
+
+    public static org.iguana.regex.matcher.Matcher characterRangeMatcher(CharRange range) {
+        return (input, i) -> input.charAt(i) >= range.getStart() && input.charAt(i) <= range.getEnd() ? 1 : -1;
+    }
+
+    public static org.iguana.regex.matcher.Matcher characterRangeBackwardsMatcher(CharRange range) {
+        return (input, i) -> i == 0 ? -1
+            : (input.charAt(i - 1) >= range.getStart() && input.charAt(i - 1) <= range.getEnd() ? 1 : -1);
+    }
+
+    public static Matcher epsilonMatcher() {
+        return (input, i) -> 0;
     }
 
 }

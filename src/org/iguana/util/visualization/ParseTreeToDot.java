@@ -17,13 +17,6 @@ public class ParseTreeToDot implements ParseTreeVisitor<Integer> {
     private final DotGraph dotGraph;
     private final Input input;
     private final Set<String> exclude;
-    private int id = 0;
-
-    private ParseTreeToDot(DotGraph dotGraph, Input input, Set<String> exclude) {
-        this.dotGraph = dotGraph;
-        this.input = input;
-        this.exclude = exclude;
-    }
 
     public static DotGraph getDotGraph(ParseTreeNode node, Input input) {
         return getDotGraph(node, input, Collections.emptySet());
@@ -35,11 +28,17 @@ public class ParseTreeToDot implements ParseTreeVisitor<Integer> {
         return dotGraph;
     }
 
+    private ParseTreeToDot(DotGraph dotGraph, Input input, Set<String> exclude) {
+        this.dotGraph = dotGraph;
+        this.input = input;
+        this.exclude = exclude;
+    }
+
     @Override
     public Integer visitNonterminalNode(NonterminalNode node) {
         int id = nextId();
         String label = String.format("(%s, %d, %d)", node.getGrammarDefinition().getHead().getName(), node.getStart(),
-                node.getEnd());
+            node.getEnd());
         dotGraph.addNode(newNode(id, label));
 
         visitChildren(node, id);
@@ -100,7 +99,7 @@ public class ParseTreeToDot implements ParseTreeVisitor<Integer> {
 
         String text = input.subString(node.getStart(), node.getEnd());
         String label = String.format("(%s, %d, %d): \"%s\"", node.getGrammarDefinition().getName(), node.getStart(),
-                node.getEnd(), text);
+            node.getEnd(), text);
         int id = nextId();
         dotGraph.addNode(newNode(id, label).setShape(DotGraph.Shape.ROUNDED_RECTANGLE));
         return id;
@@ -115,6 +114,7 @@ public class ParseTreeToDot implements ParseTreeVisitor<Integer> {
         return id;
     }
 
+    private int id = 0;
     private int nextId() {
         return id++;
     }

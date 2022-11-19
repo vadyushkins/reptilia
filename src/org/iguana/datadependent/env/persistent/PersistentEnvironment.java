@@ -35,9 +35,11 @@ import org.iguana.grammar.exception.UndefinedRuntimeValueException;
 
 public class PersistentEnvironment implements Environment {
 
-    static final Environment EMPTY = new PersistentEnvironment(null, Map.Immutable.of());
     private final PersistentEnvironment parent;
+
     final private Map.Immutable<String, Object> bindings;
+
+    static final Environment EMPTY = new PersistentEnvironment(null, Map.Immutable.of());
 
     private PersistentEnvironment(PersistentEnvironment parent, Map.Immutable<String, Object> bindings) {
         this.parent = parent;
@@ -156,7 +158,7 @@ public class PersistentEnvironment implements Environment {
     @Override
     public String toString() {
         return (parent != null ? parent.toString() + " -> " : "() -> ")
-                + (bindings != null ? bindings.toString() : "()");
+               + (bindings != null ? bindings.toString() : "()");
     }
 
     @Override

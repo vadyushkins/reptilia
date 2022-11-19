@@ -5,6 +5,7 @@ import org.iguana.grammar.runtime.RuntimeGrammar;
 import org.iguana.grammar.symbol.Start;
 import org.iguana.grammar.transformation.GrammarTransformer;
 import org.iguana.parser.*;
+import org.iguana.parser.options.ParseTreeOptions;
 import org.iguana.parsetree.ParseTreeNode;
 import org.iguana.traversal.exception.AmbiguityException;
 import org.iguana.traversal.exception.CyclicGrammarException;
@@ -45,50 +46,6 @@ public class GrammarTest {
         String regenerate = System.getenv("REGENERATE");
         if (regenerate != null && regenerate.equals("true")) {
             REGENERATE_FILES = true;
-        }
-    }
-
-    private static void record(Object obj, String path) throws IOException {
-        String json = JsonSerializer.serialize(obj);
-        FileUtils.writeFile(json, path);
-    }
-
-    private static List<String> getTests(String rootPath) {
-        List<String> tests = new ArrayList<>();
-        getTests(rootPath, tests);
-        return sort(tests);
-    }
-
-    private static List<String> sort(List<String> filePaths) {
-        Pattern pattern = Pattern.compile("(.*?)(\\d*)");
-        filePaths.sort((path1, path2) -> {
-            Matcher matcher1 = pattern.matcher(path1);
-            Matcher matcher2 = pattern.matcher(path2);
-            if (matcher1.matches() && matcher2.matches()) {
-                String path1NamePart = matcher1.group(1);
-                int path1NumericPart = matcher1.group(2).equals("") ? 0 : Integer.parseInt(matcher1.group(2));
-
-                String path2NamePart = matcher2.group(1);
-                int path2NumericPart = matcher2.group(2).equals("") ? 0 : Integer.parseInt(matcher2.group(2));
-
-                int diff = path1NamePart.compareTo(path2NamePart);
-                if (diff != 0) return diff;
-                return path1NumericPart - path2NumericPart;
-            }
-            throw new RuntimeException("Should not reach here");
-        });
-        return filePaths;
-    }
-
-    private static void getTests(String currentDirPath, List<String> tests) {
-        File currentDir = new File(currentDirPath);
-        if (!currentDir.isDirectory()) return;
-        if (currentDir.getName().matches("Test.*\\d*")) {
-            tests.add(currentDirPath);
-        } else {
-            for (String childDir : currentDir.list()) {
-                getTests(currentDir + "/" + childDir, tests);
-            }
         }
     }
 
@@ -220,7 +177,8 @@ public class GrammarTest {
             } catch (AmbiguityException e) {
                 try {
                     if (parser.getStatistics().getAmbiguousNodesCount() < 20) {
-                        actualParseTree = parser.getParseTree(true, true);
+                        actualParseTree = parser.getParseTree(new ParseTreeOptions.Builder().setAllowAmbiguities(true)
+                            .setIgnoreLayout(true).build());
                         String pdfPath = testPath + "/tree" + j + ".pdf";
                         if (REGENERATE_FILES || !Files.exists(Paths.get(resultPath))) {
                             DotGraph dotGraph = ParseTreeToDot.getDotGraph(actualParseTree, input);
@@ -245,6 +203,50 @@ public class GrammarTest {
                 }
             }
         };
+    }
+
+    private static void record(Object obj, String path) throws IOException {
+        String json = JsonSerializer.serialize(obj);
+        FileUtils.writeFile(json, path);
+    }
+
+    private static List<String> getTests(String rootPath) {
+        List<String> tests = new ArrayList<>();
+        getTests(rootPath, tests);
+        return sort(tests);
+    }
+
+    private static List<String> sort(List<String> filePaths) {
+        Pattern pattern = Pattern.compile("(.*?)(\\d*)");
+        filePaths.sort((path1, path2) -> {
+            Matcher matcher1 = pattern.matcher(path1);
+            Matcher matcher2 = pattern.matcher(path2);
+            if (matcher1.matches() && matcher2.matches()) {
+                String path1NamePart = matcher1.group(1);
+                int path1NumericPart = matcher1.group(2).equals("") ? 0 : Integer.parseInt(matcher1.group(2));
+
+                String path2NamePart = matcher2.group(1);
+                int path2NumericPart = matcher2.group(2).equals("") ? 0 : Integer.parseInt(matcher2.group(2));
+
+                int diff = path1NamePart.compareTo(path2NamePart);
+                if (diff != 0) return diff;
+                return path1NumericPart - path2NumericPart;
+            }
+            throw new RuntimeException("Should not reach here");
+        });
+        return filePaths;
+    }
+
+    private static void getTests(String currentDirPath, List<String> tests) {
+        File currentDir = new File(currentDirPath);
+        if (!currentDir.isDirectory()) return;
+        if (currentDir.getName().matches("Test.*\\d*")) {
+            tests.add(currentDirPath);
+        } else {
+            for (String childDir : currentDir.list()) {
+                getTests(currentDir + "/" + childDir, tests);
+            }
+        }
     }
 
 }

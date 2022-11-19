@@ -11,6 +11,12 @@ public class IntList implements IntStack {
     private int[] arr;
     private int size;
 
+    public static IntList of(int...elements) {
+        IntList list = new IntList();
+        for (int e : elements) list.add(e);
+        return list;
+    }
+
     public IntList() {
         this(INITIAL_CAPACITY);
     }
@@ -18,12 +24,6 @@ public class IntList implements IntStack {
     public IntList(int initialCapacity) {
         capacity = initialCapacity;
         arr = new int[initialCapacity];
-    }
-
-    public static IntList of(int... elements) {
-        IntList list = new IntList();
-        for (int e : elements) list.add(e);
-        return list;
     }
 
     public int get(int i) {
@@ -47,9 +47,7 @@ public class IntList implements IntStack {
         arr[size++] = val;
     }
 
-    public int[] toArray() {
-        return arr;
-    }
+    public int[] toArray() { return arr; }
 
     public IntArray toIntArray() {
         return new IntArray(arr, 0, size);

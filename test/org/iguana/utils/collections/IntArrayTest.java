@@ -15,7 +15,7 @@ public class IntArrayTest {
 
     @Test
     public void toStringOneElement() {
-        assertEquals("[1]", new IntArray(new int[]{1}).toString());
+        assertEquals("[1]", new IntArray(new int[] {1}).toString());
     }
 
     @Test
@@ -29,12 +29,12 @@ public class IntArrayTest {
 
     @Test
     public void illeaglArrayInstantiation1() {
-        assertThrows(IllegalArgumentException.class, () -> new IntArray(new int[]{0, 1, 2, 3, 4, 5}, -1, 4));
+        assertThrows(IllegalArgumentException.class, () -> new IntArray(new int[] {0, 1, 2, 3, 4, 5}, -1, 4));
     }
 
     @Test
     public void illeaglArrayInstantiation2() {
-        assertThrows(IllegalArgumentException.class, () -> new IntArray(new int[]{0, 1, 2, 3, 4, 5}, 3, 7));
+        assertThrows(IllegalArgumentException.class, () -> new IntArray(new int[] {0, 1, 2, 3, 4, 5}, 3, 7));
     }
 
 }

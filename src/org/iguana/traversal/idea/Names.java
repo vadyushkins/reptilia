@@ -66,8 +66,9 @@ public class Names implements GrammarTransformation {
     private static class NameVisitor implements ISymbolVisitor<Symbol> {
 
         final List<RuntimeRule> rules;
-        private final Nonterminal layout;
         private Set<Nonterminal> heads = new HashSet<>();
+
+        private final Nonterminal layout;
 
         NameVisitor(List<RuntimeRule> rules, Nonterminal layout) {
             this.rules = rules;
@@ -123,7 +124,7 @@ public class Names implements GrammarTransformation {
         @Override
         public Symbol visit(IfThenElse symbol) {
             return IfThenElse.ifThenElse(symbol.getExpression(), visitSymbol(symbol.getThenPart()),
-                    visitSymbol(symbol.getElsePart()));
+                visitSymbol(symbol.getElsePart()));
         }
 
         @Override
@@ -143,10 +144,10 @@ public class Names implements GrammarTransformation {
                         if (!heads.contains(sym)) {
                             heads.add(sym);
                             rules.add(RuntimeRule.withHead(sym).addSymbol(symbol)
-                                    .setLayout(layout).setLayoutStrategy(LayoutStrategy.INHERITED)
-                                    .setRecursion(Recursion.NON_REC).setAssociativity(Associativity.UNDEFINED)
-                                    .setPrecedence(-1).setPrecedenceLevel(PrecedenceLevel.getFirstAndDone())
-                                    .build());
+                                        .setLayout(layout).setLayoutStrategy(LayoutStrategy.INHERITED)
+                                        .setRecursion(Recursion.NON_REC).setAssociativity(Associativity.UNDEFINED)
+                                        .setPrecedence(-1).setPrecedenceLevel(PrecedenceLevel.getFirstAndDone())
+                                        .build());
                         }
                         return sym;
                     case 1:
@@ -154,10 +155,10 @@ public class Names implements GrammarTransformation {
                         if (!heads.contains(sym)) {
                             heads.add(sym);
                             rules.add(RuntimeRule.withHead(sym).addSymbol(symbol)
-                                    .setLayout(layout).setLayoutStrategy(LayoutStrategy.INHERITED)
-                                    .setRecursion(Recursion.NON_REC).setAssociativity(Associativity.UNDEFINED)
-                                    .setPrecedence(-1).setPrecedenceLevel(PrecedenceLevel.getFirstAndDone())
-                                    .build());
+                                        .setLayout(layout).setLayoutStrategy(LayoutStrategy.INHERITED)
+                                        .setRecursion(Recursion.NON_REC).setAssociativity(Associativity.UNDEFINED)
+                                        .setPrecedence(-1).setPrecedenceLevel(PrecedenceLevel.getFirstAndDone())
+                                        .build());
                         }
                         return sym;
                     default:

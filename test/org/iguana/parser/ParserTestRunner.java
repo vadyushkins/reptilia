@@ -30,15 +30,6 @@ public abstract class ParserTestRunner {
 
     protected String testName;
 
-    private static void record(Object obj, Path path) {
-        String json = JsonSerializer.serialize(obj);
-        try {
-            Files.writeString(path, json);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @BeforeEach
     void setUp(TestInfo testInfo) {
         testName = testInfo.getTestMethod().get().getName();
@@ -46,8 +37,8 @@ public abstract class ParserTestRunner {
 
     private Path getTestDirectory() {
         Path path = Path.of("test/resources/tests")
-                .resolve(this.getClass().getSimpleName())
-                .resolve(testName);
+            .resolve(this.getClass().getSimpleName())
+            .resolve(testName);
         try {
             Files.createDirectories(path);
         } catch (IOException e) {
@@ -61,7 +52,7 @@ public abstract class ParserTestRunner {
         Input input = Input.fromString(parserTest.getInput());
         IguanaParser parser = new IguanaParser(grammar);
         try {
-            parser.parse(input, parserTest.getStartSymbol());
+            parser.parse(input, parserTest.getStartSymbol(), parserTest.getParseOptions());
         } catch (ParseErrorException e) {
             throw e;
         }
@@ -89,6 +80,15 @@ public abstract class ParserTestRunner {
                 throw new RuntimeException(e);
             }
             assertEquals(expectedParseTree, actualParseTree);
+        }
+    }
+
+    private static void record(Object obj, Path path) {
+        String json = JsonSerializer.serialize(obj);
+        try {
+            Files.writeString(path, json);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -41,17 +41,6 @@ public class Epsilon extends AbstractRegularExpression {
     private static final Set<CharRange> firstSet = immutableSet(CharRange.in(VALUE, VALUE));
 
     private static Epsilon instance;
-    private static final RegexBuilder<Epsilon> builder =
-            new RegexBuilder<Epsilon>() {
-                @Override
-                public Epsilon build() {
-                    return Epsilon.getInstance();
-                }
-            };
-
-    private Epsilon() {
-        super(builder);
-    }
 
     public static Epsilon getInstance() {
         if (instance == null)
@@ -60,8 +49,20 @@ public class Epsilon extends AbstractRegularExpression {
         return instance;
     }
 
+    private static final RegexBuilder<Epsilon> builder =
+        new RegexBuilder<Epsilon>() {
+            @Override
+            public Epsilon build() {
+                return Epsilon.getInstance();
+            }
+        };
+
     public static CharRange asCharRange() {
         return CharRange.in(VALUE, VALUE);
+    }
+
+    private Epsilon() {
+        super(builder);
     }
 
     @Override

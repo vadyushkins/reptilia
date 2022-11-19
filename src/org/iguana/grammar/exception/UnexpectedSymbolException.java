@@ -37,8 +37,8 @@ public class UnexpectedSymbolException extends RuntimeException {
 
     public UnexpectedSymbolException(Symbol symbol, String phase) {
         super(String.format(
-                "Unexpected symbol %s has been encountered in %s. This symbol must be desugared prior to this phase.",
-                symbol, phase));
+            "Unexpected symbol %s has been encountered in %s. This symbol must be desugared prior to this phase.",
+            symbol, phase));
     }
 
 }
